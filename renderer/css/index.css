@@ -1,0 +1,260 @@
+:root {
+  --background: #f3efec;
+  --on-background: #171818;
+  --background-hover: #e5baab;
+  --on-background-hover: #121212;
+  --background-active: #895b5b;
+  --on-background-active: #ffffff;
+  
+  --background2: #ffffff;
+  --on-background2: #222222;
+  
+  --background3: #eeeeee;
+  --on-background3: #333333;
+  --background3-hover: #dbd0c8;
+  --on-background3-hover: #121212;
+  --background3-active: #bbad97;
+  --on-background3-active: #000000;
+  
+  --background4: #cedbf1;
+  --on-background4: #000000;
+  --background4-hover: #98bdf5;
+  --on-background4-hover: #121212;
+  --background4-active: #6fa1d5;
+  --on-background4-active: #000000;
+  
+  --accent: #bf757d;
+  --on-accent: #efefef;
+  --accent-hover: #e18490;
+  --on-accent-hover: #f7f7f7;
+  --accent-active: #8b3540;
+  --on-accent-active: #ffffff;
+  --accent-disabled: #b79292;
+  --on-accent-disabled: #e7e7e7;
+  
+  --accent2: #87707a;
+  --on-accent2: #efefef;
+  --accent2-hover: #a5929a;
+  --on-accent2-hover: #f7f7f7;
+  --accent2-active: #644754;
+  --on-accent2-active: #ffffff;
+  
+  --link: #af587f;
+  --link-hover: #e18fb4;
+  --link-active: #730838;
+}
+
+body {
+	display: flex;
+	
+	box-sizing: border-box;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	
+	background-color: var(--background);
+	color: var(--on-background);
+	font-family: sans-serif;
+	
+	font-size: 1.8vw;
+}
+
+#main-div {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: stretch;
+	
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#main-div > * {
+	flex-grow: 1;
+}
+
+
+
+#overlay-div {
+	position: absolute;
+    z-index: 1;
+	height: 100%;
+	width: 100%;
+}
+
+#overlay-div:empty {
+	height: 0;
+	width: 0;
+}
+
+#overlay-div > * {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+
+
+#secondary-div {
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#secondary-div:empty {
+	height: 0;
+	width: 0;
+}
+
+#secondary-div > * {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+	
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	
+	background-color: var(--background);
+	color: var(--on-background);
+}
+
+
+
+.secondary-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	
+	padding: 0.5em;
+	margin: 0;
+
+	background-color: var(--accent);
+	color: var(--on-accent);
+}
+
+.secondary-header > .icon {
+	font-size: 2.5em;
+}
+
+.secondary-header > * {
+	margin: 0
+}
+
+.secondary-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: stretch;
+	
+	padding: 1em;
+}
+
+.secondary-buttons > * {
+	margin: 0 0.5em;
+}
+
+#secondary-div > * > *:not(.secondary-header, .secondary-buttons) {
+	flex-grow: 1;
+}
+
+.link {
+    font-size: 0.9em;
+    color: var(--link);
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.link:hover {
+    color: var(--link-hover);
+}
+
+.link:active {
+    color: var(--link-active);
+}
+
+input {
+    font-size: 0.9em;
+}
+
+select {
+	padding: 1px;
+    font-size: 0.9em;
+}
+
+#module-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	
+	padding: 0.5em;
+}
+
+#module-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	
+	padding: 0.5em;	
+	flex-grow: 0;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--on-background);
+	
+	border-bottom-style: none;
+}
+
+#module-title > h2 {
+	margin: 0;
+}
+
+#module-title > input {
+	align-self: center;
+}
+
+#module-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	
+	padding: 0.5em;
+	flex-shrink: 1;
+	flex-grow: 1;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--on-background);
+}
+
+#module-content > * {
+	/* flex-shrink: 1; */
+	/* flex-grow: 1; */
+	/* flex-basis: 0; */
+}
+
+#module-bottom {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+	
+	padding: 1em;
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+
+#module-bottom  > * {
+	margin: 0 0.5em;
+}

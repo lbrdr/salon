@@ -1,0 +1,137 @@
+.blocker {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	
+	background-color: #00000077
+}
+
+.message-dialogue-box {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	
+	min-width: 15em;
+	max-width: 20em;
+	max-height: 15em;
+	
+	background-color: var(--background3);
+	color: var(--on-background3);
+	border-radius: 0.5em;
+	overflow: hidden;
+	
+	cursor: initial;
+}
+
+.message-dialogue-top {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+	background-color: var(--accent);
+    color: var(--on-accent);
+	padding: 0.5em;
+}
+
+.message-dialogue-box.success > .message-dialogue-top {
+	
+	background-color: #268765;
+}
+
+.message-dialogue-box.error > .message-dialogue-top {
+	
+	background-color: #af3434;
+}
+
+.message-dialogue-title {
+	flex-grow: 1;
+}
+
+.message-dialogue-close {
+	margin-left: 0.5em;
+	flex-grow: 0;
+}
+
+.message-dialogue-message {
+	box-sizing: border-box;
+	flex-grow: 1;
+	flex-shrink: 1;
+	text-align: center;
+	overflow-y: auto;
+	position: relative;
+}
+
+.message-dialogue-message-text {
+	padding: 0.75em 1em;
+	font-size: 0.9em;
+}
+
+.message-dialogue-message::before {
+	content: '';
+	display: block;
+	width: 100%;
+	position: sticky;
+	top: calc(100% - 1px);
+	
+	border-top-style: dashed;
+	border-top-width: 1px;
+	border-top-color: var(--on-background3);
+}
+
+.message-dialogue-message::after {
+	content: '';
+	display: block;
+	width: 100%;
+	position: relative;
+	bottom: 0;
+	
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-top-color: var(--background3);
+}
+	
+.message-dialogue-bottom {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5em;
+}
+
+.close-button {	
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height: 1.8em;
+	width: 1.8em;
+	
+    font-size: 0.9em;
+    border-radius: 0.2em;
+	
+	background-color: #efefef;
+    color: #d31f1f;
+	
+	border-color: #efefef;
+	border-width: 1px;
+	border-style: outset;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+}
+
+.close-button:hover {
+	background-color: #e34040;
+    color: #f7f7f7;
+	border-color: #f7f7f7;
+}
+
+.close-button:active {
+	background-color: #722929;
+    color: #fffffff;
+	border-color: #722929;
+	border-style: inset;
+	outline-style: dotted;
+}

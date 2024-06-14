@@ -1,0 +1,206 @@
+.button {
+    padding: 0.5em 1.7em;
+    font-size: 0.9em;
+    border-radius: 2em;
+	
+	background-color: var(--accent);
+    color: var(--on-accent);
+	
+    border-color: var(--accent);
+	border-width: 1px;
+	border-style: outset;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.button:not(:disabled):not(.disabled):hover {
+	background-color: var(--accent-hover);
+    color: var(--on-accent-hover);
+    border-color: var(--accent-hover);
+	border-style: outset;
+}
+
+.button:not(:disabled):not(.disabled):active {
+	background-color: var(--accent-active);
+    color: var(--on-accent-active);
+    border-color: var(--accent-active);
+	border-style: inset;
+	outline-style: dotted;
+}
+
+
+.button2 {
+    padding: calc(0.5em - 1px) calc(1.7em - 1px);
+    font-size: 0.9em;
+    border-radius: 2em;
+	
+	background-color: var(--on-accent);
+    color: var(--accent);
+	
+    border-color: var(--accent);
+	border-width: 2px;
+	border-style: solid;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.button2:not(:disabled):not(.disabled):hover {
+    padding: 0.5em 1.7em;
+	
+	background-color: var(--accent-hover);
+    color: var(--on-accent-hover);
+	
+    border-color: var(--accent-hover);
+	border-width: 1px;
+	border-style: outset;
+}
+
+.button2:not(:disabled):not(.disabled):active {
+    padding: 0.5em 1.7em;
+	
+	background-color: var(--accent-active);
+    color: var(--on-accent-active);
+	
+    border-color: var(--accent-active);
+	border-width: 1px;
+	border-style: inset;
+	
+	outline-style: dotted;
+}
+
+
+.button3 {
+    padding: 0.5em 1.7em;
+    font-size: 0.9em;
+    border-radius: 2em;
+	
+	background-color: var(--accent2);
+    color: var(--on-accent2);
+	
+    border-color: var(--accent2);
+	border-width: 1px;
+	border-style: outset;
+	
+	outline-color: var(--on-accent2);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.button3:not(:disabled):not(.disabled):hover {
+	background-color: var(--accent2-hover);
+    color: var(--on-accent2-hover);
+	outline-color: var(--accent2-hover);
+}
+
+.button3:not(:disabled):not(.disabled):active {
+	background-color: var(--accent2-active);
+    color: var(--on-accent2-active);
+	outline-color: var(--accent2-active);
+	border-style: inset;
+	outline-style: dotted;
+}
+
+
+.button4 {
+    padding: calc(0.5em - 1px) calc(1.7em - 1px);
+    font-size: 0.9em;
+    border-radius: 2em;
+	
+	background-color: var(--on-accent2);
+    color: var(--accent2);
+	
+    border-color: var(--accent2);
+	border-width: 2px;
+	border-style: solid;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.button4:not(:disabled):not(.disabled):hover {
+    padding: 0.5em 1.7em;
+	background-color: var(--accent2-hover);
+    color: var(--on-accent2-hover);
+	
+    border-color: var(--accent2-hover);
+	border-width: 1px;
+	border-style: outset;
+}
+
+.button4:not(:disabled):not(.disabled):active {
+    padding: 0.5em 1.7em;
+	background-color: var(--accent2-active);
+    color: var(--on-accent2-active);
+	
+    border-color: var(--accent2-active);
+	border-width: 1px;
+	border-style: inset;
+	
+	outline-style: dotted;
+}
+
+.button5 {
+    padding: 0.5em 1.1em;
+    font-size: 0.9em;
+    border-radius: 2px;
+	
+	background-color: var(--accent);
+    color: var(--on-accent);
+	
+    border-color: var(--accent);
+	border-width: 1px;
+	border-style: outset;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.button5:not(:disabled):not(.disabled):hover {
+	background-color: var(--accent-hover);
+    color: var(--on-accent-hover);
+    border-color: var(--accent-hover);
+	border-style: outset;
+}
+
+.button5:not(:disabled):not(.disabled):active {
+	background-color: var(--accent-active);
+    color: var(--on-accent-active);
+    border-color: var(--accent-active);
+	border-style: inset;
+	outline-style: dotted;
+}
+
+.button:disabled,
+.button.disabled,
+.button2:disabled,
+.button2.disabled,
+.button3:disabled,
+.button3.disabled,
+.button4:disabled,
+.button4.disabled,
+.button5:disabled,
+.button5.disabled
+{
+	background-color: var(--accent-disabled);
+    color: var(--on-accent-disabled);
+    border-color: var(--on-accent-disabled);
+	border-style: solid;
+	
+	cursor: default;
+}

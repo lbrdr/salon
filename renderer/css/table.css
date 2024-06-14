@@ -1,0 +1,99 @@
+.table-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.table-container {	
+	overflow-y: auto;
+	
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0;
+	font-size: 0.8em;
+	
+    border-color: var(--on-background);
+    border-style: solid;
+    border-width: 1px;
+}
+
+table {
+	height: 100%;
+	width: 100%;
+	
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+}
+
+thead {
+	position: sticky;
+	top: 0;
+	background-color: var(--background2);
+	color: var(--on-background2)
+}
+
+tbody {
+	background-color: var(--background3);
+	color: var(--on-background3)
+}
+
+table.selectable > tbody > tr {
+	cursor: pointer;
+}
+
+table.selectable > tbody > tr:hover {
+	background-color: var(--background3-hover);
+	color: var(--on-background3-hover)
+}
+
+table.selectable > tbody > tr:active {
+	background-color: var(--background3-active);
+	color: var(--on-background3-active)
+}
+
+tr.selected {
+	background-color: var(--background4);
+	color: var(--on-background4)
+}
+table.selectable > tbody > tr.selected:hover {
+	background-color: var(--background4-hover);
+	color: var(--on-background4-hover)
+}
+table.selectable > tbody > tr.selected:active {
+	background-color: var(--background4-active);
+	color: var(--on-background4-active)
+}
+
+th {
+    text-wrap: nowrap;
+}
+
+td, th {
+	padding: 0.3em;
+	
+    border-color: var(--on-background);
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-width: 1px;
+}
+
+tbody > tr:last-child > td {
+    border-bottom-style: none;
+}
+
+td:last-child, th:last-child {
+    border-right-style: none;
+}
+
+.table-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.8em;
+	padding: 0.5em;
+}
+
+.table-controls > * {
+	margin: 0 0.5em;
+}

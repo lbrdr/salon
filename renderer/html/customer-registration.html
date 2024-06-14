@@ -1,0 +1,38 @@
+<div class="secondary-header">
+	<div class="icon customer-registration-icon"></div>
+	<h2>Customer Registration</h2>
+</div>
+<div id="customer-registration-div">
+	<div class="customer-registration-row">
+		<div class="customer-registration-column">
+			<label for="customer-registration-full-name">
+				Full Name (required)
+			</label>
+			<input type="text" id="customer-registration-full-name" list="customer-names"></input>
+		</div>
+		<div class="customer-registration-column">
+			<label for="customer-registration-date">
+				Date Registered
+			</label>
+			<input type="date" id="customer-registration-date" disabled></input>
+		</div>
+	</div>
+	<div class="customer-registration-row">
+		<div class="customer-registration-column">
+			<label for="customer-registration-contact">
+				Contact Number
+			</label>
+			<input type="text" id="customer-registration-contact"></input>
+		</div>
+		<div class="customer-registration-column">
+			<label for="customer-registration-preferred-staff">
+				Preferred Staff
+			</label>
+			<select id="customer-registration-preferred-staff"></select>
+		</div>
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="cmCancelRegistration()"></input>
+	<input type="button" value="Submit" class="button" onclick="cmSubmitRegistration()"></input>
+</div>

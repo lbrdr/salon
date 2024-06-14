@@ -1,0 +1,56 @@
+#page-selector {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-around;
+	
+	flex-grow: 0;
+	flex-shrink: 0;
+	padding: 1em;
+	
+	background-color: var(--accent2);
+	color: var(--on-accent2);
+}
+
+#page-selector > .company-logo-icon {
+	font-size: 2em;
+}
+
+.page-button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	
+    padding: 0.2em 1em;
+    border-radius: 2px;
+	
+	border-color: var(--on-background);
+	border-width: 1px;
+	border-style: outset;
+	
+	background-color: var(--background);
+	color: var(--on-background);
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+}
+
+.page-button:hover {
+	background-color: var(--background-hover);
+	color: var(--on-background-hover);
+}
+
+.page-button:active {
+	background-color: var(--background-active);
+	color: var(--on-background-active);
+	
+	border-style: inset;
+	outline-style: dotted;
+}
+
+.page-button > .icon {
+	font-size: 1.5em;
+}

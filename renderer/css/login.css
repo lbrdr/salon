@@ -1,0 +1,49 @@
+#login-banner {
+	background-color: var(--accent2);
+	margin: 1em;
+}
+
+#login-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+	
+	flex-grow: 0;
+    flex-basis: 0;
+	margin: 1em;
+	
+	text-align: center;
+}
+
+#login-column form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	
+	flex-grow: 1;
+	padding: 1em 2em;
+}
+
+#login-column input {
+	margin-left: 1em;
+}
+
+#login-column .login-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	
+	margin: 0.75em 0;
+}
+
+#login-column .link {
+	align-self: flex-end;
+	margin: 0 0 2em;
+}
+
+#login-column .button {
+	align-self: center;
+	margin: 0.75em 0;
+}

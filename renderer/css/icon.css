@@ -1,0 +1,21 @@
+.icon {
+	min-width: 1.2em;
+	min-height: 1.2em;
+	margin: 0 0.5em;
+	vertical-align: bottom;
+	
+	display: inline-block;
+	
+	background-image: url('../images/placeholder.png');
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.icon:first-child {
+	margin-left: 0;
+}
+
+.icon:last-child {
+	margin-right: 0;
+}

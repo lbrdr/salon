@@ -1,0 +1,54 @@
+<div class="secondary-header">
+	<div class="icon search-icon"></div>
+	<h2>Customer Search</h2>
+</div>
+<div id="customer-search-div">
+	<div id="customer-search-top">
+		<div id="customer-search-fields">
+			<div class="customer-search-field">
+				<label for="customer-search-id">Customer ID</label>
+				<input type="number" id="customer-search-id" />
+			</div>
+			<div class="customer-search-field">
+				<label for="customer-search-full-name">Full Name</label>
+				<input type="text" id="customer-search-full-name" />
+			</div>
+			<div class="customer-search-field">
+				<label for="customer-search-contact">Contact</label>
+				<input type="text" id="customer-search-contact" />
+			</div>
+			<div class="customer-search-field">
+				<label for="customer-search-preferred-staff">Preferred Staff</label>
+				<select id="customer-search-preferred-staff"></select>
+			</div>
+			<div class="customer-search-field">
+				<label for="customer-search-date-registered-from">Date Registered</label>
+				<div>
+					<label for="customer-search-date-registered-from">From</label>
+					<input type="date" id="customer-search-date-registered-from" />
+					<label for="customer-search-date-registered-to">To</label>
+					<input type="date" id="customer-search-date-registered-to" />
+				</div>
+			</div>
+			<div class="customer-search-field">
+				<label for="customer-search-last-service-from">Date of Last Service</label>
+				<div>
+					<label for="customer-search-last-service-from">From</label>
+					<input type="date" id="customer-search-last-service-from" />
+					<label for="customer-search-last-service-to">To</label>
+					<input type="date" id="customer-search-last-service-to" />
+				</div>
+			</div>
+		</div>
+		<div class="button5" onclick="cmSubmitSearch()">
+			<div class="icon search-icon"></div>
+			Search
+		</div>
+	</div>
+	<div id="customer-search-table" class="table-div">
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Done" class="button2" onclick="cmCloseSearch()"></input>
+	<input type="button" value="Edit Customer" class="button" onclick="cmEditSearchedCustomer()"></input>
+</div>
