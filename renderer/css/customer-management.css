@@ -80,6 +80,11 @@
     margin-left: 1em;
 }
 
+#customer-edit-id::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
 
 
 #customer-search-div {
@@ -147,6 +152,13 @@
 #customer-search-table {
 	flex-grow: 1;
 }
+
+#customer-search-id::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 
 #customer-services-div {
 	display: flex;

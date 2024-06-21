@@ -2,18 +2,18 @@ var tableCount = 0
 
 function createTable(parent, columns, data, options) {
 	
-	const tableData = {}
+	const tableObj = {}
 	
-	tableData.name = 'table' + (tableCount++)
-	tableData.columns = columns
-	tableData.data = data
+	tableObj.name = 'table' + (tableCount++)
+	tableObj.columns = columns
+	tableObj.data = data
 	for (const option in options) {
-		tableData[option] = options[option]
+		tableObj[option] = options[option]
 	}
-	tableData.setData = setData
-	tableData.setPage = setPage
-	tableData.setItemsPerPage = setItemsPerPage
-	tableData.setSelected = setSelected
+	tableObj.setData = setData
+	tableObj.setPage = setPage
+	tableObj.setItemsPerPage = setItemsPerPage
+	tableObj.setSelected = setSelected
 	
 	const controls = document.createElement('div')
 	controls.className = 'table-controls'
@@ -28,7 +28,7 @@ function createTable(parent, columns, data, options) {
 	prevButton.type = 'button'
 	prevButton.className = 'button5'
 	prevButton.value = '<'
-	prevButton.onclick = () => {setPage(tableData.page - 1)}
+	prevButton.onclick = () => {setPage(tableObj.page - 1)}
 	
 	const pageDisplay = document.createElement('div')
 	
@@ -36,13 +36,13 @@ function createTable(parent, columns, data, options) {
 	nextButton.type = 'button'
 	nextButton.className = 'button5'
 	nextButton.value = '>'
-	nextButton.onclick = () => {setPage(tableData.page + 1)}
+	nextButton.onclick = () => {setPage(tableObj.page + 1)}
 	
 	const lastButton = document.createElement('input')
 	lastButton.type = 'button'
 	lastButton.className = 'button5'
 	lastButton.value = '>|'
-	lastButton.onclick = () => {setPage(tableData.lastPage)}
+	lastButton.onclick = () => {setPage(tableObj.lastPage)}
 	
 	controls.append(firstButton)
 	controls.append(prevButton)
@@ -50,17 +50,17 @@ function createTable(parent, columns, data, options) {
 	controls.append(nextButton)
 	controls.append(lastButton)
 	
-	setItemsPerPage(tableData.itemsPerPage)
+	setItemsPerPage(tableObj.itemsPerPage)
 	
-	return tableData
+	return tableObj
 	
 	
 	
 	function setData(data) {
-		tableData.data = data
-		setItemsPerPage(tableData.itemsPerPage)
+		tableObj.data = data
+		setItemsPerPage(tableObj.itemsPerPage)
 		
-		const selected = tableData.selected
+		const selected = tableObj.selected
 		if (selected && selected.id !== undefined) {			
 			setSelected(
 				data.find(
@@ -74,13 +74,13 @@ function createTable(parent, columns, data, options) {
 	function setPage(page) {
 		var tableHTML
 		
-		if (tableData.itemsPerPage) {
+		if (tableObj.itemsPerPage) {
 			
 			if (page < 1) {
 				page = 1
 			}
-			if (page > tableData.lastPage) {
-				page = tableData.lastPage
+			if (page > tableObj.lastPage) {
+				page = tableObj.lastPage
 			}
 			if (page <= 1) {
 				firstButton.disabled = true
@@ -89,7 +89,7 @@ function createTable(parent, columns, data, options) {
 				firstButton.disabled = false
 				prevButton.disabled = false
 			}
-			if (page >= tableData.lastPage) {
+			if (page >= tableObj.lastPage) {
 				nextButton.disabled = true
 				lastButton.disabled = true
 			} else {
@@ -97,21 +97,21 @@ function createTable(parent, columns, data, options) {
 				lastButton.disabled = false
 			}
 			
-			pageDisplay.innerText = 'Showing page ' + page + ' of ' + tableData.lastPage
+			pageDisplay.innerText = 'Showing page ' + page + ' of ' + tableObj.lastPage
 			
 		}
 		
-		tableData.page = page
+		tableObj.page = page
 		
-		tableHTML = createTableHTML(tableData)
+		tableHTML = createTableHTML(tableObj)
 		
-		if (tableData.html) {
-			tableData.html.remove()
+		if (tableObj.html) {
+			tableObj.html.remove()
 		}
 		
 		parent.prepend(tableHTML)
 		
-		tableData.html = tableHTML
+		tableObj.html = tableHTML
 
 	}
 	
@@ -121,30 +121,27 @@ function createTable(parent, columns, data, options) {
 		
 		if (itemsPerPage) {
 			parent.append(controls)
-			if (tableData.page) {
-				nextPage = Math.ceil(((tableData.page-1) * tableData.itemsPerPage + 1) / itemsPerPage)
+			if (tableObj.page) {
+				nextPage = Math.ceil(((tableObj.page-1) * tableObj.itemsPerPage + 1) / itemsPerPage)
 			} else {
 				nextPage = 1
 			}
-			tableData.itemsPerPage = itemsPerPage
-			tableData.lastPage = Math.ceil(tableData.data.length / itemsPerPage)
+			tableObj.itemsPerPage = itemsPerPage
+			tableObj.lastPage = Math.ceil(tableObj.data.length / itemsPerPage)
 			setPage(nextPage)
 		} else {
 			controls.remove()
-			tableData.itemsPerPage = undefined
-			tableData.page = undefined
-			tableData.lastPage = undefined
+			tableObj.itemsPerPage = undefined
+			tableObj.page = undefined
+			tableObj.lastPage = undefined
 			setPage()
 		}
 		
 	}
 	
 	function setSelected(item) {
-		console.log('setSelected:')
-		console.log(item)
-		
 		if (item) {
-			const index = tableData.data.indexOf(item)
+			const index = tableObj.data.indexOf(item)
 			
 			if (index < 0) {
 				
@@ -152,14 +149,14 @@ function createTable(parent, columns, data, options) {
 				
 			} else {
 				
-				const itemsPerPage = tableData.itemsPerPage
+				const itemsPerPage = tableObj.itemsPerPage
 				let tr
 				if (itemsPerPage) {
 					setPage(Math.ceil((index + 1)/ itemsPerPage))
-					const allTR = tableData.html.getElementsByTagName('tr')
+					const allTR = tableObj.html.getElementsByTagName('tr')
 					tr = allTR[index % itemsPerPage + 1]
 				} else {
-					const allTR = tableData.html.getElementsByTagName('tr')
+					const allTR = tableObj.html.getElementsByTagName('tr')
 					for (const eachTR of allTR) {
 						eachTR.className = ''
 					}
@@ -174,9 +171,9 @@ function createTable(parent, columns, data, options) {
 			}
 		}
 		
-		const select = tableData.select
+		const select = tableObj.select
 		
-		tableData.selected = item
+		tableObj.selected = item
 		
 		if (typeof select === 'function') {
 			select(item)
@@ -184,7 +181,7 @@ function createTable(parent, columns, data, options) {
 	}
 }
 
-function createTableHTML(tableData) {
+function createTableHTML(tableObj) {
 	
 	var {
 		columns,
@@ -193,9 +190,8 @@ function createTableHTML(tableData) {
 		page,
 		name,
 		select,
-		view,
 		minRows
-	} = tableData
+	} = tableObj
 	
 	if (itemsPerPage) {
 		data = data.slice(
@@ -230,12 +226,6 @@ function createTableHTML(tableData) {
 			tr.append(td)
 		}
 		
-		if (view) {
-			const td = document.createElement('th')
-			td.innerText = 'View'
-			tr.append(td)
-		}
-		
 		tHead.append(tr)
 	}
 	
@@ -245,6 +235,8 @@ function createTableHTML(tableData) {
 		
 		if (select) {
 			const td = document.createElement('td')
+			td.className = 'input-td'
+			
 			const radio = document.createElement('input')
 			radio.type = 'radio'
 			radio.name = name + '-radio'
@@ -255,13 +247,13 @@ function createTableHTML(tableData) {
 					eachTR.className = ''
 				}
 				tr.className = 'selected'
-				tableData.selected = item
+				tableObj.selected = item
 				if (typeof select === 'function') {
 					select(item)
 				}
 			}
 			
-			if (tableData.selected && tableData.selected === item) {
+			if (tableObj.selected && tableObj.selected === item) {
 				radio.checked = true
 				tr.className = 'selected'
 			}
@@ -273,8 +265,10 @@ function createTableHTML(tableData) {
 		for (const column in columns) {
 			const td = document.createElement('td')
 			const data = item[column]
-		
+			
 			if (typeof data === 'function') {
+				
+				td.className = 'input-td'
 				
 				const button = document.createElement('input')
 				button.type = 'button'
@@ -287,10 +281,20 @@ function createTableHTML(tableData) {
 				
 				td.append(button)
 				
+			} else if (typeof data === 'object') {
+				
+				td.className = 'input-td'
+				
+				const button = document.createElement('input')
+				button.type = 'button'
+				button.className = 'button5'
+				button.value = data.value
+				button.onclick = data.onclick
+				
+				td.append(button)
+				
 			} else {
-				
-				td.innerText = data || '-'
-				
+				td.innerText = data || data === 0 ? data : '-'
 			}
 			
 			tr.append(td)

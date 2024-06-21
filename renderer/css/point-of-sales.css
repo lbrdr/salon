@@ -1,3 +1,136 @@
-#sales-table {
+#sales-record-table {
 	flex-grow: 1;
+}
+
+#sales-record-services-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+#sales-record-services-bottom {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#sales-record-creation-div,
+#sales-record-edit-div,
+#sales-record-services-div
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+	
+	flex-grow: 1;
+	padding: 1em 2em;
+}
+
+#sales-record-creation-div > div,
+#sales-record-edit-div > div,
+#sales-record-services-div > div
+{
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 1;
+	padding: 1em;
+}
+
+#sales-record-creation-div > div:first-child,
+#sales-record-edit-div > div:first-child,
+#sales-record-services-div > div:first-child
+{
+	justify-content: space-between;
+	align-items: stretch;
+	flex-grow: 0;
+}
+
+#sales-record-creation-div > div:last-child,
+#sales-record-edit-div > div:last-child,
+#sales-record-services-div > div:last-child
+{
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+}
+
+#sales-record-creation-services-table,
+#sales-record-edit-services-table,
+#sales-record-services-services-table
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+}
+
+#sales-record-creation-services-table tfoot th,
+#sales-record-edit-services-table tfoot th,
+#sales-record-services-services-table tfoot th
+{
+	text-align: right;
+}
+
+.sales-record-creation-field,
+.sales-record-edit-field,
+.sales-record-services-field
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.sales-record-services-field > h4
+{
+	margin: 0.2em 0 0;
+}
+
+.sales-record-edit-field > div
+{
+    display: flex;
+    align-items: center;
+}
+
+.sales-record-edit-field > div > .button {
+    font-size: 0.8em;
+    margin-left: 1em;
+}
+
+.sales-record-creation-service-price,
+#sales-record-creation-total-price,
+#sales-record-creation-payment,
+#sales-record-creation-change,
+.sales-record-edit-service-price,
+#sales-record-edit-total-price,
+#sales-record-edit-payment,
+#sales-record-edit-change,
+.sales-record-services-service-price,
+#sales-record-services-total-price,
+#sales-record-services-payment,
+#sales-record-services-change
+{
+	text-align: right;
+    font-family: monospace;
+}
+
+.sales-record-creation-service-price::-webkit-inner-spin-button,
+#sales-record-creation-total-price::-webkit-inner-spin-button,
+#sales-record-creation-payment::-webkit-inner-spin-button,
+#sales-record-creation-change::-webkit-inner-spin-button,
+.sales-record-edit-service-price::-webkit-inner-spin-button,
+#sales-record-edit-total-price::-webkit-inner-spin-button,
+#sales-record-edit-payment::-webkit-inner-spin-button,
+#sales-record-edit-change::-webkit-inner-spin-button,
+.sales-record-services-service-price::-webkit-inner-spin-button,
+#sales-record-services-total-price::-webkit-inner-spin-button,
+#sales-record-services-payment::-webkit-inner-spin-button,
+#sales-record-services-change::-webkit-inner-spin-button
+{
+	-webkit-appearance: none;
+	margin: 0;
 }

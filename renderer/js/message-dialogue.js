@@ -33,7 +33,7 @@ function createMessageDialogue(type, title, message) {
 	
 	const messageTextDiv = document.createElement('div')
 	messageTextDiv.className = 'message-dialogue-message-text'
-	messageTextDiv.innerText = message
+	messageTextDiv.innerText = message.replace(/\./g, '.\n')
 	
 	const bottomDiv = document.createElement('div')
 	bottomDiv.className = 'message-dialogue-bottom'

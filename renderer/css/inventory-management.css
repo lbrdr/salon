@@ -1,0 +1,17 @@
+#inventory-management-table-switch {
+	display: flex;
+	flex-direction: row;
+    align-items: flex-end;
+}
+
+#inventory-management-table-switch > h3 {
+	margin: 0;
+}
+
+#inventory-management-table-switch > div {
+	margin-left: 0.75em;
+}
+
+#inventory-management-table {
+	flex-grow: 1;
+}

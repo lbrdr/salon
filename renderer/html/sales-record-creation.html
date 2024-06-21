@@ -1,0 +1,65 @@
+<div class="secondary-header">
+	<div class="icon sales-record-creation-icon"></div>
+	<h2>Sales Record Creation</h2>
+</div>
+<div id="sales-record-creation-div">
+	<div>
+		<div class="sales-record-creation-field">
+			<label for="sales-record-creation-customer">
+				Customer
+			</label>
+			<input type="text" id="sales-record-creation-customer" list="sales-record-creation-customers" />
+		</div>
+		<div class="sales-record-creation-field">
+			<label for="sales-record-creation-servicing-staff">
+				Servicing Staff
+			</label>
+			<select id="sales-record-creation-servicing-staff" disabled></select>
+		</div>
+		<div class="sales-record-creation-field">
+			<label for="sales-record-creation-date">
+				Transaction Date
+			</label>
+			<input type="date" id="sales-record-creation-date" disabled />
+		</div>
+	</div>
+	<div>
+		Offered Services
+		<div id="sales-record-creation-services-table">
+			<div class="table-container">
+				<table>
+					<tfoot>
+						<tr>
+							<th colspan="2">
+								Total Price
+							</th>
+							<td>
+								<input type="number" id="sales-record-creation-total-price" disabled />
+							</td>
+						</tr>
+							<th colspan="2">
+								Payment
+							</th>
+							<td>
+								<input type="number" id="sales-record-creation-payment" />
+							</td>
+						<tr>
+						</tr>
+						<tr>
+							<th colspan="2">
+								Change
+							</th>
+							<td>
+								<input type="number" id="sales-record-creation-change" disabled />
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="posCancelCreation()"></input>
+	<input type="button" value="Submit" class="button" onclick="posSubmitCreation()"></input>
+</div>

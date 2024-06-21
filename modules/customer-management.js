@@ -11,6 +11,26 @@ const {
 } = require('../server-token.js')
 
 
+function checkCustomer(
+	fullName,
+	preferredStaffID
+) {
+	if (!fullName) {
+		return 'The full name of the customer is required.'
+	}
+	
+	if (!database.getCustomerByFullName(fullName)) {
+		return 'A customer with the given full name already exists.'
+	}
+	
+	if (
+		preferredStaffID &&
+		!database.getUserByID(preferredStaffID)
+	) {
+		return 'The given preferred staff ID does not exist.'
+	}
+}
+
 
 // Actions that the server will handle
 const actions = {
@@ -110,21 +130,18 @@ const actions = {
 		
 		const requestBody = await getRequestBody(req);
 		
-		const newCustomer = JSON.parse(requestBody)
+		const customer = JSON.parse(requestBody)
 		
-		var registerError
+		const {
+			fullName,
+			preferredStaffID,
+			contact
+		} = customer
 		
-		const oldCustomer = database.getCustomerByFullName(newCustomer.fullName)
-		if (oldCustomer) {
-			registerError = 'A customer with the given full name already exists.'
-		}
-		
-		if (newCustomer.preferredStaffID) {
-			const staff = database.getUserByID(newCustomer.preferredStaffID)
-			if (!staff) {
-				registerError = 'The given preferred staff ID does not exist.'
-			}
-		}
+		var registerError = checkCustomer(
+			fullName,
+			preferredStaffID
+		)
 		
 		if (registerError) {
 			res.statusCode = 204
@@ -134,9 +151,9 @@ const actions = {
 		}
 		
 		const createResult = database.createCustomer(
-			newCustomer.preferredStaffID || null,
-			newCustomer.fullName,
-			newCustomer.contact || null
+			preferredStaffID || null,
+			fullName,
+			contact || null
 		)
 		
 		updateToken(token)
@@ -148,6 +165,7 @@ const actions = {
 		)
 		
 		res.statusCode = 200
+		res.statusMessage = 'The customer has been successfully registered with ID: ' + createResult.lastInsertRowid
 		res.end()
 		
 	},
@@ -165,22 +183,21 @@ const actions = {
 		
 		const customer = JSON.parse(requestBody)
 		
-		var editError
+		const {
+			customerID,
+			fullName,
+			preferredStaffID,
+			contact
+		} = customer
 		
-		const targetCustomer = database.getCustomerByID(customer.id)
-		if (!targetCustomer) {
-			editError = 'Customer with the given customer ID does not exist.'
-		}
+		var editError = checkCustomer(
+			fullName,
+			preferredStaffID
+		)
 		
-		const differentCustomer = database.getCustomerByFullName(customer.fullName)
-		if (differentCustomer && differentCustomer.id !== targetCustomer.id) {
-			editError = 'A different customer with the given full name exists.'
-		}
-		
-		if (customer.preferredStaffID) {
-			const staff = database.getUserByID(customer.preferredStaffID)
-			if (!staff) {
-				editError = 'The given preferred staff ID does not exist.'
+		if (!editError) {
+			if (!database.getCustomerByID(customerID)) {
+				editError = 'Invalid customer ID.'
 			}
 		}
 		
@@ -192,10 +209,10 @@ const actions = {
 		}
 		
 		const editResult = database.editCustomer(
-			customer.id,
-			customer.preferredStaffID || null,
-			customer.fullName,
-			customer.contact || null
+			customerID,
+			preferredStaffID || null,
+			fullName,
+			contact || null
 		)
 		
 		updateToken(token)
@@ -203,7 +220,7 @@ const actions = {
 		database.createUserAction(
 			user.id,
 			'Edited customer: ' +
-			JSON.stringify(database.getCustomerByID(customer.id))
+			JSON.stringify(database.getCustomerByID(customerID))
 		)
 		
 		res.statusCode = 200

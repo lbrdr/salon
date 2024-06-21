@@ -5,13 +5,12 @@
 	align-items: stretch;
 }
 
-.table-container {	
+.table-container {
 	overflow-y: auto;
 	
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: 0;
-	font-size: 0.8em;
 	
     border-color: var(--on-background);
     border-style: solid;
@@ -24,48 +23,63 @@ table {
 	
     /* border-collapse: collapse; */
     border-spacing: 0;
+	
+	font-size: 0.8em;
 }
 
-thead {
+thead > tr:first-child {
 	position: sticky;
 	top: 0;
-	background-color: var(--background2);
-	color: var(--on-background2)
+}
+
+tfoot {
+	position: sticky;
+	bottom: 0;
 }
 
 tbody {
-	background-color: var(--background3);
-	color: var(--on-background3)
 }
 
-table.selectable > tbody > tr {
+table.selectable > tbody > tr > td {
 	cursor: pointer;
 }
 
-table.selectable > tbody > tr:hover {
-	background-color: var(--background3-hover);
-	color: var(--on-background3-hover)
+table.selectable > tbody > tr:hover > td {
+	background-color: var(--background2-hover);
+	color: var(--on-background2-hover)
 }
 
-table.selectable > tbody > tr:active {
-	background-color: var(--background3-active);
-	color: var(--on-background3-active)
+table.selectable > tbody > tr:active > td  {
+	background-color: var(--background2-active);
+	color: var(--on-background2-active)
 }
 
-tr.selected {
+tr.selected > td {
 	background-color: var(--background4);
 	color: var(--on-background4)
 }
-table.selectable > tbody > tr.selected:hover {
+table.selectable > tbody > tr.selected:hover > td  {
 	background-color: var(--background4-hover);
 	color: var(--on-background4-hover)
 }
-table.selectable > tbody > tr.selected:active {
+table.selectable > tbody > tr.selected:active > td  {
 	background-color: var(--background4-active);
 	color: var(--on-background4-active)
 }
 
+table {
+	background-color: var(--background2);
+}
+
+td {
+	background-color: var(--background2);
+	color: var(--on-background2);
+	
+}
+
 th {
+	background-color: var(--background3);
+	color: var(--on-background3);
     text-wrap: nowrap;
 }
 
@@ -78,11 +92,27 @@ td, th {
     border-width: 1px;
 }
 
-tbody > tr:last-child > td {
+tbody > tr:last-child > th,
+tbody > tr:last-child > td
+{
     border-bottom-style: none;
 }
 
-td:last-child, th:last-child {
+tfoot > tr:first-child > th,
+tfoot > tr:first-child > td
+{
+    border-top-style: solid;
+}
+
+tfoot > tr:last-child > th,
+tfoot > tr:last-child > td
+{
+    border-bottom-style: none;
+}
+
+td:last-child,
+th:last-child
+{
     border-right-style: none;
 }
 
@@ -96,4 +126,17 @@ td:last-child, th:last-child {
 
 .table-controls > * {
 	margin: 0 0.5em;
+}
+
+.input-td {
+	text-align: -webkit-center;
+}
+
+table input,
+table select
+{
+	box-sizing: border-box;
+	width: 100%;
+	text-overflow: ellipsis;
+	font-size: 1em;
 }

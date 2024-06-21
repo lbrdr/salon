@@ -54,7 +54,7 @@ async function cmSetupCustomerTable() {
 		}
 		
 		customer.services = () => {
-			cmCustomerServices(customer)
+			cmViewServices(customer)
 		}
 		
 	});
@@ -104,7 +104,7 @@ function cmRegisterCustomer() {
 	const nameInput = document.getElementById('customer-registration-full-name')
 	
 	const nameList = document.createElement('datalist')
-	nameList.id = 'customer-names'
+	nameList.id = 'customer-registration-customer-names'
 	for (const customer of cmCustomerData) {
 		const option = document.createElement('option')
 		option.value = customer.fullName
@@ -126,6 +126,7 @@ function cmRegisterCustomer() {
 		option.innerText = staff.id + ' - ' + staff.fullName
 		staffInput.append(option)
 	}
+	staffInput.value = currentUser.id
 }
 
 function cmCancelRegistration() {
@@ -163,7 +164,7 @@ async function cmSubmitRegistration() {
 	}
 	
 	if (registerRequest.status === 200) {
-		createMessageDialogue('success', 'Customer Registration Successful', 'The user has been successfully registered')
+		createMessageDialogue('success', 'Customer Registration Successful', registerRequest.statusText)
 		setPage('customer-management')
 		return
 	}
@@ -174,7 +175,7 @@ async function cmSubmitRegistration() {
 
 
 
-function cmCustomerSearch() {
+function cmSearchCustomer() {
 	setSecondary('customer-search')
 	
 	const staffInput = document.getElementById('customer-search-preferred-staff')
@@ -199,6 +200,18 @@ function cmCustomerSearch() {
 	}
 	staffInput.value = ''
 	// staffInput.value = currentUser.id
+	
+	const nameInput = document.getElementById('customer-search-full-name')
+	
+	const nameList = document.createElement('datalist')
+	nameList.id = 'customer-search-customer-names'
+	for (const customer of cmCustomerData) {
+		const option = document.createElement('option')
+		option.value = customer.fullName
+		option.innerText = customer.fullName
+		nameList.append(option)
+	}
+	nameInput.parentElement.append(nameList)
 	
 	const tableDiv = document.getElementById('customer-search-table')
 	
@@ -240,7 +253,7 @@ async function cmSubmitSearch() {
 			token
 		},
 		JSON.stringify({
-			id: customerID,
+			customerID,
 			fullName,
 			contact,
 			preferredStaffID,
@@ -276,7 +289,7 @@ async function cmSubmitSearch() {
 		}
 		
 		customer.services = () => {
-			cmCustomerServices(customer)
+			cmViewServices(customer)
 		}
 		
 	});
@@ -303,14 +316,10 @@ function cmEditCustomer() {
 	cmCustomerEdit(customer)
 }
 
+
+
 async function cmCustomerEdit(customer) {
 	addSecondary('customer-edit')
-	
-	if (!customer) {
-		return
-	}
-	
-	document.getElementById('customer-edit-id').value = customer.id
 	
 	const staffInput = document.getElementById('customer-edit-preferred-staff')
 	{
@@ -325,6 +334,12 @@ async function cmCustomerEdit(customer) {
 		option.innerText = staff.id + ' - ' + staff.fullName
 		staffInput.append(option)
 	}
+	
+	if (!customer) {
+		return
+	}
+	
+	document.getElementById('customer-edit-id').value = customer.id
 	
 	await cmCheckID()
 }
@@ -401,7 +416,7 @@ async function cmSubmitEdit() {
 			token
 		},
 		JSON.stringify({
-			id: customerID,
+			customerID,
 			fullName,
 			contact,
 			preferredStaffID
@@ -431,7 +446,7 @@ async function cmSubmitEdit() {
 
 
 
-async function cmCustomerServices(customer) {
+async function cmViewServices(customer) {
 	
 	const customerID = customer.id
 	

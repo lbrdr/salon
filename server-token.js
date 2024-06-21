@@ -40,7 +40,7 @@ function updateToken(token) {
 // Function for verifying token
 function verifyToken(token, res) {
 	
-	var tokenError
+	var tokenError, user
 	
 	const tokenData = tokens[token]
 	
@@ -48,34 +48,36 @@ function verifyToken(token, res) {
 		tokenError = 'Login token not recognized.'
 	} else if (token.expiry < Date.now()) {
 		tokenError = 'Login token has expired.'
-	}
-	
-	// Check if user connected to the token still exists
-	const username = tokens[token].username
-	const user = database.getUserByUsername(tokens[token].username)
-	
-	if (!user) {
-		tokenError = 'Login token has expired.'
-		tokens[token].expiry = 0
-	}
-	
-	if (res) {
-		if (tokenError) {
-			res.statusCode = 204
-			res.statusMessage = tokenError
-			res.end()
+	} else {
+		// Check if user connected to the token still exists
+		const username = tokenData.username
+		user = database.getUserByUsername(username)
+		
+		if (!user) {
+			tokenError = 'Login token has expired.'
+			tokens[token].expiry = 0
 		} else {
-			res.setHeader('token', token)
-			res.setHeader('user', JSON.stringify({
-				id: user.id,
-				username: username,
-				userType: user.user_type,
-				fullName: user.full_name
-			}))
+			if (res) {
+				res.setHeader('token', token)
+				res.setHeader('user', JSON.stringify({
+					id: user.id,
+					username: username,
+					userType: user.user_type,
+					fullName: user.full_name
+				}))
+			}
 		}
+		
+	}
+	
+	if (tokenError) {
+		res.statusCode = 204
+		res.statusMessage = tokenError
+		res.end()
 	}
 	
 	return { tokenError, user }
+	
 }
 
 

@@ -88,27 +88,27 @@ function initialize() {
 	).run();
 	db.prepare(
 		`CREATE TABLE IF NOT EXISTS inventory_item (
-			id INTEGER PRIMARY KEY ASC,
-			item_name TEXT NOT NULL,
-			manufacturer TEXT,
-			status TEXT NOT NULL
+			name TEXT NOT NULL,
+			manufacturer TEXT NOT NULL,
+			unit TEXT NOT NULL,
+			current_stock REAL,
+			last_record_date TEXT,
+			status TEXT,
+			void INTEGER,
+			PRIMARY KEY(name, manufacturer, unit)
 		)`
 	).run();
 	db.prepare(
 		`CREATE TABLE IF NOT EXISTS inventory_record (
 			id INTEGER PRIMARY KEY ASC,
 			recording_staff_id INTEGER,
+			item_name TEXT NOT NULL,
+			item_manufacturer TEXT NOT NULL,
+			item_unit TEXT NOT NULL,
+			amount REAL,
 			date TEXT NOT NULL,
 			FOREIGN KEY(recording_staff_id) REFERENCES user(id)
-		)`
-	).run();
-	db.prepare(
-		`CREATE TABLE IF NOT EXISTS inventory_measurement (
-			id INTEGER PRIMARY KEY ASC,
-			inventory_record_id INTEGER,
-			inventory_item_id INTEGER,
-			FOREIGN KEY(inventory_record_id) REFERENCES inventory_record(id),
-			FOREIGN KEY(inventory_item_id) REFERENCES inventory_item(id)
+			FOREIGN KEY(item_name, item_manufacturer, item_unit) REFERENCES inventory_item(name, manufacturer, unit)
 		)`
 	).run();
 	db.prepare(
@@ -137,6 +137,7 @@ function initialize() {
 			sales_record_id INTEGER,
 			service_id INTEGER,
 			price REAL NOT NULL,
+			void INTEGER,
 			FOREIGN KEY(sales_record_id) REFERENCES sales_record(id),
 			FOREIGN KEY(service_id) REFERENCES service(id)
 		)`
@@ -246,7 +247,7 @@ function createSampleData() {
 		createOfferedService(salesRecordID, 3, 1000)
 	}
 	{
-		const salesRecordID = createSalesRecord(3, 7, 1500).lastInsertRowid
+		const salesRecordID = createSalesRecord(3, 7, 3000).lastInsertRowid
 		createOfferedService(salesRecordID, 2, 1500)
 		createOfferedService(salesRecordID, 3, 1200)
 	}
@@ -268,11 +269,337 @@ function createSampleData() {
 		createOfferedService(salesRecordID, 1, 200)
 	}
 	
+	createInventoryRecord(
+		1,
+		'Hair Dye',
+		'GLAMWORKS',
+		'box/es',
+		3
+	)
+	
+	createInventoryRecord(
+		3,
+		'Hair Dye',
+		'GLAMWORKS',
+		'box/es',
+		-1
+	)
+	
+	createInventoryRecord(
+		2,
+		'Hair Dye',
+		'GLAMWORKS',
+		'box/es',
+		-1
+	)
+	
+	createInventoryRecord(
+		1,
+		'Hair Dye',
+		'GLAMWORKS',
+		'box/es',
+		-1
+	)
+	
+	createInventoryRecord(
+		1,
+		'Shampoo',
+		'Smooth and Manageable',
+		'ml',
+		900
+	)
+	
+	createInventoryRecord(
+		1,
+		'Shampoo',
+		'Smooth and Manageable',
+		'ml',
+		-50
+	)
+	
+	createInventoryRecord(
+		2,
+		'Shampoo',
+		'Smooth and Manageable',
+		'ml',
+		-50
+	)
+	
+	createInventoryRecord(
+		2,
+		'sabon',
+		'seypgard',
+		'box/es',
+		1
+	)
+	
+	setInventoryRecord(
+		8,
+		2,
+		'Soap',
+		'Safeguard',
+		'box/es',
+		1
+	)
+	
 }
 
 
 
 // Encode string to escape quotes (for preventing sql injection)
+
+
+
+// Create inventory record
+function createInventoryRecord(
+	recordingStaffID,
+	itemName,
+	itemManufacturer,
+	itemUnit,
+	amount
+) {
+	
+	createInventoryItem(
+		itemName,
+		itemManufacturer,
+		itemUnit
+	)
+	
+	const result = db.prepare(
+		`INSERT INTO inventory_record (
+			recording_staff_id,
+			item_name,
+			item_manufacturer,
+			item_unit,
+			amount,
+			date
+		) VALUES (?, ?, ?, ?, ?, ?)
+		`
+	).run(
+		recordingStaffID,
+		itemName,
+		itemManufacturer,
+		itemUnit,
+		amount,
+		(new Date()).toJSON()
+	)
+	
+	updateInventoryItem(
+		itemName,
+		itemManufacturer,
+		itemUnit
+	)
+	
+	return result
+	
+}
+
+// Set inventory record info
+function setInventoryRecord(
+	inventoryRecordID,
+	recordingStaffID,
+	itemName,
+	itemManufacturer,
+	itemUnit,
+	amount
+) {
+	
+	const oldRecord = db.prepare(
+		`SELECT * FROM inventory_record	WHERE id=?`
+	).get(inventoryRecordID)
+	
+	const differentItem =
+		oldRecord.item_name !== itemName ||
+		oldRecord.item_unit !== itemUnit
+	
+	if (differentItem) {	
+		createInventoryItem(
+			itemName,
+			itemManufacturer,
+			itemUnit
+		)
+	}
+	
+	const result = db.prepare(
+		`UPDATE inventory_record
+		SET recording_staff_id=?,
+			item_name=?,
+			item_manufacturer=?,
+			item_unit=?,
+			amount=?
+		WHERE id=?
+		`
+	).run(
+		recordingStaffID,
+		itemName,
+		itemManufacturer,
+		itemUnit,
+		amount,
+		inventoryRecordID
+	)
+	
+	if (differentItem) {
+		updateInventoryItem(
+			oldRecord.item_name,
+			oldRecord.item_manufacturer,
+			oldRecord.item_unit
+		)
+	}
+	
+	updateInventoryItem(
+		itemName,
+		itemManufacturer,
+		itemUnit
+	)
+	
+	return result
+	
+}
+
+// Create an inventory item with null values for current stock, status, etc.
+function createInventoryItem(name, manufacturer, unit) {
+	
+	return db.prepare(
+		`INSERT OR IGNORE INTO inventory_item (
+			name,
+			manufacturer,
+			unit
+		) VALUES (?, ?, ?)`
+	).run(
+		name,
+		manufacturer,
+		unit
+	)
+	
+}
+
+// Update an inventory item current stock, status, etc.
+function updateInventoryItem(name, manufacturer, unit) {
+	
+	return db.prepare(
+		`UPDATE inventory_item
+		SET current_stock=
+				(SELECT SUM(amount)
+					FROM inventory_record
+					WHERE item_name=?
+					AND item_manufacturer=?
+					AND item_unit=?),
+			last_record_date=
+				(SELECT MAX(date)
+					FROM inventory_record
+					WHERE item_name=?
+					AND item_manufacturer=?
+					AND item_unit=?),
+			status=
+				CASE
+					WHEN
+						(SELECT SUM(amount)
+							FROM inventory_record
+							WHERE item_name=?
+							AND item_manufacturer=?
+							AND item_unit=?)
+						> 0
+					THEN 'in stock'
+					WHEN
+						(SELECT SUM(amount)
+							FROM inventory_record
+							WHERE item_name=?
+							AND item_manufacturer=?
+							AND item_unit=?)
+						< 0
+					THEN 'error: negative stock'
+					ELSE 'out of stock'
+				END,
+			void=
+				CASE
+					WHEN 
+						(SELECT COUNT(*)
+							FROM inventory_record
+							WHERE item_name=?
+							AND item_manufacturer=?
+							AND item_unit=?)
+						> 0
+					THEN NULL
+					ELSE 1
+				END
+		WHERE name=?
+		AND manufacturer=?
+		AND unit=?
+		`
+	).run(
+		name, manufacturer, unit,
+		name, manufacturer, unit,
+		name, manufacturer, unit,
+		name, manufacturer, unit,
+		name, manufacturer, unit,
+		name, manufacturer, unit
+	)
+	
+}
+
+// Get all inventory records
+function getInventoryRecords() {
+	
+	return db.prepare(
+		`SELECT * FROM inventory_record`
+	).all()
+
+}
+
+// Get an inventory record by id
+function getInventoryRecordByID(inventoryRecordID) {
+	
+	return db.prepare(
+		`SELECT * FROM inventory_record WHERE id=?`
+	).get(inventoryRecordID)
+
+}
+
+// Get an inventory record by item details (name, unit)
+function getInventoryRecordsByItem(itemName, itemManufacturer, itemUnit) {
+	
+	return db.prepare(
+		`SELECT *
+		FROM inventory_record
+		WHERE item_name=?
+		AND item_manufacturer=?
+		AND item_unit=?
+		`
+	).get(
+		itemName,
+		itemManufacturer,
+		itemUnit
+	)
+
+}
+
+// Get all inventory items
+function getInventoryItems() {
+	
+	return db.prepare(
+		`SELECT * FROM inventory_item WHERE void IS NULL`
+	).all()
+
+}
+
+// Get an inventory item by the name, and unit
+function getInventoryItem(name, manufacturer, unit) {
+	
+	return db.prepare(
+		`SELECT *
+		FROM inventory_item
+		WHERE name=?
+		AND manufacturer=?
+		AND unit=?
+		AND void IS NULL
+		`
+	).get(
+		name,
+		manufacturer,
+		unit
+	)
+
+}
 
 
 
@@ -420,6 +747,15 @@ function getSalesRecordsByCustomerID(customerID) {
 	
 }
 
+// Get sales records for a customer
+function getSalesRecordByID(salesRecordID) {
+	
+	return db.prepare(
+		`SELECT * FROM sales_record WHERE id=?`
+	).get(salesRecordID)
+	
+}
+
 // Get all sales records
 function getSalesRecords() {
 	
@@ -429,14 +765,15 @@ function getSalesRecords() {
 	
 }
 
-// Get offered services in a sales record
-function getOfferedServicesBySalesRecordID(salesRecordID) {
+// Get all services
+function getServices() {
 	
 	return db.prepare(
-		`SELECT * FROM offered_service WHERE sales_record_id=?`
-	).all(salesRecordID)
+		`SELECT * FROM service`
+	).all()
 	
 }
+
 
 // Get a service using service ID
 function getServiceByID(serviceID) {
@@ -464,7 +801,7 @@ function getCustomersBySearch(searchParameters) {
 		if (!value) {continue}
 		
 		switch(column) {
-			case 'id':
+			case 'customerID':
 				addCondition('customer.id LIKE ?')
 				searchValues.push('%' + value + '%')
 				break
@@ -557,20 +894,39 @@ function createSalesRecord(servicingStaffID, customerID, payment) {
 	
 }
 
-// Update sales record values (price and change)
+// Update sales record price and change
 function updateSalesRecord(salesRecordID) {
 	
 	return db.prepare(
 		`UPDATE sales_record
 		SET total_price=(
-				SELECT sum(price) FROM offered_service WHERE sales_record_id=?),
-			change=(
-				SELECT sum(price) FROM offered_service WHERE sales_record_id=?) - payment
-		WHERE id=?`
+				SELECT SUM(price) FROM offered_service WHERE sales_record_id=? AND void IS NULL),
+			change=payment - (
+				SELECT SUM(price) FROM offered_service WHERE sales_record_id=? AND void IS NULL)
+		WHERE id=?
+		`
 	).run(
 		salesRecordID,
 		salesRecordID,
 		salesRecordID
+	);
+	
+}
+
+// Set sales record info
+function setSalesRecord(salesRecordID, servicingStaffID, customerID, payment) {
+	
+	return db.prepare(
+		`UPDATE sales_record
+		SET servicing_staff_id=?,
+			customer_id=?,
+			payment=?
+		WHERE id=?`
+	).run(
+		servicingStaffID,
+		customerID,
+		payment,
+		salesRecordID,
 	);
 	
 }
@@ -606,11 +962,42 @@ function getOfferedServicesByCustomerID(customerID) {
 			ON sales_record.id = sales_record_id
 		INNER JOIN service
 			ON service.id = service_id
-		WHERE customer_id=?
+		WHERE customer_id=? AND offered_service.void IS NULL
 		`
 	).all(customerID);
 	
 }
+
+// Get an offered service using offered service ID
+function getOfferedServiceByID(offeredServiceID) {
+	
+	return db.prepare(
+		`SELECT * FROM offered_service WHERE id=? AND void IS NULL`
+	).get(offeredServiceID)
+	
+}
+
+// Void offered services using offered service ID
+function voidOfferedServicesBySalesRecordID(salesRecordID) {
+	
+	return db.prepare(
+		`UPDATE offered_service 
+		SET void=1
+		WHERE sales_record_id=? AND void IS NULL`
+	).run(salesRecordID)
+	
+}
+
+// Get offered services in a sales record
+function getOfferedServicesBySalesRecordID(salesRecordID) {
+	
+	return db.prepare(
+		`SELECT * FROM offered_service WHERE sales_record_id=? AND void IS NULL`
+	).all(salesRecordID)
+	
+}
+
+
 
 // Create a user action
 function createUserAction(userID, action) {
@@ -671,7 +1058,9 @@ module.exports = {
 	getCustomerByFullName,
 	getSalesRecordsByCustomerID,
 	getOfferedServicesBySalesRecordID,
+	getServices,
 	getServiceByID,
+	getOfferedServiceByID,
 	getCustomersBySearch,
 	createService,
 	createSalesRecord,
@@ -681,5 +1070,13 @@ module.exports = {
 	createUserAction,
 	editCustomer,
 	getSalesRecords,
-	getUserActions
+	getUserActions,
+	getSalesRecordByID,
+	setSalesRecord,
+	voidOfferedServicesBySalesRecordID,
+	getInventoryItem,
+	getInventoryItems,
+	getInventoryRecordByID,
+	getInventoryRecords,
+	getInventoryRecordsByItem
 }

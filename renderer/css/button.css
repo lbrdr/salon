@@ -1,12 +1,12 @@
 .button {
-    padding: 0.5em 1.7em;
-    font-size: 0.9em;
-    border-radius: 2em;
+	padding: 0.5em 1.7em;
+	font-size: 0.9em;
+	border-radius: 2em;
 	
 	background-color: var(--accent);
-    color: var(--on-accent);
+	color: var(--on-accent);
 	
-    border-color: var(--accent);
+	border-color: var(--accent);
 	border-width: 1px;
 	border-style: outset;
 	
@@ -19,29 +19,29 @@
 
 .button:not(:disabled):not(.disabled):hover {
 	background-color: var(--accent-hover);
-    color: var(--on-accent-hover);
-    border-color: var(--accent-hover);
+	color: var(--on-accent-hover);
+	border-color: var(--accent-hover);
 	border-style: outset;
 }
 
 .button:not(:disabled):not(.disabled):active {
 	background-color: var(--accent-active);
-    color: var(--on-accent-active);
-    border-color: var(--accent-active);
+	color: var(--on-accent-active);
+	border-color: var(--accent-active);
 	border-style: inset;
 	outline-style: dotted;
 }
 
 
 .button2 {
-    padding: calc(0.5em - 1px) calc(1.7em - 1px);
-    font-size: 0.9em;
-    border-radius: 2em;
+	padding: calc(0.5em - 1px) calc(1.7em - 1px);
+	font-size: 0.9em;
+	border-radius: 2em;
 	
 	background-color: var(--on-accent);
-    color: var(--accent);
+	color: var(--accent);
 	
-    border-color: var(--accent);
+	border-color: var(--accent);
 	border-width: 2px;
 	border-style: solid;
 	
@@ -53,23 +53,23 @@
 }
 
 .button2:not(:disabled):not(.disabled):hover {
-    padding: 0.5em 1.7em;
+	padding: 0.5em 1.7em;
 	
 	background-color: var(--accent-hover);
-    color: var(--on-accent-hover);
+	color: var(--on-accent-hover);
 	
-    border-color: var(--accent-hover);
+	border-color: var(--accent-hover);
 	border-width: 1px;
 	border-style: outset;
 }
 
 .button2:not(:disabled):not(.disabled):active {
-    padding: 0.5em 1.7em;
+	padding: 0.5em 1.7em;
 	
 	background-color: var(--accent-active);
-    color: var(--on-accent-active);
+	color: var(--on-accent-active);
 	
-    border-color: var(--accent-active);
+	border-color: var(--accent-active);
 	border-width: 1px;
 	border-style: inset;
 	
@@ -78,14 +78,14 @@
 
 
 .button3 {
-    padding: 0.5em 1.7em;
-    font-size: 0.9em;
-    border-radius: 2em;
+	padding: 0.5em 1.7em;
+	font-size: 0.9em;
+	border-radius: 2em;
 	
 	background-color: var(--accent2);
-    color: var(--on-accent2);
+	color: var(--on-accent2);
 	
-    border-color: var(--accent2);
+	border-color: var(--accent2);
 	border-width: 1px;
 	border-style: outset;
 	
@@ -98,13 +98,13 @@
 
 .button3:not(:disabled):not(.disabled):hover {
 	background-color: var(--accent2-hover);
-    color: var(--on-accent2-hover);
+	color: var(--on-accent2-hover);
 	outline-color: var(--accent2-hover);
 }
 
 .button3:not(:disabled):not(.disabled):active {
 	background-color: var(--accent2-active);
-    color: var(--on-accent2-active);
+	color: var(--on-accent2-active);
 	outline-color: var(--accent2-active);
 	border-style: inset;
 	outline-style: dotted;
@@ -112,14 +112,14 @@
 
 
 .button4 {
-    padding: calc(0.5em - 1px) calc(1.7em - 1px);
-    font-size: 0.9em;
-    border-radius: 2em;
+	padding: calc(0.5em - 1px) calc(1.7em - 1px);
+	font-size: 0.9em;
+	border-radius: 2em;
 	
 	background-color: var(--on-accent2);
-    color: var(--accent2);
+	color: var(--accent2);
 	
-    border-color: var(--accent2);
+	border-color: var(--accent2);
 	border-width: 2px;
 	border-style: solid;
 	
@@ -131,21 +131,21 @@
 }
 
 .button4:not(:disabled):not(.disabled):hover {
-    padding: 0.5em 1.7em;
+	padding: 0.5em 1.7em;
 	background-color: var(--accent2-hover);
-    color: var(--on-accent2-hover);
+	color: var(--on-accent2-hover);
 	
-    border-color: var(--accent2-hover);
+	border-color: var(--accent2-hover);
 	border-width: 1px;
 	border-style: outset;
 }
 
 .button4:not(:disabled):not(.disabled):active {
-    padding: 0.5em 1.7em;
+	padding: 0.5em 1.7em;
 	background-color: var(--accent2-active);
-    color: var(--on-accent2-active);
+	color: var(--on-accent2-active);
 	
-    border-color: var(--accent2-active);
+	border-color: var(--accent2-active);
 	border-width: 1px;
 	border-style: inset;
 	
@@ -153,36 +153,79 @@
 }
 
 .button5 {
-    padding: 0.5em 1.1em;
-    font-size: 0.9em;
-    border-radius: 2px;
-	
+	padding: 0.5em 1.1em;
+	font-size: 0.9em;
+	border-radius: 2px;
+
 	background-color: var(--accent);
-    color: var(--on-accent);
-	
-    border-color: var(--accent);
+	color: var(--on-accent);
+
+	border-color: var(--accent);
 	border-width: 1px;
 	border-style: outset;
-	
+
 	outline-color: var(--on-background);
 	outline-width: 1px;
-	
+
 	cursor: pointer;
 	user-select: none;
 }
 
 .button5:not(:disabled):not(.disabled):hover {
 	background-color: var(--accent-hover);
-    color: var(--on-accent-hover);
-    border-color: var(--accent-hover);
+	color: var(--on-accent-hover);
+	border-color: var(--accent-hover);
 	border-style: outset;
 }
 
 .button5:not(:disabled):not(.disabled):active {
 	background-color: var(--accent-active);
-    color: var(--on-accent-active);
-    border-color: var(--accent-active);
+	color: var(--on-accent-active);
+	border-color: var(--accent-active);
 	border-style: inset;
+	outline-style: dotted;
+}
+
+.button6 {
+	padding: calc(0.5em - 1px) calc(1.1em - 1px);
+	font-size: 0.9em;
+	border-radius: 2px;
+
+	background-color: var(--on-accent);
+	color: var(--accent);
+
+	border-color: var(--accent);
+	border-width: 2px;
+	border-style: solid;
+
+	outline-color: var(--on-background);
+	outline-width: 1px;
+
+	cursor: pointer;
+	user-select: none;
+}
+
+.button6:not(:disabled):not(.disabled):hover {
+	padding: 0.5em 1.1em;
+	
+	background-color: var(--accent-hover);
+	color: var(--on-accent-hover);
+	
+	border-color: var(--accent-hover);
+	border-width: 1px;
+	border-style: outset;
+}
+
+.button6:not(:disabled):not(.disabled):active {
+	padding: 0.5em 1.1em;
+	
+	background-color: var(--accent-active);
+	color: var(--on-accent-active);
+	
+	border-color: var(--accent-active);
+	border-width: 1px;
+	border-style: inset;
+	
 	outline-style: dotted;
 }
 
@@ -195,12 +238,31 @@
 .button4:disabled,
 .button4.disabled,
 .button5:disabled,
-.button5.disabled
+.button5.disabled,
+.button6:disabled,
+.button6.disabled
 {
 	background-color: var(--accent-disabled);
-    color: var(--on-accent-disabled);
-    border-color: var(--on-accent-disabled);
+	color: var(--on-accent-disabled);
+	border-color: var(--on-accent-disabled);
 	border-style: solid;
 	
 	cursor: default;
+}
+
+th > .button,
+td > .button,
+th > .button2,
+td > .button2,
+th > .button3,
+td > .button3,
+th > .button4,
+td > .button4,
+th > .button5,
+td > .button5,
+th > .button6,
+td > .button6
+{
+    text-wrap: nowrap;
+	width: fit-content;
 }

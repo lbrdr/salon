@@ -38,13 +38,18 @@ async function setPage(nextPage) {
 	// Operations for when changing page to a certain page
 	switch (nextPage) {
 		
+		case 'inventory-management':
+			mainDiv.innerHTML = htmlFiles['inventory-management.html']
+			await imSetupInventoryManagementTable()
+			break;
+		
 		case 'point-of-sales':
 			if (currentUser.userType === 'admin') {
 				mainDiv.innerHTML += htmlFiles['point-of-sales-admin.html']
-				await posSetupSalesTable(true)
+				await posSetupSalesRecordTable(true)
 			} else if (currentUser.userType === 'staff') {
 				mainDiv.innerHTML += htmlFiles['point-of-sales-staff.html']
-				await posSetupSalesTable()
+				await posSetupSalesRecordTable()
 			}
 			break;
 		
@@ -97,6 +102,22 @@ async function addSecondary(secondary) {
 		
 		case 'customer-services':
 			div.innerHTML = htmlFiles['customer-services.html']
+			break;
+		
+		case 'sales-record-creation':
+			div.innerHTML = htmlFiles['sales-record-creation.html']
+			break;
+		
+		case 'sales-record-edit':
+			div.innerHTML = htmlFiles['sales-record-edit.html']
+			break;
+		
+		case 'sales-record-services':
+			div.innerHTML = htmlFiles['sales-record-services.html']
+			break;
+		
+		case 'inventory-item-records':
+			div.innerHTML = htmlFiles['inventory-item-records.html']
 			break;
 		
 	}

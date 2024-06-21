@@ -47,6 +47,11 @@ async function checkToken(request) {
 			}
 		}
 		
+	} else if (request.status === 406) {
+		
+		createMessageDialogue('error', 'Request Failed', 'Client-side error')
+		return request.statusText
+		
 	} else if (request.status === 500) {
 		
 		createMessageDialogue('error', 'Request Failed', request.statusText)

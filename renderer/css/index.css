@@ -8,6 +8,10 @@
   
   --background2: #ffffff;
   --on-background2: #222222;
+  --background2-hover: #ebdfd7;
+  --on-background2-hover: #121212;
+  --background2-active: #e9c997;
+  --on-background2-active: #000000;
   
   --background3: #eeeeee;
   --on-background3: #333333;
@@ -16,11 +20,11 @@
   --background3-active: #bbad97;
   --on-background3-active: #000000;
   
-  --background4: #cedbf1;
+  --background4: #d0e1ff;
   --on-background4: #000000;
-  --background4-hover: #98bdf5;
-  --on-background4-hover: #121212;
-  --background4-active: #6fa1d5;
+  --background4-hover: #a4c5f7;
+  --on-background4-hover: #000000;
+  --background4-active: #66affb;
   --on-background4-active: #000000;
   
   --accent: #bf757d;
@@ -56,7 +60,7 @@ body {
 	color: var(--on-background);
 	font-family: sans-serif;
 	
-	font-size: 1.8vw;
+	font-size: min(1.8vw, 3.6vh);
 }
 
 #main-div {
@@ -185,9 +189,21 @@ input {
     font-size: 0.9em;
 }
 
+input[type="radio"] {
+    height: 1em;
+    width: 1em;
+}
+
 select {
 	padding: 1px;
     font-size: 0.9em;
+}
+
+input:disabled,
+select:disabled
+{
+	opacity: 1;
+	color: black;
 }
 
 #module-div {

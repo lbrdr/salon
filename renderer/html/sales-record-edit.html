@@ -1,0 +1,74 @@
+<div class="secondary-header">
+	<div class="icon sales-record-edit-icon"></div>
+	<h2>Edit Sales Record Information</h2>
+</div>
+<div id="sales-record-edit-div">
+	<div>
+		<div class="sales-record-edit-field">
+			<label for="sales-record-edit-id">
+				Sales Record ID
+			</label>
+			<div>
+				<input type="number" id="sales-record-edit-id" />
+				<input type="button" value="Check" class="button" onclick="posCheckID()" />
+			</div>
+		</div>
+		<div class="sales-record-edit-field">
+			<label for="sales-record-edit-customer">
+				Customer
+			</label>
+			<input type="text" id="sales-record-edit-customer" list="sales-record-edit-customers" />
+		</div>
+		<div class="sales-record-edit-field">
+			<label for="sales-record-edit-servicing-staff">
+				Servicing Staff
+			</label>
+			<select id="sales-record-edit-servicing-staff"></select>
+		</div>
+		<div class="sales-record-edit-field">
+			<label for="sales-record-edit-date">
+				Transaction Date
+			</label>
+			<input type="date" id="sales-record-edit-date" disabled />
+		</div>
+	</div>
+	<div>
+		Offered Services
+		<div id="sales-record-edit-services-table">
+			<div class="table-container">
+				<table>
+					<tfoot>
+						<tr>
+							<th colspan="2">
+								Total Price
+							</th>
+							<td>
+								<input type="number" id="sales-record-edit-total-price" disabled />
+							</td>
+						</tr>
+							<th colspan="2">
+								Payment
+							</th>
+							<td>
+								<input type="number" id="sales-record-edit-payment" />
+							</td>
+						<tr>
+						</tr>
+						<tr>
+							<th colspan="2">
+								Change
+							</th>
+							<td>
+								<input type="number" id="sales-record-edit-change" disabled />
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="posCancelEdit()"></input>
+	<input type="button" value="Submit" class="button" onclick="posSubmitEdit()"></input>
+</div>
