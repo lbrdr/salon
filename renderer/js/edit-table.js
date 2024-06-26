@@ -2,6 +2,7 @@ function createEditTable (parent, columns, options) {
 	
 	const tableObj = {}
 	
+	tableObj.parent = parent
 	tableObj.columns = columns
 	for (const option in options) {
 		tableObj[option] = options[option]
@@ -54,7 +55,11 @@ function createEditTableHTML(tableObj) {
 		tHead.append(tr)
 	}
 	
+	table.append(tHead)
+	table.append(tBody)
+	
 	if (editable) {
+		const tFoot = document.createElement('tfoot')
 		const tr = document.createElement('tr')
 		const td = document.createElement('td')
 		td.colSpan = columnCount
@@ -62,14 +67,15 @@ function createEditTableHTML(tableObj) {
 		
 		const addButton = document.createElement('div')
 		addButton.className = 'button5'
-		addButton.onclick = () => {
+		addButton.onclick = async () => {
 			createEditTableRow(tableObj)
 			if (onadd) {
-				onadd()
+				await onadd()
 			}
 			if (onchange) {
-				onchange()
+				await onchange()
 			}
+			container.scrollTop = container.scrollHeight
 		}
 		
 		const addIcon = document.createElement('div')
@@ -79,11 +85,10 @@ function createEditTableHTML(tableObj) {
 		addButton.append(' Add' + (name ? ' ' + name : ''))
 		td.append(addButton)
 		tr.append(td)
-		tHead.append(tr)
+		tFoot.append(tr)
+		table.append(tFoot)
 	}
 	
-	table.append(tHead)
-	table.append(tBody)
 	container.append(table)
 	
 	return container
@@ -96,7 +101,8 @@ function createEditTableRow(tableObj) {
 		columns,
 		onchange,
 		onremove,
-		editable
+		editable,
+		parent
 	} = tableObj
 	
 	const table = tableObj.html
@@ -169,11 +175,13 @@ function createEditTableRow(tableObj) {
 		
 	}
 	
-	if (editable) {
-		tHead.insertBefore(tr, tHead.lastChild)
-	} else {
-		tHead.append(tr)
-	}
+	// if (editable) {
+		// tHead.insertBefore(tr, tHead.lastChild)
+	// } else {
+		// tHead.append(tr)
+	// }
+	
+	tHead.append(tr)
 	
 	return tr
 	

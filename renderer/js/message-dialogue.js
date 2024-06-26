@@ -1,5 +1,5 @@
 // Create and show dialogue box
-function createMessageDialogue(type, title, message) {
+function createMessageDialogue(type, title, message, buttons) {
 	
 	const blockerDiv = document.createElement('div')
 	blockerDiv.className = 'blocker'
@@ -33,26 +33,37 @@ function createMessageDialogue(type, title, message) {
 	
 	const messageTextDiv = document.createElement('div')
 	messageTextDiv.className = 'message-dialogue-message-text'
-	messageTextDiv.innerText = message.replace(/\./g, '.\n')
+	if (typeof message === 'string') {
+		messageTextDiv.innerText = message.replace(/\.(?!$)/g, '.\n\n')
+	} else {
+		messageTextDiv.append(message)
+	}
 	
 	const bottomDiv = document.createElement('div')
 	bottomDiv.className = 'message-dialogue-bottom'
 	
-	const okDiv = document.createElement('div')
-	okDiv.type = 'button'
-	okDiv.className = 'button3'
-	okDiv.innerText = 'OK'
-	okDiv.onclick = (event) => blockerDiv.remove()
-	
+	if (buttons) {
+		for (const button of buttons) {
+			bottomDiv.append(button)
+		}
+	} else {
+		const okDiv = document.createElement('div')
+		okDiv.type = 'button'
+		okDiv.className = 'button3'
+		okDiv.innerText = 'OK'
+		okDiv.onclick = (event) => blockerDiv.remove()
+		bottomDiv.append(okDiv)
+	}
 	
 	topDiv.append(titleDiv)
 	topDiv.append(closeDiv)
 	messageDiv.append(messageTextDiv)
-	bottomDiv.append(okDiv)
 	dialogueDiv.append(topDiv)
 	dialogueDiv.append(messageDiv)
 	dialogueDiv.append(bottomDiv)
 	blockerDiv.append(dialogueDiv)
 	overlayDiv.append(blockerDiv)
+	
+	return blockerDiv
 	
 }

@@ -1,28 +1,11 @@
-var posSalesRecordTable
 var posSalesRecordData
+var posSalesRecordTable
 var posCustomerData
 var posStaffData
 var posServiceData
 var posViewedSalesRecord
 
-
-
-async function posSetupSalesRecordTable(selectable) {
-
-	const salesRequest = await queryRequest(
-		'POST',
-		{
-			action: 'point-of-sales-get-sales-records',
-			token
-		},
-	);
-	
-	{
-		const tokenError = await checkToken(salesRequest)
-		if (tokenError) { return; }
-		const permissionError = checkPermission(salesRequest)
-		if (permissionError) { return; }
-	}
+async function posGetCustomerData() {
 	
 	const customerRequest = await queryRequest(
 		'POST',
@@ -34,10 +17,16 @@ async function posSetupSalesRecordTable(selectable) {
 	
 	{
 		const tokenError = await checkToken(customerRequest)
-		if (tokenError) { return; }
+		if (tokenError) { return tokenError; }
 		const permissionError = checkPermission(customerRequest)
-		if (permissionError) { return; }
+		if (permissionError) { return permissionError; }
 	}
+	
+	posCustomerData = JSON.parse(customerRequest.responseText)
+	
+}
+
+async function posGetStaffData() {
 	
 	const staffRequest = await queryRequest(
 		'POST',
@@ -49,30 +38,33 @@ async function posSetupSalesRecordTable(selectable) {
 	
 	{
 		const tokenError = await checkToken(staffRequest)
-		if (tokenError) { return; }
+		if (tokenError) { return tokenError; }
 		const permissionError = checkPermission(staffRequest)
-		if (permissionError) { return; }
+		if (permissionError) { return permissionError; }
 	}
 	
-	const serviceRequest = await queryRequest(
+	posStaffData = JSON.parse(staffRequest.responseText)
+	
+}
+
+async function posGetSalesRecordData() {
+
+	const salesRequest = await queryRequest(
 		'POST',
 		{
-			action: 'point-of-sales-get-services',
+			action: 'point-of-sales-get-sales-records',
 			token
 		},
 	);
 	
 	{
-		const tokenError = await checkToken(serviceRequest)
-		if (tokenError) { return; }
-		const permissionError = checkPermission(serviceRequest)
-		if (permissionError) { return; }
+		const tokenError = await checkToken(salesRequest)
+		if (tokenError) { return tokenError; }
+		const permissionError = checkPermission(salesRequest)
+		if (permissionError) { return permissionError; }
 	}
 	
 	posSalesRecordData = JSON.parse(salesRequest.responseText)
-	posCustomerData = JSON.parse(customerRequest.responseText)
-	posStaffData = JSON.parse(staffRequest.responseText)
-	posServiceData = JSON.parse(serviceRequest.responseText)
 	
 	posSalesRecordData.forEach(
 		(record) => {
@@ -106,6 +98,42 @@ async function posSetupSalesRecordTable(selectable) {
 			
 		}
 	);
+	
+}
+
+async function posGetServiceData() {
+	
+	const serviceRequest = await queryRequest(
+		'POST',
+		{
+			action: 'point-of-sales-get-services',
+			token
+		},
+	);
+	
+	{
+		const tokenError = await checkToken(serviceRequest)
+		if (tokenError) { return tokenError; }
+		const permissionError = checkPermission(serviceRequest)
+		if (permissionError) { return permissionError; }
+	}
+	
+	posServiceData = JSON.parse(serviceRequest.responseText)
+	
+}
+
+async function posSetupSalesRecordTable() {
+	
+	{
+		const customerError = await posGetCustomerData()
+		if (customerError) { return customerError; }
+		const staffError = await posGetStaffData()
+		if (staffError) { return staffError; }
+		const salesError = await posGetSalesRecordData()
+		if (salesError) { return salesError; }
+		const serviceError = await posGetServiceData()
+		if (serviceError) { return serviceError; }
+	}
 	
 	const salesRecords = [...posSalesRecordData]
 	salesRecords.sort(
@@ -141,25 +169,42 @@ async function posSetupSalesRecordTable(selectable) {
 			customer: 'Customer',
 			servicingStaff: 'Servicing Staff',
 			shortDate: 'Date',
-			services: 'Services'
+			services: 'Details'
 		},
 		salesRecords,
 		{
-			itemsPerPage: userIsAdmin ? 7 : 9,
+			itemsPerPage: userIsAdmin ? 5 : 7,
 			select: userIsAdmin
 		}
 	)
 	
 }
 
-function serviceInputGenerator(action, updateTotalPrice) {
+function posServiceInputGenerator(action, updateTotalPrice) {
 	return () => {
 		const serviceInput = document.createElement('select')
 		serviceInput.className = `sales-record-${action}-service`
+		const unavailableOptions = []
+		
 		for (const service of posServiceData) {
 			const option = document.createElement('option')
 			option.value = service.id
 			option.innerText = service.id + ' - ' + service.name
+			if (service.unavailable) {
+				unavailableOptions.push(option)
+			} else {
+				serviceInput.append(option)
+			}
+		}
+		
+		if (unavailableOptions.length) {
+			const option = document.createElement('option')
+			option.innerText = '(unavailable services)'
+			option.disabled = true
+			serviceInput.append(option)
+		}
+		
+		for (const option of unavailableOptions) {
 			serviceInput.append(option)
 		}
 		
@@ -181,7 +226,7 @@ function serviceInputGenerator(action, updateTotalPrice) {
 	}
 }
 
-function priceInputGenerator(action, updateTotalPrice) {
+function posPriceInputGenerator(action, updateTotalPrice) {
 	return () => {
 		const priceInput = document.createElement('input')
 		priceInput.type = 'number'
@@ -199,8 +244,9 @@ function priceInputGenerator(action, updateTotalPrice) {
 }
 
 function posSetupSalesRecordInputs(action) {
+	
 	const dateInput = document.getElementById(`sales-record-${action}-date`)
-	dateInput.value = new Date().toLocaleDateString('en-CA')
+	dateInput.value = toLocalDateTime(new Date())
 	
 	const customerInput = document.getElementById(`sales-record-${action}-customer`)
 	
@@ -238,8 +284,8 @@ function posSetupServicesTable(action, services) {
 	const tableObj = createEditTable(
 		tableDiv,
 		{
-			'Service': serviceInputGenerator(action, updateTotalPrice),
-			'Price': priceInputGenerator(action, updateTotalPrice)
+			'Service': posServiceInputGenerator(action, updateTotalPrice),
+			'Price': posPriceInputGenerator(action, updateTotalPrice)
 		},
 		{
 			onchange: () => {
@@ -252,9 +298,16 @@ function posSetupServicesTable(action, services) {
 	const tableContainers = tableDiv.getElementsByClassName('table-container')
 	const oldTable = tableContainers[0]
 	const newTable = tableContainers[1]
-	const tFoot = oldTable.getElementsByTagName('tfoot')[0]
+	const newTFoot = newTable.getElementsByTagName('tfoot')[0]
+	const oldTFoot = oldTable.getElementsByTagName('tfoot')[0]
 	
-	newTable.firstChild.append(tFoot)
+	console.log(oldTFoot.children)
+	const i = oldTFoot.children.length - 3
+	
+	while (oldTFoot.children.length > i) {
+		newTFoot.appendChild(oldTFoot.children[i])
+	}
+	
 	oldTable.remove()
 	
 	if (services) {
@@ -295,10 +348,13 @@ function posCreateSalesRecord() {
 	
 	posSetupSalesRecordInputs('creation')
 	
-	const staffInput = document.getElementById('sales-record-creation-servicing-staff')
 	if (currentUser.userType === 'admin') {
+		const staffInput = document.getElementById('sales-record-creation-servicing-staff')
 		staffInput.disabled = false
+		const dateInput = document.getElementById('sales-record-creation-date')
+		dateInput.disabled = false
 	}
+
 	
 	posSetupServicesTable('creation')
 	
@@ -309,10 +365,12 @@ async function posSubmitCreation() {
 	const customerInput = document.getElementById('sales-record-creation-customer')
 	const paymentInput = document.getElementById('sales-record-creation-payment')
 	const staffInput = document.getElementById('sales-record-creation-servicing-staff')
+	const dateInput = document.getElementById('sales-record-creation-date')
 	
 	const customerID = customerInput.value.split(' - ')[0]
 	const payment = paymentInput.value
 	const servicingStaffID = staffInput.value
+	const date = formatDateTime(dateInput.value)
 	
 	const services = []
 	
@@ -339,6 +397,7 @@ async function posSubmitCreation() {
 			customerID,
 			servicingStaffID,
 			payment,
+			date,
 			services
 		})
 	);
@@ -351,12 +410,12 @@ async function posSubmitCreation() {
 	}
 	
 	if (createRequest.status === 200) {
-		createMessageDialogue('success', 'Record Creation Successful', createRequest.statusText)
+		createMessageDialogue('success', 'Sales Record Creation Successful', createRequest.statusText)
 		setPage('point-of-sales')
 		return
 	}
 	
-	createMessageDialogue('error', 'Record Creation Failed', createRequest.statusText)
+	createMessageDialogue('error', 'Sales Record Creation Failed', createRequest.statusText)
 	
 }
 
@@ -367,8 +426,6 @@ function posCancelCreation() {
 
 
 async function posViewServices() {
-	
-	setSecondary('sales-record-services')
 	
 	salesRecordID = posViewedSalesRecord.id
 	
@@ -381,33 +438,6 @@ async function posViewServices() {
 		date
 	} = posViewedSalesRecord
 	
-	const recordIDDiv = document.getElementById('sales-record-services-id')
-	const servicingStaffDiv = document.getElementById('sales-record-services-servicing-staff')
-	const customerDiv = document.getElementById('sales-record-services-customer')
-	const dateDiv = document.getElementById('sales-record-services-date')
-	
-	const servicingStaff = servicingStaffID + ' - ' + posStaffData.find(
-		(staff) => staff.id == servicingStaffID
-	).fullName
-	
-	const customer = customerID ? customerID + ' - ' + posCustomerData.find(
-		(cust) => cust.id == customerID
-	).fullName : '-'
-	
-	const formattedDate = (new Date(date)).toDateString()
-	
-	recordIDDiv.innerText = salesRecordID
-	servicingStaffDiv.innerText = servicingStaff
-	customerDiv.innerText = customer
-	dateDiv.innerText = formattedDate
-	
-	const totalPriceTD = document.getElementById(`sales-record-services-total-price`)
-	const paymentTD = document.getElementById(`sales-record-services-payment`)
-	const changeInputTD = document.getElementById(`sales-record-services-change`)
-	
-	totalPriceTD.innerText = totalPrice.toFixed(2)
-	paymentTD.innerText = payment.toFixed(2)
-	changeInputTD.innerText = change.toFixed(2)
 	
 	
 	const servicesRequest = await queryRequest(
@@ -432,6 +462,38 @@ async function posViewServices() {
 	}
 	
 	const services = JSON.parse(servicesRequest.responseText)
+	
+	
+	
+	setSecondary('sales-record-services')
+	
+	const recordIDDiv = document.getElementById('sales-record-services-id')
+	const servicingStaffDiv = document.getElementById('sales-record-services-servicing-staff')
+	const customerDiv = document.getElementById('sales-record-services-customer')
+	const dateDiv = document.getElementById('sales-record-services-date')
+	
+	const servicingStaff = servicingStaffID + ' - ' + posStaffData.find(
+		(staff) => staff.id == servicingStaffID
+	).fullName
+	
+	const customer = customerID ? customerID + ' - ' + posCustomerData.find(
+		(cust) => cust.id == customerID
+	).fullName : '-'
+	
+	const formattedDate = (new Date(date)).toLocaleString()
+	
+	recordIDDiv.innerText = salesRecordID
+	servicingStaffDiv.innerText = servicingStaff
+	customerDiv.innerText = customer
+	dateDiv.innerText = formattedDate
+	
+	const totalPriceTD = document.getElementById(`sales-record-services-total-price`)
+	const paymentTD = document.getElementById(`sales-record-services-payment`)
+	const changeInputTD = document.getElementById(`sales-record-services-change`)
+	
+	totalPriceTD.innerText = totalPrice.toFixed(2)
+	paymentTD.innerText = payment.toFixed(2)
+	changeInputTD.innerText = change.toFixed(2)
 	
 	const tableDiv = document.getElementById(`sales-record-services-services-table`)
 	
@@ -577,6 +639,7 @@ async function posCheckID() {
 	const salesRecord = JSON.parse(recordRequest.responseText)
 	const services = JSON.parse(servicesRequest.responseText)
 	
+	const dateInput = document.getElementById('sales-record-edit-date')
 	const staffInput = document.getElementById('sales-record-edit-servicing-staff')
 	const customerInput = document.getElementById('sales-record-edit-customer')
 	const paymentInput = document.getElementById('sales-record-edit-payment')
@@ -586,6 +649,7 @@ async function posCheckID() {
 		(customer) => customer.id == customerID
 	).fullName : ''
 	
+	dateInput.value = toLocalDateTime(new Date(salesRecord.date))
 	staffInput.value = salesRecord.servicingStaffID
 	customerInput.value = customer
 	paymentInput.value = salesRecord.payment
@@ -606,11 +670,13 @@ async function posSubmitEdit() {
 	const customerInput = document.getElementById('sales-record-edit-customer')
 	const paymentInput = document.getElementById('sales-record-edit-payment')
 	const staffInput = document.getElementById('sales-record-edit-servicing-staff')
+	const dateInput = document.getElementById('sales-record-edit-date')
 	
 	const salesRecordID = salesRecordIDInput.value
 	const customerID = customerInput.value.split(' - ')[0]
 	const payment = paymentInput.value
 	const servicingStaffID = staffInput.value
+	const date = formatDateTime(dateInput.value)
 	
 	const services = []
 	
@@ -627,7 +693,7 @@ async function posSubmitEdit() {
 		})
 	}
 	
-	const createRequest = await queryRequest(
+	const editRequest = await queryRequest(
 		'POST',
 		{
 			action: 'point-of-sales-edit-sales-record',
@@ -638,31 +704,156 @@ async function posSubmitEdit() {
 			customerID,
 			servicingStaffID,
 			payment,
+			date,
 			services
 		})
 	);
 	
 	{
-		const tokenError = await checkToken(createRequest)
+		const tokenError = await checkToken(editRequest)
 		if (tokenError) { return; }
-		const permissionError = checkPermission(createRequest)
+		const permissionError = checkPermission(editRequest)
 		if (permissionError) { return; }
 	}
 	
-	if (createRequest.status === 200) {
-		createMessageDialogue('success', 'Record Creation Successful', createRequest.statusText)
-		await posSetupSalesRecordTable()
+	if (editRequest.status === 200) {
+		createMessageDialogue('success', 'Record Edit Successful', editRequest.statusText)
 		removeSecondary()
+		await posSetupSalesRecordTable()
 		return
 	}
 	
-	createMessageDialogue('error', 'Record Creation Failed', createRequest.statusText)
+	createMessageDialogue('error', 'Record Edit Failed', editRequest.statusText)
 }
 
 function posClearData() {
 	posSalesRecordData = undefined
+	posSalesRecordTable = undefined
 	posCustomerData = undefined
 	posStaffData = undefined
-	posSalesRecordTable = undefined
 	posServiceData = undefined
+	posViewedSalesRecord = undefined
+}
+
+
+function posEditServices() {
+	setSecondary('services-edit')
+	
+	posSetupEditServicesTable()
+}
+
+function posSetupEditServicesTable() {
+	
+	const tableDiv = document.getElementById('services-edit-table')
+	
+	const tableObj = createEditTable(
+		tableDiv,
+		{
+			'ID': () => {
+				const idDiv = document.createElement('div')
+				idDiv.className = 'services-edit-id'
+				idDiv.type = 'text'
+				return idDiv
+			},
+			
+			'Name': () => {
+				const nameInput = document.createElement('input')
+				nameInput.className = 'services-edit-name'
+				nameInput.type = 'text'
+				return nameInput
+			},
+			
+			'Default Price': () => {
+				const defaultPriceInput = document.createElement('input')
+				defaultPriceInput.className = 'services-edit-default-price'
+				defaultPriceInput.type = 'number'
+				defaultPriceInput.value = '0.00'
+				defaultPriceInput.onchange = () => {
+					defaultPriceInput.value = Number(defaultPriceInput.value).toFixed(2)
+				}
+				return defaultPriceInput
+			},
+			
+			'Available': () => {
+				const availInput = document.createElement('input')
+				availInput.className = 'services-edit-available'
+				availInput.type = 'checkbox'
+				availInput.checked = true
+				return availInput
+			}
+		},
+		{
+			name: 'Service'
+		}
+	)
+	
+	for (const service of posServiceData) {
+		const tr = createEditTableRow(tableObj)
+		
+		tr.firstChild.firstChild.remove()
+		
+		const idDiv = tr.getElementsByClassName('services-edit-id')[0]
+		const nameInput = tr.getElementsByClassName('services-edit-name')[0]
+		const defaultPriceInput = tr.getElementsByClassName('services-edit-default-price')[0]
+		const availInput = tr.getElementsByClassName('services-edit-available')[0]
+		
+		idDiv.innerText = service.id
+		nameInput.value = service.name
+		defaultPriceInput.value = service.defaultPrice.toFixed(2)
+		availInput.checked = !service.unavailable
+	}
+	
+}
+
+async function posSubmitServicesEdit() {
+	const services = []
+	
+	const idDivs = document.getElementsByClassName('services-edit-id')
+	const nameInputs = document.getElementsByClassName('services-edit-name')
+	const defaultPriceInputs = document.getElementsByClassName('services-edit-default-price')
+	const availInputs = document.getElementsByClassName('services-edit-available')
+	
+	for (var i = 0; i < idDivs.length; i++) {
+		const idDiv = idDivs[i]
+		const nameInput = nameInputs[i]
+		const defaultPriceInput = defaultPriceInputs[i]
+		const availInput = availInputs[i]
+		
+		services.push({
+			id: idDiv.innerText,
+			name: nameInput.value,
+			defaultPrice: defaultPriceInput.value,
+			unavailable: !availInput.checked
+		})
+	}
+	
+	const editRequest = await queryRequest(
+		'POST',
+		{
+			action: 'point-of-sales-edit-services',
+			token
+		},
+		JSON.stringify(services)
+	);
+	
+	{
+		const tokenError = await checkToken(editRequest)
+		if (tokenError) { return; }
+		const permissionError = checkPermission(editRequest)
+		if (permissionError) { return; }
+	}
+	
+	if (editRequest.status === 200) {
+		createMessageDialogue('success', 'Services Edit Successful', editRequest.statusText)
+		removeSecondary()
+		await posSetupSalesRecordTable()
+		return
+	}
+	
+	createMessageDialogue('error', 'Services Edit Failed', editRequest.statusText)
+	
+}
+
+function posCancelServicesEdit() {
+	clearSecondary()
 }

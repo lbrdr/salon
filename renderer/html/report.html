@@ -1,0 +1,46 @@
+<div id="module-div">
+	<div id="module-title">
+		<h2>Report</h2>
+	</div>
+	<div id="module-content">
+		<div id="report-top">
+			<div id="report-fields">
+				<div class="report-field">
+					<label for="report-type">
+						Report Type
+					</label>
+					<select id="report-type" onchange="rSetupTempInputs()">
+						<option value="customer">Customer Report</option>
+						<option value="sales">Sales Report</option>
+						<option value="inventory">Inventory Report</option>
+						<option value="user">User Report</option>
+					</select>
+				</div>
+				<div class="report-field">
+					<label for="report-start-date">
+						Start Date
+					</label>
+					<input type="date" id="report-start-date" />
+				</div>
+				<div class="report-field">
+					<label for="report-end-date">
+						End Date
+					</label>
+					<input type="date" id="report-end-date" />
+				</div>
+			</div>
+			<div class="button5" onclick="rGenerateReport()">
+				<div class="icon generate-icon"></div>
+				Generate Report
+			</div>
+		</div>
+		<div id="report-preview">
+		</div>
+		<div id="module-bottom">
+			<div class="button" onclick="rPrintReport()">
+				<div class="icon save-icon"></div>
+				Print/Save Report
+			</div>
+		</div>
+	</div>
+</div>	

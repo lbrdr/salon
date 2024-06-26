@@ -27,6 +27,37 @@
   --background4-active: #66affb;
   --on-background4-active: #000000;
   
+  --background5: #f7cccc;
+  --on-background5: #000000;
+  --background5-hover: #e9a5a5;
+  --on-background5-hover: #000000;
+  --background5-active: #f77979;
+  --on-background5-active: #000000;
+  
+  --background6: #dbcaf3;
+  --on-background6: #000000;
+  --background6-hover: #cbb0f1;
+  --on-background6-hover: #000000;
+  --background6-active: #b48bef;
+  --on-background6-active: #000000;
+  
+  --background7: #fff4d0;
+  --on-background7: #000000;
+  --background7-hover: #ebe59c;
+  --on-background7-hover: #000000;
+  --background7-active: #e9e062;
+  --on-background7-active: #000000;
+  
+  --background8: #dcdde1;
+  --on-background8: #111111;
+  
+  --background9: #eaecef;
+  --on-background9: #111111;
+  --background9-hover: #f8fdff;
+  --on-background9-hover: #000000;
+  --background9-active: #a09fab;
+  --on-background9-active: #000000;
+  
   --accent: #bf757d;
   --on-accent: #efefef;
   --accent-hover: #e18490;
@@ -46,6 +77,12 @@
   --link: #af587f;
   --link-hover: #e18fb4;
   --link-active: #730838;
+  
+  --error: #f7cccc;
+  --on-error: #000000;
+  
+  --red: #c51414;
+  --green: #14a514;
 }
 
 body {
@@ -171,32 +208,33 @@ body {
 }
 
 .link {
-    font-size: 0.9em;
-    color: var(--link);
+	font-size: 0.9em;
+	color: var(--link);
 	cursor:pointer;
 	text-decoration:underline;
 }
 
 .link:hover {
-    color: var(--link-hover);
+	color: var(--link-hover);
 }
 
 .link:active {
-    color: var(--link-active);
+	color: var(--link-active);
 }
 
 input {
-    font-size: 0.9em;
+	font-size: 0.9em;
 }
 
 input[type="radio"] {
-    height: 1em;
-    width: 1em;
+	height: 1em;
+	width: 1em;
+	margin: 0.1em 0.3em;
 }
 
 select {
 	padding: 1px;
-    font-size: 0.9em;
+	font-size: 0.9em;
 }
 
 input:disabled,
@@ -254,6 +292,11 @@ select:disabled
 	border-color: var(--on-background);
 }
 
+#module-content > div:first-child {
+	margin-bottom: 0.5em;
+	font-size: 0.9em;
+}
+
 #module-content > * {
 	/* flex-shrink: 1; */
 	/* flex-grow: 1; */
@@ -273,4 +316,9 @@ select:disabled
 
 #module-bottom  > * {
 	margin: 0 0.5em;
+}
+
+input[type="checkbox"] {
+    margin: 0;
+    height: 1.2em;
 }

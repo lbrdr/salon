@@ -1,0 +1,111 @@
+<div class="secondary-header">
+	<div class="icon inventory-record-edit-icon"></div>
+	<h2>Edit Inventory Record</h2>
+</div>
+<div id="inventory-record-edit-div">
+
+	<div>
+		
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-id">
+				Inventory Record ID
+			</label>
+			<div>
+				<input
+					type="number"
+					id="inventory-record-edit-id"
+				/>
+				<input type="button" value="Check" class="button" onclick="imCheckID()" />
+			</div>
+		</div>
+		
+	</div>
+	
+	<div>
+		
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-item-name">
+				Item Name
+			</label>
+			<input
+				type="text"
+				id="inventory-record-edit-item-name"
+				list="inventory-record-edit-item-names"
+			/>
+		</div>
+		
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-item-manufacturer">
+				Item Manufacturer
+			</label>
+			<input
+				type="text"
+				id="inventory-record-edit-item-manufacturer"
+				list="inventory-record-edit-item-manufacturers"
+			/>
+		</div>
+		
+	</div>
+	
+	<div>
+			
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-item-unit">
+				Unit
+			</label>
+			<input
+				type="text"
+				id="inventory-record-edit-item-unit"
+				list="inventory-record-edit-item-units"
+			/>
+		</div>
+	
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-amount">
+				Amount
+			</label>
+			<div class="inventory-record-edit-field-group">
+				<select
+					id="inventory-record-edit-amount-sign"
+				>
+					<option value="-">(-) Loss/Usage</option>
+					<option value="+">(+) Gain/Restock</option>
+				</select>
+				<input
+					type="number"
+					id="inventory-record-edit-amount"
+				/>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div>
+		
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-recording-staff">
+				Recording Staff
+			</label>
+			<select id="inventory-record-edit-recording-staff" disabled></select>
+		</div>
+		
+		<div class="inventory-record-edit-field">
+			<label for="inventory-record-edit-date">
+				Recording Date
+			</label>
+			<input type="datetime-local" id="inventory-record-edit-date" disabled />
+		</div>
+			
+	</div>
+		
+	<div>
+		
+		<input type="button" value="View Changes" class="button5" onclick="imViewChanges('edit')"></input>
+		
+	</div>
+	
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="imCancelEdit()"></input>
+	<input type="button" value="Submit" class="button" onclick="imSubmitEdit()"></input>
+</div>

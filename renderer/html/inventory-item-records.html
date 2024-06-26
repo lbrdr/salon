@@ -2,10 +2,31 @@
 	<div class="icon inventory-item-records-icon"></div>
 	<h2>Inventory Item-Related Records</h2>
 </div>
-<div id="inventory-item-records-div">
-	<div>Inventory Records Referring to:</div>
-	<h2 id="inventory-item-records-item"></h2>
-	<div id="inventory-item-records-table" class="table-div"></div>
+<div id="inventory-item-records-column">
+	<div id="inventory-item-records-div">
+		<div>
+			<div>
+				Item Name
+				<h4 id="inventory-item-records-name"></h4>
+			</div>
+			<div>
+				Item Manufacturer
+				<h4 id="inventory-item-records-manufacturer"></h4>
+			</div>
+			<div>
+				Unit
+				<h4 id="inventory-item-records-unit"></h4>
+			</div>
+			<div>
+				Current Stock
+				<h4 id="inventory-item-records-current-stock"></h4>
+			</div>
+		</div>
+		<div>
+			Related Inventory Records
+			<div id="inventory-item-records-table" class="table-div"></div>
+		</div>
+	</div>
 </div>
 <div class="secondary-buttons">
 	<input type="button" value="Close" class="button" onclick="imCloseItemRecords()"></input>

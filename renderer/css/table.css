@@ -54,18 +54,76 @@ table.selectable > tbody > tr:active > td  {
 	color: var(--on-background2-active)
 }
 
+/* tr.highlight > td { */
+	/* background-color: var(--background4); */
+	/* color: var(--on-background4); */
+/* } */
+
+tr.highlight > td {
+	background-color: var(--background4);
+	color: var(--on-background4);
+}
+/* table.selectable > tbody > tr.highlight:hover > td  { */
+	/* background-color: var(--background7-hover); */
+	/* color: var(--on-background7-hover) */
+/* } */
+/* table.selectable > tbody > tr.highlight:active > td  { */
+	/* background-color: var(--background7-active); */
+	/* color: var(--on-background7-active) */
+/* } */
+
+tr.error > td,
+tr.highlight.error > td
+{
+	background-color: var(--background5);
+	color: var(--on-background5);
+}
+table.selectable > tbody > tr.error:hover > td,
+table.selectable > tbody > tr.highlight.error:hover > td
+{
+	background-color: var(--background5-hover);
+	color: var(--on-background5-hover)
+}
+table.selectable > tbody > tr.error:active > td,
+table.selectable > tbody > tr.highlight.error:active > td
+{
+	background-color: var(--background5-active);
+	color: var(--on-background5-active)
+}
+
 tr.selected > td {
 	background-color: var(--background4);
 	color: var(--on-background4)
 }
-table.selectable > tbody > tr.selected:hover > td  {
+
+table.selectable > tbody > tr.selected:hover > td {
 	background-color: var(--background4-hover);
 	color: var(--on-background4-hover)
 }
-table.selectable > tbody > tr.selected:active > td  {
+
+table.selectable > tbody > tr.selected:active > td {
 	background-color: var(--background4-active);
 	color: var(--on-background4-active)
 }
+
+tr.error.selected > td
+{
+	background-color: var(--background6);
+	color: var(--on-background6)
+}
+
+table.selectable > tbody > tr.error.selected:hover > td
+{
+	background-color: var(--background6-hover);
+	color: var(--on-background6-hover)
+}
+
+table.selectable > tbody > tr.error.selected:active > td
+{
+	background-color: var(--background6-active);
+	color: var(--on-background6-active)
+}
+
 
 table {
 	background-color: var(--background2);
@@ -132,6 +190,11 @@ th:last-child
 	text-align: -webkit-center;
 }
 
+.number-td {
+	font-family: monospace;
+	text-align: right;
+}
+
 table input,
 table select
 {
@@ -139,4 +202,12 @@ table select
 	width: 100%;
 	text-overflow: ellipsis;
 	font-size: 1em;
+}
+
+td > input[type="text"],
+td > input[type="number"],
+td > select
+{
+	height: 100%;
+	width: 100%;
 }

@@ -1,5 +1,22 @@
 var tableCount = 0
 
+function createColoredSpan(value, text) {
+	if (!text) {text = Number(value)}
+	const span = document.createElement('span')
+	span.style.color = value < 0 ? 'var(--red)' : value > 0 ? 'var(--green)' : ''
+	span.style.fontWeight = 'bold'
+	span.innerText = text
+	return span
+}
+	
+function createErrorSpan() {
+	const span = document.createElement('span')
+	span.style.color = 'var(--red)'
+	span.style.fontWeight = 'bold'
+	span.innerText = 'Error'
+	return span
+}
+
 function createTable(parent, columns, data, options) {
 	
 	const tableObj = {}
@@ -141,6 +158,7 @@ function createTable(parent, columns, data, options) {
 	
 	function setSelected(item) {
 		if (item) {
+			
 			const index = tableObj.data.indexOf(item)
 			
 			if (index < 0) {
@@ -153,31 +171,31 @@ function createTable(parent, columns, data, options) {
 				let tr
 				if (itemsPerPage) {
 					setPage(Math.ceil((index + 1)/ itemsPerPage))
-					const allTR = tableObj.html.getElementsByTagName('tr')
+				}
+				
+				const allTR = tableObj.html.getElementsByTagName('tr')
+				
+				if (itemsPerPage) {
 					tr = allTR[index % itemsPerPage + 1]
 				} else {
-					const allTR = tableObj.html.getElementsByTagName('tr')
-					for (const eachTR of allTR) {
-						eachTR.className = ''
-					}
 					tr = allTR[index + 1]
 				}
 				
-				const radio = tr.children[0].children[0]
+				for (const eachTR of allTR) {
+					eachTR.className = eachTR.className.replace(/ ?selected ?/g, '')
+				}
+				tr.className += ' selected'
 				
+				const radio = tr.children[0].children[0]
 				radio.checked = true
-				tr.className = 'selected'
+				
+				tr.scrollIntoViewIfNeeded()
 				
 			}
 		}
 		
-		const select = tableObj.select
-		
 		tableObj.selected = item
 		
-		if (typeof select === 'function') {
-			select(item)
-		}
 	}
 }
 
@@ -190,7 +208,8 @@ function createTableHTML(tableObj) {
 		page,
 		name,
 		select,
-		minRows
+		minRows,
+		setSelected
 	} = tableObj
 	
 	if (itemsPerPage) {
@@ -233,6 +252,14 @@ function createTableHTML(tableObj) {
 		const item = data[i]
 		const tr = document.createElement('tr')
 		
+		if (item.highlight) {
+			tr.className += ' highlight'
+		}
+		
+		if (item.error) {
+			tr.className += ' error'
+		}
+		
 		if (select) {
 			const td = document.createElement('td')
 			td.className = 'input-td'
@@ -242,12 +269,8 @@ function createTableHTML(tableObj) {
 			radio.name = name + '-radio'
 			
 			tr.onclick = (event) => {
-				radio.checked = true
-				for (const eachTR of tBody.getElementsByTagName('tr')) {
-					eachTR.className = ''
-				}
-				tr.className = 'selected'
-				tableObj.selected = item
+				setSelected(item)
+		
 				if (typeof select === 'function') {
 					select(item)
 				}
@@ -255,7 +278,7 @@ function createTableHTML(tableObj) {
 			
 			if (tableObj.selected && tableObj.selected === item) {
 				radio.checked = true
-				tr.className = 'selected'
+				tr.className += ' selected'
 			}
 			
 			td.append(radio)
@@ -266,7 +289,19 @@ function createTableHTML(tableObj) {
 			const td = document.createElement('td')
 			const data = item[column]
 			
-			if (typeof data === 'function') {
+			if (data === null) {
+				
+				td.innerText = '-'
+				
+			} else if (data instanceof Node) {
+				
+				if (data.innerText && !isNaN(data.innerText)) {
+					td.className = 'number-td'
+				}
+				
+				td.append(data.cloneNode(true))
+				
+			} else if (typeof data === 'function') {
 				
 				td.className = 'input-td'
 				
@@ -294,6 +329,15 @@ function createTableHTML(tableObj) {
 				td.append(button)
 				
 			} else {
+				
+				if (!isNaN(data)) {
+					td.className = 'number-td'
+				}
+				
+				// if (typeof data === 'number') {
+					// td.className = 'number-td'
+				// }
+				
 				td.innerText = data || data === 0 ? data : '-'
 			}
 			

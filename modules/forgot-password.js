@@ -20,10 +20,12 @@ function fpCheckUser(username, res) {
 	
 	const user = database.getUserByUsername(username)
 	
-	if (!user) {
-		userError = 'Username does not exist.'
+	if (!user || user.disabled) {
+		userError = 'Invalid username.'
 	} else {
-		securityQuestions = database.getSecurityQuestions(user.id)
+		securityQuestions = database.getSecurityQuestionsByUserID(user.id).filter(
+			(securityQuestion) => securityQuestion.question && securityQuestion.answer
+		)
 		
 		if (!securityQuestions.length) {
 			userError = 'User does not have security question for recovery. Please contact an administrator to recover your account.'
@@ -124,6 +126,13 @@ const actions = {
 		
 		const answersError = fpCheckAnswers(securityQuestions, answers, res)
 		if (answersError) {
+			return
+		}
+		
+		if (!newPassword) {
+			res.statusCode = 204
+			res.statusMessage = 'Password is required.'
+			res.end()
 			return
 		}
 		

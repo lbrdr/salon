@@ -24,7 +24,7 @@ async function fpSubmitUsername() {
 		const usernameInput = document.getElementById('forgot-password-username')
 		usernameInput.value = fpUsername
 			
-		const fpDiv = document.getElementById('forgot-password-div')
+		const fpColumn = document.getElementById('forgot-password-column')
 		
 		for (var i = 0; i < fpQuestions.length; i++) {
 			const question = fpQuestions[i]
@@ -43,7 +43,8 @@ async function fpSubmitUsername() {
 			const questionTitle = document.createElement('label')
 			questionTitle.htmlFor = answerID
 			questionTitle.className = 'forgot-password-title'
-			questionTitle.innerText = 'Security Question ' + (i+1)
+			questionTitle.innerText = 'Security Question'
+			// questionTitle.innerText = 'Security Question ' + (i+1)
 			
 			const questionLabel = document.createElement('label')
 			questionLabel.htmlFor = answerID
@@ -59,7 +60,7 @@ async function fpSubmitUsername() {
 			columnDiv.append(questionAnswer)
 			rowDiv.append(icon)
 			rowDiv.append(columnDiv)
-			fpDiv.append(rowDiv)
+			fpColumn.append(rowDiv)
 		}
 	
 		fpAnswers = new Array(fpQuestions.length)
@@ -116,11 +117,6 @@ async function fpSubmitNewPassword() {
 	const newPassword = document.getElementById('forgot-password-new-password').value
 	const confirmPassword = document.getElementById('forgot-password-confirm-password').value
 	
-	if (!newPassword) {
-		createMessageDialogue('error', 'Password Submission Failed', 'No password')
-		return
-	}
-	
 	if (newPassword !== confirmPassword) {
 		createMessageDialogue('error', 'Password Submission Failed', 'Confirm password doesn\'t match.')
 		return
@@ -135,7 +131,6 @@ async function fpSubmitNewPassword() {
 			newPassword
 		}),
 	);
-	
 	
 	if (request.status === 200) {
 		clearSecondary()

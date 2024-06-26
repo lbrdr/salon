@@ -29,6 +29,14 @@
 	padding: 1em 2em;
 }
 
+#services-edit-div {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+	padding: 2em 4em;
+}
+
 #sales-record-creation-div > div,
 #sales-record-edit-div > div,
 #sales-record-services-div > div
@@ -59,12 +67,9 @@
 
 #sales-record-creation-services-table,
 #sales-record-edit-services-table,
-#sales-record-services-services-table
+#sales-record-services-services-table,
+#services-edit-table
 {
-	display: flex;
-	flex-direction: column;
-	justify-content: stretch;
-	align-items: stretch;
 	flex-grow: 1;
 }
 
@@ -112,7 +117,9 @@
 .sales-record-services-service-price,
 #sales-record-services-total-price,
 #sales-record-services-payment,
-#sales-record-services-change
+#sales-record-services-change,
+.services-edit-default-price,
+.services-edit-id
 {
 	text-align: right;
     font-family: monospace;
@@ -129,7 +136,8 @@
 .sales-record-services-service-price::-webkit-inner-spin-button,
 #sales-record-services-total-price::-webkit-inner-spin-button,
 #sales-record-services-payment::-webkit-inner-spin-button,
-#sales-record-services-change::-webkit-inner-spin-button
+#sales-record-services-change::-webkit-inner-spin-button,
+.services-edit-default-price::-webkit-inner-spin-button
 {
 	-webkit-appearance: none;
 	margin: 0;

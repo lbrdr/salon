@@ -1,17 +1,229 @@
 #inventory-management-table-switch {
 	display: flex;
-	flex-direction: row;
-    align-items: flex-end;
+	align-items: center;
+	margin-bottom: 0.5em;
+	font-size: 0.9em;
 }
 
-#inventory-management-table-switch > h3 {
+#inventory-management-table-switch > h4 {
 	margin: 0;
 }
 
 #inventory-management-table-switch > div {
+	display: flex;
+	align-items: center;
 	margin-left: 0.75em;
+}
+
+#inventory-management-table-switch > div > input {
+	margin: 0.5em;
 }
 
 #inventory-management-table {
 	flex-grow: 1;
+	font-size: 0.95em;
+}
+
+
+
+#inventory-record-creation-div,
+#inventory-record-edit-div
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+	
+	flex-grow: 1;
+	padding: 1em 8em;
+}
+
+#inventory-record-creation-div > div,
+#inventory-record-edit-div > div
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+}
+
+#inventory-record-creation-div > div > *,
+#inventory-record-edit-div > div > *
+{
+	flex-basis: 0;
+	flex-grow: 1;
+	margin: 0.5em 2em;
+}
+
+#inventory-record-creation-div > div > *:first-child:last-child,
+#inventory-record-edit-div > div > *:first-child:last-child
+{
+    flex-basis: auto;
+	flex-grow: 0;
+}
+
+.inventory-record-creation-field,
+.inventory-record-edit-field
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+.inventory-record-edit-field > div
+{
+    display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+    align-items: center;
+}
+
+.inventory-record-edit-field > div > input:not(.button) {
+    flex-grow: 1;
+}
+
+.inventory-record-edit-field > div > .button {
+    font-size: 0.8em;
+    margin-left: 1em;
+}
+
+.inventory-record-creation-field-group,
+.inventory-record-edit-field-group
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.inventory-record-creation-field-group > *,
+.inventory-record-edit-field-group > *
+{
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.inventory-record-creation-field-group > *:not(:first-child),
+.inventory-record-edit-field-group > *:not(:first-child)
+{
+	margin-left: 0.5em;
+}
+
+#inventory-record-creation-amount,
+#inventory-record-edit-amount
+{
+	width: 5em;
+}
+
+/* #inventory-record-creation-item-unit,
+/* #inventory-record-edit-item-unit
+{ */
+	/* width: 5em; */
+/* } */
+
+#inventory-record-creation-item-table,
+#inventory-record-edit-item-table
+{
+    display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+}
+
+#inventory-stock-changes-div {
+    display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+	
+	padding: 2em 4em;
+}
+
+#inventory-record-changes-table {
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin-bottom: 1em;
+}
+
+#inventory-record-changes-table > div {
+    flex-basis: auto;
+}
+
+#inventory-item-changes-table {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+
+
+#inventory-item-records-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+	
+	padding: 1em 2em 0;
+}
+
+#inventory-item-records-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+	flex-grow: 1;
+}
+
+#inventory-item-records-div > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+#inventory-item-records-div > div:first-child {
+	text-wrap: nowrap;
+}
+
+#inventory-item-records-div > div:last-child {
+    flex-grow: 1;
+    flex-shrink: 1;
+	margin-left: 2em;
+}
+
+#inventory-item-records-div h4 {
+	margin: 0.2em 0;
+}
+
+.inventory-item-records-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.inventory-item-records-row > div {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0;
+}
+
+.inventory-item-records-row > div:not(:first-child) {
+	margin-left: 1em;
+}
+
+#inventory-item-records-table {
+	flex-grow: 1;
+}
+
+#inventory-item-records-bottom {
+	margin-top: 1em;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }

@@ -1,0 +1,22 @@
+<div id="module-div">
+	<div id="module-title">
+		<h2>Backup and Restore</h2>
+	</div>
+	<div id="module-content">
+		<input type="file" id="backup-and-restore-file" onchange="barRestoreData()" style="display: none;"/>
+		<div id="backup-and-restore-div">
+			<div class="button5" onclick="barBackupData()">
+				<div class="icon backup-icon"></div>
+				Backup Data
+			</div>
+			<label
+				class="button5"
+				for="backup-and-restore-file"
+				onclick="document.getElementById('backup-and-restore-file').value = null"
+			>
+				<div class="icon restore-icon"></div>
+				Restore Data
+			</label>
+		</div>
+	</div>
+</div>

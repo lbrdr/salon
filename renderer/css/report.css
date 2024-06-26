@@ -1,0 +1,48 @@
+#report-top {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: center;
+}
+
+#report-top > .button5 {
+	margin: 0.5em;
+	text-wrap: nowrap;
+}
+
+#report-fields {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-grow: 1;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.report-field {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+	
+	/* flex-grow: 1; */
+	margin: 0.25em 0.5em;
+}
+
+.report-field > label {
+	margin-bottom: 0.2em;
+}
+
+#report-preview {
+	background-color: var(--background2);
+	border-style: solid;
+	border-width: 1px;
+	margin: 0.5em;
+	flex-grow: 1;
+}
+
+.report-frame {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+}

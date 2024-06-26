@@ -1,0 +1,70 @@
+<div class="secondary-header">
+	<div class="icon user-registration-icon"></div>
+	<h2>User Registration</h2>
+</div>
+<div id="user-registration-div">
+	<div>
+		<div class="user-registration-field">
+			<label for="user-registration-username">
+				Username
+			</label>
+			<input type="text" id="user-registration-username" />
+		</div>
+		<div class="user-registration-field">
+			<label for="user-registration-full-name">
+				Full Name
+			</label>
+			<input type="text" id="user-registration-full-name" />
+		</div>
+		<div class="user-registration-field">
+			<label for="user-registration-user-type">
+				User Type
+			</label>
+			<select id="user-registration-user-type">
+				<option value='staff'>Staff</option>
+				<option value='admin'>Admin</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<div class="user-registration-field">
+			<label for="user-registration-password">
+				Password
+			</label>
+			<input type="password" id="user-registration-password" />
+		</div>
+		<div class="user-registration-field">
+			<label for="user-registration-confirm-password">
+				Confirm Password
+			</label>
+			<input type="password" id="user-registration-confirm-password" />
+		</div>
+		<div class="user-registration-field">
+			<label for="user-registration-disabled">
+				Login
+			</label>
+			<select id="user-registration-disabled">
+				<option value=''>Enabled</option>
+				<option value='1'>Disabled</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<div class="user-registration-field">
+			<label for="user-registration-security-question">
+				Security Question
+			</label>
+			<textarea id="user-registration-security-question"></textarea>
+		</div>
+		<div class="user-registration-field">
+			<label for="user-registration-security-question-answer">
+				Security Question Answer
+			</label>
+			<input type="text" id="user-registration-security-question-answer" />
+		</div>
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="umCancelRegistration()" />
+	<input type="button" value="Submit" class="button" onclick="umSubmitRegistration()" />
+</div>

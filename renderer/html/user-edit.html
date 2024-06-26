@@ -1,0 +1,73 @@
+<div class="secondary-header">
+	<div class="icon user-edit-icon"></div>
+	<h2>User Edit</h2>
+</div>
+<div id="user-edit-div">
+	<div>
+		<div class="user-edit-field">
+			<label for="user-edit-username">
+				Username
+			</label>
+			<div>
+				<input type="text" id="user-edit-username" />
+				<input type="button" value="Check" class="button" onclick="umCheckUsername()" />
+			</div>
+		</div>
+		<div class="user-edit-field">
+			<label for="user-edit-full-name">
+				Full Name
+			</label>
+			<input type="text" id="user-edit-full-name" />
+		</div>
+		<div class="user-edit-field">
+			<label for="user-edit-user-type">
+				User Type
+			</label>
+			<select id="user-edit-user-type">
+				<option value='staff'>Staff</option>
+				<option value='admin'>Admin</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<div class="user-edit-field">
+			<label for="user-edit-password">
+				Password
+			</label>
+			<input type="password" id="user-edit-password" placeholder="Unchanged" />
+		</div>
+		<div class="user-edit-field">
+			<label for="user-edit-confirm-password">
+				Confirm Password
+			</label>
+			<input type="password" id="user-edit-confirm-password" placeholder="Unchanged" />
+		</div>
+		<div class="user-edit-field">
+			<label for="user-edit-disabled">
+				Login
+			</label>
+			<select id="user-edit-disabled">
+				<option value=''>Enabled</option>
+				<option value='1'>Disabled</option>
+			</select>
+		</div>
+	</div>
+	<div>
+		<div class="user-edit-field">
+			<label for="user-edit-security-question">
+				Security Question
+			</label>
+			<textarea id="user-edit-security-question" placeholder="Unchanged"></textarea>
+		</div>
+		<div class="user-edit-field">
+			<label for="user-edit-security-question-answer">
+				Security Question Answer
+			</label>
+			<input type="text" id="user-edit-security-question-answer" placeholder="Unchanged" />
+		</div>
+	</div>
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="umCancelEdit()" />
+	<input type="button" value="Submit" class="button" onclick="umSubmitEdit()" />
+</div>

@@ -14,6 +14,7 @@ async function login() {
 	
 	if (loginRequest.status === 200) {
 		checkToken(loginRequest)
+		createMessageDialogue('success', 'Login Successful', 'Welcome, ' + currentUser.fullName + '.')
 		return
 	}
 	

@@ -1,0 +1,34 @@
+<div id="module-div">
+	<div id="module-title">
+		<h2>Inventory Management</h2>
+		<div type="button" class="button5" onclick="imCreateInventoryRecord()">
+			<div class="icon add-icon"></div>
+			Create Inventory Record
+		</div>
+	</div>
+	<div id="module-content">
+		<div id="inventory-management-table-switch">
+			<h4>View:</h4>
+			<div>
+				<input type="radio" name="inventory-management-table-switch-radio" id="inventory-management-table-switch-records" onchange="imSetupInventoryManagementTable()" checked />
+				<label for="inventory-management-table-switch-records">
+					Records
+				</label>
+			</div>
+			<div>
+				<input type="radio" name="inventory-management-table-switch-radio" id="inventory-management-table-switch-items" onchange="imSetupInventoryManagementTable()" />
+				<label for="inventory-management-table-switch-items">
+					Items
+				</label>
+			</div>
+		</div>
+		<div id="inventory-management-table" class="table-div">
+		</div>
+		<div id="module-bottom">
+			<div class="button" onclick="imEditInventoryRecord(imInventoryRecordTable && imInventoryRecordTable.selected)">
+				<div class="icon edit-icon"></div>
+				Edit Inventory Record
+			</div>
+		</div>
+	</div>
+</div>

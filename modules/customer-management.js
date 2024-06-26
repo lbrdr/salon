@@ -19,10 +19,6 @@ function checkCustomer(
 		return 'The full name of the customer is required.'
 	}
 	
-	if (!database.getCustomerByFullName(fullName)) {
-		return 'A customer with the given full name already exists.'
-	}
-	
 	if (
 		preferredStaffID &&
 		!database.getUserByID(preferredStaffID)
@@ -76,7 +72,7 @@ const actions = {
 		
 		if (!customer) {
 			res.statusCode = 204
-			res.statusMessage = 'Customer not found'
+			res.statusMessage = 'Customer not found.'
 			res.end()
 			return
 		}
@@ -138,10 +134,18 @@ const actions = {
 			contact
 		} = customer
 		
+		const dateRegistered = (new Date()).toJSON()
+		
 		var registerError = checkCustomer(
 			fullName,
 			preferredStaffID
 		)
+		
+		if (!registerError) {
+			if (database.getCustomerByFullName(fullName)) {
+				registerError = 'A customer with the given full name already exists.'
+			}
+		}
 		
 		if (registerError) {
 			res.statusCode = 204
@@ -153,15 +157,24 @@ const actions = {
 		const createResult = database.createCustomer(
 			preferredStaffID || null,
 			fullName,
-			contact || null
+			contact || null,
+			dateRegistered
 		)
 		
 		updateToken(token)
 		
+		const customerID = createResult.lastInsertRowid
+		
 		database.createUserAction(
 			user.id,
 			'Registered customer: ' +
-			JSON.stringify(database.getCustomerByID(createResult.lastInsertRowid))
+			JSON.stringify({
+				id: customerID,
+				fullName,
+				preferredStaffID,
+				contact,
+				dateRegistered
+			})
 		)
 		
 		res.statusCode = 200
@@ -195,9 +208,16 @@ const actions = {
 			preferredStaffID
 		)
 		
+		var sameID
+			
 		if (!editError) {
-			if (!database.getCustomerByID(customerID)) {
+			sameID = database.getCustomerByID(customerID)
+			const sameFullName = database.getCustomerByFullName(fullName)
+			
+			if (!sameID) {
 				editError = 'Invalid customer ID.'
+			} else if (sameFullName && sameFullName.id != customerID) {
+				editError = 'Another customer with the given full name already exists.'
 			}
 		}
 		
@@ -208,11 +228,14 @@ const actions = {
 			return
 		}
 		
-		const editResult = database.editCustomer(
+		const dateRegistered = sameID.date_registered
+		
+		const editResult = database.setCustomer(
 			customerID,
 			preferredStaffID || null,
 			fullName,
-			contact || null
+			contact || null,
+			dateRegistered
 		)
 		
 		updateToken(token)
@@ -220,10 +243,17 @@ const actions = {
 		database.createUserAction(
 			user.id,
 			'Edited customer: ' +
-			JSON.stringify(database.getCustomerByID(customerID))
+			JSON.stringify({
+				id: customerID,
+				preferredStaffID,
+				fullName,
+				contact,
+				dateRegistered
+			})
 		)
 		
 		res.statusCode = 200
+		res.statusMessage = 'The customer ' + customerID + ' has been successfully edited.'
 		res.end()
 		
 	},
@@ -265,7 +295,27 @@ const actions = {
 		
 		const searchParameters = JSON.parse(requestBody)
 		
-		const searchedCustomers = database.getCustomersBySearch(searchParameters).map(
+		const {
+			customerID,
+			fullName,
+			contact,
+			preferredStaffID,
+			dateRegisteredFrom,
+			dateRegisteredTo,
+			lastServiceFrom,
+			lastServiceTo
+		} = searchParameters
+		
+		const searchedCustomers = database.getCustomersBySearch(
+			customerID,
+			fullName,
+			contact,
+			preferredStaffID,
+			dateRegisteredFrom,
+			dateRegisteredTo,
+			lastServiceFrom,
+			lastServiceTo
+		).map(
 			(customer) => ({
 				id: customer.id,
 				fullName: customer.full_name,
@@ -276,10 +326,20 @@ const actions = {
 			})
 		);
 		
+		
 		database.createUserAction(
 			user.id,
 			'Searched customers: ' +
-			JSON.stringify(searchParameters)
+			JSON.stringify({
+				id: customerID,
+				fullName,
+				contact,
+				preferredStaffID,
+				dateRegisteredFrom,
+				dateRegisteredTo,
+				lastServiceFrom,
+				lastServiceTo
+			})
 		)
 		
 		res.statusCode = 200

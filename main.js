@@ -20,7 +20,10 @@ function createMainWindow() {
 	const mainWindow = new BrowserWindow({
 		title: 'Hairliners Salon',
 		width: isDev ? 1500: 1000,
-		height: 600
+		height: 539,
+		webPreferences: {
+			backgroundThrottling: false,
+		},
 	})
 	
 	// Open devtools if in dev env
@@ -37,23 +40,6 @@ function createMainWindow() {
 app.whenReady().then(async () => {
 	createMainWindow()
 	
-	// Implement Menu
-	const mainMenu = Menu.buildFromTemplate(menu)
-	Menu.setApplicationMenu(mainMenu)
+	// Remove Menu
+	Menu.setApplicationMenu(null)
 })
-
-
-
-// Menu Template
-const menu = [
-	{
-		label: 'File',
-		submenu: [
-			{
-				label: 'Quit',
-				click: () => app.quit(),
-				accelerator: 'CmdOrCtrl+W'
-			}
-		]
-	}
-];

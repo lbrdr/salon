@@ -14,6 +14,17 @@ function getRequestBody(req) {
 
 
 
+// Function for getting the body of an http request as a buffer
+function getRequestBodyAsBuffer(req) {
+	return new Promise((resolve, reject) => {
+		const chunks = []
+		req.on('data', (data) => {chunks.push(data)})
+		req.on('end', () => {resolve(Buffer.concat(chunks))})
+	});
+}
+
+
+
 // Function for verifying user permission
 function checkPermission(userType, permissions, res) {
 	
@@ -37,5 +48,6 @@ function checkPermission(userType, permissions, res) {
 
 module.exports = {
 	getRequestBody,
+	getRequestBodyAsBuffer,
 	checkPermission
 }

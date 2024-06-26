@@ -4,22 +4,7 @@ var cmCustomerData
 var cmCustomerTable
 var cmSearchTable
 
-async function cmSetupCustomerTable() {
-	
-	const customerRequest = await queryRequest(
-		'POST',
-		{
-			action: 'customer-management-get-customers',
-			token
-		},
-	);
-	
-	{
-		const tokenError = await checkToken(customerRequest)
-		if (tokenError) { return; }
-		const permissionError = checkPermission(customerRequest)
-		if (permissionError) { return; }
-	}
+async function cmGetStaffData() {
 	
 	const staffRequest = await queryRequest(
 		'POST',
@@ -31,15 +16,33 @@ async function cmSetupCustomerTable() {
 	
 	{
 		const tokenError = await checkToken(staffRequest)
-		if (tokenError) { return; }
+		if (tokenError) { return tokenError; }
 		const permissionError = checkPermission(staffRequest)
-		if (permissionError) { return; }
+		if (permissionError) { return permissionError; }
 	}
 	
+	cmStaffData = JSON.parse(staffRequest.responseText)
 	
+}
+
+async function cmGetCustomerData() {
+	
+	const customerRequest = await queryRequest(
+		'POST',
+		{
+			action: 'customer-management-get-customers',
+			token
+		},
+	);
+	
+	{
+		const tokenError = await checkToken(customerRequest)
+		if (tokenError) { return tokenError; }
+		const permissionError = checkPermission(customerRequest)
+		if (permissionError) { return permissionError; }
+	}
 	
 	cmCustomerData = JSON.parse(customerRequest.responseText)
-	cmStaffData = JSON.parse(staffRequest.responseText)
 	
 	cmCustomerData.forEach((customer) => {
 		
@@ -58,6 +61,17 @@ async function cmSetupCustomerTable() {
 		}
 		
 	});
+	
+}
+
+async function cmSetupCustomerTable() {
+	
+	{
+		const staffError = await cmGetStaffData()
+		if (staffError) { return staffError; }
+		const customerError = await cmGetCustomerData()
+		if (customerError) { return customerError; }
+	}
 	
 	const relevantCustomers = [...cmCustomerData]
 	relevantCustomers.sort(
@@ -86,7 +100,7 @@ async function cmSetupCustomerTable() {
 		},
 		relevantCustomers,
 		{
-			itemsPerPage: 7,
+			itemsPerPage: 5,
 			select: true
 		}
 	)
@@ -95,7 +109,8 @@ async function cmSetupCustomerTable() {
 
 
 
-function cmRegisterCustomer() {
+async function cmRegisterCustomer() {
+	
 	setSecondary('customer-registration')
 	
 	const dateInput = document.getElementById('customer-registration-date')
@@ -175,7 +190,8 @@ async function cmSubmitRegistration() {
 
 
 
-function cmSearchCustomer() {
+async function cmSearchCustomer() {
+	
 	setSecondary('customer-search')
 	
 	const staffInput = document.getElementById('customer-search-preferred-staff')
@@ -237,6 +253,7 @@ function cmSearchCustomer() {
 }
 
 async function cmSubmitSearch() {
+	
 	const customerID = document.getElementById('customer-search-id').value
 	const fullName = document.getElementById('customer-search-full-name').value
 	const contact = document.getElementById('customer-search-contact').value
@@ -245,6 +262,7 @@ async function cmSubmitSearch() {
 	const dateRegisteredTo = document.getElementById('customer-search-date-registered-to').value
 	const lastServiceFrom = document.getElementById('customer-search-last-service-from').value
 	const lastServiceTo = document.getElementById('customer-search-last-service-to').value
+	
 	
 	const searchRequest = await queryRequest(
 		'POST',
@@ -257,10 +275,10 @@ async function cmSubmitSearch() {
 			fullName,
 			contact,
 			preferredStaffID,
-			dateRegisteredFrom,
-			dateRegisteredTo,
-			lastServiceFrom,
-			lastServiceTo
+			dateRegisteredFrom: dateRegisteredFrom && formatDate(dateRegisteredFrom),
+			dateRegisteredTo: dateRegisteredTo && formatDate(dateRegisteredTo, setToNextDay),
+			lastServiceFrom: lastServiceFrom && formatDate(lastServiceFrom),
+			lastServiceTo: lastServiceTo && formatDate(lastServiceTo, setToNextDay)
 		})
 	);
 	
@@ -319,7 +337,11 @@ function cmEditCustomer() {
 
 
 async function cmCustomerEdit(customer) {
+	
 	addSecondary('customer-edit')
+	
+	const dateInput = document.getElementById('customer-edit-date')
+	dateInput.value = new Date(customer.dateRegistered).toLocaleDateString('en-CA')
 	
 	const staffInput = document.getElementById('customer-edit-preferred-staff')
 	{
@@ -433,9 +455,9 @@ async function cmSubmitEdit() {
 	if (editRequest.status === 200) {
 		createMessageDialogue('success', 'Customer Edit Successful', 'The user has been successfully edited')
 		removeSecondary()
-		cmSetupCustomerTable()
+		await cmSetupCustomerTable()
 		if (cmSearchTable) {
-			cmSubmitSearch()
+			await cmSubmitSearch()
 		}
 		return
 	}

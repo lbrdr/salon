@@ -54,3 +54,13 @@
 .page-button > .icon {
 	font-size: 1.5em;
 }
+
+#page-selector.admin > .page-button > .icon {
+	font-size: 1.2em;
+}
+
+#system-time {
+	text-align: center;
+	margin-top: 0.3em;
+	font-size: 0.9em;
+}

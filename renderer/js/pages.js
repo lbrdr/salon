@@ -31,6 +31,14 @@ async function setPage(nextPage) {
 			posClearData()
 			break;
 		
+		case 'inventory-management':
+			imClearData()
+			break;
+		
+		case 'user-management':
+			umClearData()
+			break;
+		
 	}
 	
 	currentPage = nextPage
@@ -38,19 +46,45 @@ async function setPage(nextPage) {
 	// Operations for when changing page to a certain page
 	switch (nextPage) {
 		
+		case 'help':
+			mainDiv.innerHTML += htmlFiles['help.html']
+			break;
+		
+		case 'about':
+			mainDiv.innerHTML += htmlFiles['about.html']
+			break;
+		
+		case 'backup-and-restore':
+			mainDiv.innerHTML += htmlFiles['backup-and-restore.html']
+			break;
+		
+		case 'report':
+			mainDiv.innerHTML += htmlFiles['report.html']
+			rSetupInputs()
+			break;
+		
+		case 'user-management':
+			mainDiv.innerHTML += htmlFiles['user-management.html']
+			await umSetupUserTable()
+			break;
+		
 		case 'inventory-management':
-			mainDiv.innerHTML = htmlFiles['inventory-management.html']
-			await imSetupInventoryManagementTable()
+			// mainDiv.innerHTML += htmlFiles['inventory-management.html']
+			if (currentUser.userType === 'admin') {
+				mainDiv.innerHTML += htmlFiles['inventory-management-admin.html']
+			} else if (currentUser.userType === 'staff') {
+				mainDiv.innerHTML += htmlFiles['inventory-management-staff.html']
+			}
+			await imSetupInventoryManagementTable(true)
 			break;
 		
 		case 'point-of-sales':
 			if (currentUser.userType === 'admin') {
 				mainDiv.innerHTML += htmlFiles['point-of-sales-admin.html']
-				await posSetupSalesRecordTable(true)
 			} else if (currentUser.userType === 'staff') {
 				mainDiv.innerHTML += htmlFiles['point-of-sales-staff.html']
-				await posSetupSalesRecordTable()
 			}
+			await posSetupSalesRecordTable()
 			break;
 		
 		case 'customer-management':
@@ -65,6 +99,8 @@ async function setPage(nextPage) {
 	}
 	
 	setSecondary()
+	
+	setSystemTime()
 	
 }
 
@@ -118,6 +154,38 @@ async function addSecondary(secondary) {
 		
 		case 'inventory-item-records':
 			div.innerHTML = htmlFiles['inventory-item-records.html']
+			break;
+		
+		case 'inventory-record-creation':
+			div.innerHTML = htmlFiles['inventory-record-creation.html']
+			break;
+		
+		case 'inventory-record-edit':
+			div.innerHTML = htmlFiles['inventory-record-edit.html']
+			break;
+		
+		case 'inventory-stock-changes':
+			div.innerHTML = htmlFiles['inventory-stock-changes.html']
+			break;
+		
+		case 'user-registration':
+			div.innerHTML = htmlFiles['user-registration.html']
+			break;
+		
+		case 'user-edit':
+			div.innerHTML = htmlFiles['user-edit.html']
+			break;
+		
+		case 'services-edit':
+			div.innerHTML = htmlFiles['services-edit.html']
+			break;
+		
+		case 'help-faq':
+			div.innerHTML = htmlFiles['help-faq.html']
+			break;
+		
+		case 'help-user-manual':
+			div.innerHTML = htmlFiles['help-user-manual.html']
 			break;
 		
 	}

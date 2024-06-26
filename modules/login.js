@@ -24,7 +24,7 @@ const actions = {
 		const username = loginInfo.username
 		const user = database.getUserByUsername(username)
 		
-		if (!user || user.password !== loginInfo.password) {
+		if (!user || user.disabled || user.password !== loginInfo.password) {
 			res.statusCode = 204
 			res.statusMessage = 'Invalid credentials'
 			res.end()
@@ -56,10 +56,7 @@ const actions = {
 		
 		tokens[token].expiry = 0
 		
-		database.createUserAction(
-			user.id,
-			'Logged Out'
-		)
+		database.createUserAction(user.id, 'Logged Out')
 		
 		res.statusCode = 200
 		res.end()

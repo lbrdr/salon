@@ -1,0 +1,94 @@
+<div class="secondary-header">
+	<div class="icon inventory-record-creation-icon"></div>
+	<h2>Create Inventory Record</h2>
+</div>
+<div id="inventory-record-creation-div">
+	
+	<div>
+		
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-item-name">
+				Item Name
+			</label>
+			<input
+				type="text"
+				id="inventory-record-creation-item-name"
+				list="inventory-record-creation-item-names"
+			/>
+		</div>
+		
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-item-manufacturer">
+				Item Manufacturer
+			</label>
+			<input
+				type="text"
+				id="inventory-record-creation-item-manufacturer"
+				list="inventory-record-creation-item-manufacturers"
+			/>
+		</div>
+		
+	</div>
+	
+	<div>
+	
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-amount">
+				Amount
+			</label>
+			<div class="inventory-record-creation-field-group">
+				<select
+					id="inventory-record-creation-amount-sign"
+				>
+					<option value="-">(-) Loss/Usage</option>
+					<option value="+">(+) Gain/Restock</option>
+				</select>
+				<input
+					type="number"
+					id="inventory-record-creation-amount"
+				/>
+			</div>
+		</div>
+			
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-item-unit">
+				Unit
+			</label>
+			<input
+				type="text"
+				id="inventory-record-creation-item-unit"
+				list="inventory-record-creation-item-units"
+			/>
+		</div>
+		
+	</div>
+	
+	<div>
+		
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-recording-staff">
+				Recording Staff
+			</label>
+			<select id="inventory-record-creation-recording-staff" disabled></select>
+		</div>
+		
+		<div class="inventory-record-creation-field">
+			<label for="inventory-record-creation-date">
+				Record Date
+			</label>
+			<input type="datetime-local" id="inventory-record-creation-date" disabled />
+		</div>
+		
+	</div>
+		
+	<div>
+		
+		<input type="button" value="View Changes" class="button5" onclick="imViewChanges('creation')"></input>
+		
+	</div>
+	
+</div>
+<div class="secondary-buttons">
+	<input type="button" value="Cancel" class="button2" onclick="imCancelCreation()"></input>
+	<input type="button" value="Submit" class="button" onclick="imSubmitCreation()"></input>
+</div>
