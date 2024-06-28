@@ -6,7 +6,7 @@
 }
 
 #report-top > .button5 {
-	margin: 0.5em;
+	margin: 0.5em 0.5em 0.5em 1.5em;
 	text-wrap: nowrap;
 }
 
@@ -15,8 +15,8 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	flex-grow: 1;
-	justify-content: flex-start;
-	align-items: flex-start;
+	justify-content: stretch;
+	align-items: center;
 }
 
 .report-field {
@@ -25,7 +25,7 @@
 	justify-content: space-between;
 	align-items: stretch;
 	
-	/* flex-grow: 1; */
+	flex-grow: 1;
 	margin: 0.25em 0.5em;
 }
 
@@ -39,6 +39,10 @@
 	border-width: 1px;
 	margin: 0.5em;
 	flex-grow: 1;
+}
+
+#report-preview + #module-bottom {
+	padding: 0.25em;
 }
 
 .report-frame {

@@ -6,7 +6,7 @@ function checkPermission(request) {
 		if (
 			request.statusText === 'User has insufficient permission.'
 		) {
-			tokenError = request.statusText + ' The action cannot be performed.'	
+			permissionError = request.statusText + ' The action cannot be performed.'	
 		}
 	}
 	

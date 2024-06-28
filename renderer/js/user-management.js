@@ -213,6 +213,15 @@ async function umSubmitEdit() {
 	
 	if (editRequest.status === 200) {
 		createMessageDialogue('success', 'User Edit Successful', editRequest.statusText)
+		
+		// if (currentUser.username === newUser.username) {
+			// token = undefined
+			// currentUser = undefined
+			// setPage('login')
+			// createMessageDialogue('warning', 'Logout Notice', 'Your user account has been edited. You have been logged out.')
+			// return
+		// }
+		
 		await umSetupUserTable()
 		clearSecondary()
 		return

@@ -94,7 +94,7 @@
 }
 
 .faq-question > .icon {
-	font-size: 1.5em;
+	font-size: 1.25em;
 }
 
 .faq-answer {
@@ -106,6 +106,121 @@
 }
 
 .faq-checkbox:checked + * + .faq-answer {
-	display: flex !important;
+	display: block;
+	text-align: justify;
+	text-wrap: pretty;
 	padding: 1.5em 6em;
+}
+
+
+#user-manual-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+	
+    min-height: 0;
+	
+    border-bottom-color: var(--accent);
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+}
+
+#user-manual-content-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	
+    padding: 1em 1em 2em;
+	
+	background-color: var(--background2);
+	color: var(--on-background2);
+	
+	overflow-y: auto;
+}
+
+#user-manual-content-list h4 {
+	margin: 0.2em 0;
+	text-align: center;
+}
+
+#user-manual-content-list-table,
+#user-manual-content-list-table *
+{
+	background: none;
+	border: none;
+}
+
+.user-manual-content-list-item {
+	opacity: 0.7;
+}
+
+.user-manual-content-list-item.clickable {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.user-manual-content-list-item.clickable:hover > .user-manual-content-list-number,
+.user-manual-content-list-item.clickable:hover > .user-manual-content-list-title
+{
+	background-color: var(--background2-hover) !important;
+	color: var(--on-background2-hover) !important;
+}
+
+.user-manual-content-list-item.clickable:active > .user-manual-content-list-number,
+.user-manual-content-list-item.clickable:active > .user-manual-content-list-title
+{
+	background-color: var(--background2-active) !important;
+	color: var(--on-background2-active) !important;
+}
+
+.user-manual-content-list-item.clickable.selected > .user-manual-content-list-number,
+.user-manual-content-list-item.clickable.selected > .user-manual-content-list-title
+{
+	background-color: var(--background4) !important;
+	color: var(--on-background4) !important;
+}
+
+.user-manual-content-list-item.clickable.selected:hover > .user-manual-content-list-number,
+.user-manual-content-list-item.clickable.selected:hover > .user-manual-content-list-title
+{
+	background-color: var(--background4-hover) !important;
+	color: var(--on-background4-hover) !important;
+}
+
+.user-manual-content-list-item.clickable.selected:active > .user-manual-content-list-number,
+.user-manual-content-list-item.clickable.selected:active > .user-manual-content-list-title
+{
+	background-color: var(--background4-active) !important;
+	color: var(--on-background4-active) !important;
+}
+
+
+
+#user-manual-content {
+	background-color: var(--background3);
+	color: var(--on-background3);
+	flex-grow: 1;
+	flex-basis: 0;
+	min-height: 0;
+	
+    font-family: sans-serif;
+    padding: 1em 2em 4em;
+    line-height: 1.5;
+    text-align: justify;
+    text-wrap: pretty;
+	
+	overflow-y: auto;
+}
+
+#user-manual-content img {
+    max-width: 100%;
+    max-height: 15em;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#user-manual-content p {
+    text-indent: 2em;
 }

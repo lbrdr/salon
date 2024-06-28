@@ -167,14 +167,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Registered customer: ' +
-			JSON.stringify({
-				id: customerID,
-				fullName,
-				preferredStaffID,
-				contact,
-				dateRegistered
-			})
+			'Registered customer ' + customerID
 		)
 		
 		res.statusCode = 200
@@ -242,14 +235,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Edited customer: ' +
-			JSON.stringify({
-				id: customerID,
-				preferredStaffID,
-				fullName,
-				contact,
-				dateRegistered
-			})
+			'Edited customer ' + customerID
 		)
 		
 		res.statusCode = 200
@@ -329,17 +315,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Searched customers: ' +
-			JSON.stringify({
-				id: customerID,
-				fullName,
-				contact,
-				preferredStaffID,
-				dateRegisteredFrom,
-				dateRegisteredTo,
-				lastServiceFrom,
-				lastServiceTo
-			})
+			'Searched customers'
 		)
 		
 		res.statusCode = 200

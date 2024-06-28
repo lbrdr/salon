@@ -5,78 +5,91 @@
 <div id="inventory-record-creation-div">
 	
 	<div>
-		
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-item-name">
-				Item Name
-			</label>
-			<input
-				type="text"
-				id="inventory-record-creation-item-name"
-				list="inventory-record-creation-item-names"
-			/>
-		</div>
-		
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-item-manufacturer">
-				Item Manufacturer
-			</label>
-			<input
-				type="text"
-				id="inventory-record-creation-item-manufacturer"
-				list="inventory-record-creation-item-manufacturers"
-			/>
-		</div>
-		
-	</div>
 	
-	<div>
-	
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-amount">
-				Amount
-			</label>
-			<div class="inventory-record-creation-field-group">
-				<select
-					id="inventory-record-creation-amount-sign"
-				>
-					<option value="-">(-) Loss/Usage</option>
-					<option value="+">(+) Gain/Restock</option>
-				</select>
+		<div class="inventory-record-creation-column">
+		
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-item-name">
+					Item Name
+				</label>
 				<input
-					type="number"
-					id="inventory-record-creation-amount"
+					type="text"
+					id="inventory-record-creation-item-name"
+					list="inventory-record-creation-item-names"
 				/>
 			</div>
-		</div>
 			
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-item-unit">
-				Unit
-			</label>
-			<input
-				type="text"
-				id="inventory-record-creation-item-unit"
-				list="inventory-record-creation-item-units"
-			/>
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-item-manufacturer">
+					Item Manufacturer
+				</label>
+				<input
+					type="text"
+					id="inventory-record-creation-item-manufacturer"
+					list="inventory-record-creation-item-manufacturers"
+				/>
+			</div>
+			
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-item-unit">
+					Unit of Measurement
+				</label>
+				<input
+					type="text"
+					id="inventory-record-creation-item-unit"
+					list="inventory-record-creation-item-units"
+				/>
+			</div>
+		
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-unit-cost">
+					Cost per Unit
+				</label>
+				<input
+					type="number"
+					id="inventory-record-creation-unit-cost"
+					onchange="this.value = Number(this.value).toFixed(2)"
+					disabled
+				/>
+			</div>
+			
 		</div>
 		
-	</div>
+		<div class="inventory-record-creation-column">
 	
-	<div>
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-amount">
+					Quantity/Amount
+				</label>
+				<div class="inventory-record-creation-field-group">
+					<select
+						id="inventory-record-creation-amount-sign"
+						onchange="imSetupUnitCostInput('creation')"
+					>
+						<option value="-">(-) Consumed</option>
+						<option value="+">(+) Restock</option>
+					</select>
+					<input
+						type="number"
+						id="inventory-record-creation-amount"
+					/>
+				</div>
+			</div>
 		
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-recording-staff">
-				Recording Staff
-			</label>
-			<select id="inventory-record-creation-recording-staff" disabled></select>
-		</div>
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-recording-staff">
+					Recording Staff
+				</label>
+				<select id="inventory-record-creation-recording-staff" disabled></select>
+			</div>
+			
+			<div class="inventory-record-creation-field">
+				<label for="inventory-record-creation-date">
+					Record Date
+				</label>
+				<input type="datetime-local" id="inventory-record-creation-date" disabled />
+			</div>
 		
-		<div class="inventory-record-creation-field">
-			<label for="inventory-record-creation-date">
-				Record Date
-			</label>
-			<input type="datetime-local" id="inventory-record-creation-date" disabled />
 		</div>
 		
 	</div>

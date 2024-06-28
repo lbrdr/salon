@@ -8,8 +8,11 @@ const isMac = process.platform === 'darwin'
 const database = require('./database.js')
 
 
-// Preprocess html
+// Preprocess html files
 require('./html-preprocess.js')
+
+// Preprocess user manual data
+require('./user-manual-preprocess.js')
 
 // Start server
 require('./server.js')

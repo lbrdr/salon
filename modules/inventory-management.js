@@ -18,7 +18,8 @@ function checkInventoryRecordInfo(
 	itemName,
 	itemManufacturer,
 	itemUnit,
-	amount
+	amount,
+	unitCost
 ) {
 	
 	if (!itemName) {
@@ -34,7 +35,14 @@ function checkInventoryRecordInfo(
 	}
 	
 	if (isNaN(amount) || amount == 0) {
-		return 'Invalid amount.'
+		return 'Invalid quantity/amount.'
+	}
+	
+	if (
+		amount > 0 &&
+		(isNaN(unitCost) || unitCost <= 0)
+	) {
+		return 'Invalid cost per unit.'
 	}
 	
 	if (
@@ -72,6 +80,7 @@ const actions = {
 				itemManufacturer: record.item_manufacturer,
 				itemUnit: record.item_unit,
 				amount: record.amount,
+				unitCost: record.unit_cost,
 				date: record.date,
 			})
 		);
@@ -151,7 +160,8 @@ const actions = {
 			itemName,
 			itemManufacturer,
 			itemUnit,
-			amount
+			amount,
+			unitCost
 		} = newInventoryRecord
 		
 		const date = user.user_type === 'admin' ?
@@ -166,7 +176,8 @@ const actions = {
 			itemName,
 			itemManufacturer,
 			itemUnit,
-			amount
+			amount,
+			unitCost
 		)
 		
 		if (createError) {
@@ -182,6 +193,7 @@ const actions = {
 			itemManufacturer,
 			itemUnit,
 			amount,
+			unitCost,
 			date
 		)
 		
@@ -189,16 +201,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Created Inventory Record: ' +
-			JSON.stringify({
-				id: inventoryRecordID,
-				recordingStaffID,
-				itemName,
-				itemManufacturer,
-				itemUnit,
-				amount,
-				date
-			})
+			'Created inventory record ' + inventoryRecordID
 		)
 		
 		res.statusCode = 200
@@ -227,6 +230,7 @@ const actions = {
 			itemManufacturer,
 			itemUnit,
 			amount,
+			unitCost,
 			date
 		} = newInventoryRecord
 		
@@ -236,7 +240,8 @@ const actions = {
 			itemName,
 			itemManufacturer,
 			itemUnit,
-			amount
+			amount,
+			unitCost
 		)
 		
 		if (!editError) {
@@ -259,21 +264,13 @@ const actions = {
 			itemManufacturer,
 			itemUnit,
 			amount,
+			unitCost,
 			date
 		)
 		
 		const recordResult = database.createUserAction(
 			user.id,
-			'Edited Inventory Record: ' +
-			JSON.stringify({
-				id: inventoryRecordID,
-				recordingStaffID,
-				itemName,
-				itemManufacturer,
-				itemUnit,
-				amount,
-				date
-			})
+			'Edited inventory record ' + inventoryRecordID
 		)
 		
 		res.statusCode = 200

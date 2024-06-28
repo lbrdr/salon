@@ -19,3 +19,172 @@
 .icon:last-child {
 	margin-right: 0;
 }
+
+
+
+
+.logo-icon {
+	background-image: url('../images/logo.png');
+}
+
+.check-icon {
+	background-image: url('../images/check.png');
+}
+
+.add-icon {
+	background-image: url('../images/add.png');
+}
+
+.remove-icon {
+	background-image: url('../images/remove.png');
+}
+
+.edit-icon {
+	background-image: url('../images/edit.png');
+}
+
+.edit-maintenance-icon {
+	background-image: url('../images/edit-maintenance.png');
+}
+
+.save-icon {
+	background-image: url('../images/save.png');
+}
+
+.search-icon {
+	background-image: url('../images/search.png');
+}
+
+.success-icon {
+	background-image: url('../images/success.png');
+}
+
+.error-icon {
+	background-image: url('../images/error.png');
+}
+
+.failed-icon {
+	background-image: url('../images/error.png');
+}
+
+.warning-icon {
+	background-image: url('../images/warning.png');
+}
+
+
+
+
+
+
+
+.forgot-password-icon {
+	background-image: url('../images/forgot-password.png');
+}
+
+.username-icon {
+	background-image: url('../images/username.png');
+	filter: brightness(0.2);
+}
+
+.security-question-icon {
+	background-image: url('../images/security-question.png');
+	filter: brightness(0.2);
+}
+
+.password-icon {
+	background-image: url('../images/password.png');
+	filter: brightness(0.2);
+}
+
+
+
+.customer-registration-icon {
+	background-image: url('../images/customer-registration.png');
+}
+
+.customer-edit-icon {
+	background-image: url('../images/customer-edit.png');
+}
+
+.customer-search-icon {
+	background-image: url('../images/customer-search.png');
+}
+
+.customer-services-icon {
+	background-image: url('../images/customer-services.png');
+}
+
+
+
+.sales-record-creation-icon {
+	background-image: url('../images/sales-record.png');
+}
+
+.sales-record-edit-icon {
+	background-image: url('../images/sales-record.png');
+}
+
+.sales-record-services-icon {
+	background-image: url('../images/sales-record.png');
+}
+
+
+
+.edit-services-icon {
+	background-image: url('../images/edit-services.png')
+}
+
+.services-edit-icon {
+	background-image: url('../images/service.png')
+}
+
+
+
+.inventory-record-creation-icon {
+	background-image: url('../images/inventory-record.png');
+}
+
+.inventory-record-edit-icon {
+	background-image: url('../images/inventory-record.png');
+}
+
+.inventory-stock-changes-icon {
+	background-image: url('../images/inventory-item.png');
+}
+
+.inventory-item-records-icon {
+	background-image: url('../images/inventory-item.png');
+}
+
+
+
+.user-registration-icon {
+	background-image: url('../images/user.png');
+}
+
+.user-edit-icon {
+	background-image: url('../images/user.png');
+}
+
+
+
+.user-manual-icon {
+	background-image: url('../images/user-manual.png');
+}
+
+.faq-icon {
+	background-image: url('../images/faq.png');
+}
+
+
+
+.arrow-right-icon {
+	background-image: url('../images/arrow-right.png');
+	filter: brightness(0.2);
+}
+
+
+
+.generate-report-icon {
+	background-image: url('../images/generate-report.png');
+}

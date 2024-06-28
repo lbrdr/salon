@@ -23,79 +23,92 @@
 	
 	<div>
 		
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-item-name">
-				Item Name
-			</label>
-			<input
-				type="text"
-				id="inventory-record-edit-item-name"
-				list="inventory-record-edit-item-names"
-			/>
-		</div>
+		<div class="inventory-record-edit-column">
 		
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-item-manufacturer">
-				Item Manufacturer
-			</label>
-			<input
-				type="text"
-				id="inventory-record-edit-item-manufacturer"
-				list="inventory-record-edit-item-manufacturers"
-			/>
-		</div>
-		
-	</div>
-	
-	<div>
-			
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-item-unit">
-				Unit
-			</label>
-			<input
-				type="text"
-				id="inventory-record-edit-item-unit"
-				list="inventory-record-edit-item-units"
-			/>
-		</div>
-	
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-amount">
-				Amount
-			</label>
-			<div class="inventory-record-edit-field-group">
-				<select
-					id="inventory-record-edit-amount-sign"
-				>
-					<option value="-">(-) Loss/Usage</option>
-					<option value="+">(+) Gain/Restock</option>
-				</select>
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-item-name">
+					Item Name
+				</label>
 				<input
-					type="number"
-					id="inventory-record-edit-amount"
+					type="text"
+					id="inventory-record-edit-item-name"
+					list="inventory-record-edit-item-names"
 				/>
 			</div>
-		</div>
-		
-	</div>
-	
-	<div>
-		
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-recording-staff">
-				Recording Staff
-			</label>
-			<select id="inventory-record-edit-recording-staff" disabled></select>
-		</div>
-		
-		<div class="inventory-record-edit-field">
-			<label for="inventory-record-edit-date">
-				Recording Date
-			</label>
-			<input type="datetime-local" id="inventory-record-edit-date" disabled />
-		</div>
 			
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-item-manufacturer">
+					Item Manufacturer
+				</label>
+				<input
+					type="text"
+					id="inventory-record-edit-item-manufacturer"
+					list="inventory-record-edit-item-manufacturers"
+				/>
+			</div>
+			
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-item-unit">
+					Unit of Measurement
+				</label>
+				<input
+					type="text"
+					id="inventory-record-edit-item-unit"
+					list="inventory-record-edit-item-units"
+				/>
+			</div>
+		
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-unit-cost">
+					Cost per Unit
+				</label>
+				<input
+					type="number"
+					id="inventory-record-edit-unit-cost"
+					onchange="this.value = Number(this.value).toFixed(2)"
+					disabled
+				/>
+			</div>
+		
+		</div>
+		
+		<div class="inventory-record-edit-column">
+		
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-amount">
+					Quantity/Amount
+				</label>
+				<div class="inventory-record-edit-field-group">
+					<select
+						id="inventory-record-edit-amount-sign"
+						onchange="imSetupUnitCostInput('edit')"
+					>
+						<option value="-">(-) Consumed</option>
+						<option value="+">(+) Restock</option>
+					</select>
+					<input
+						type="number"
+						id="inventory-record-edit-amount"
+					/>
+				</div>
+			</div>
+		
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-recording-staff">
+					Recording Staff
+				</label>
+				<select id="inventory-record-edit-recording-staff" disabled></select>
+			</div>
+			
+			<div class="inventory-record-edit-field">
+				<label for="inventory-record-edit-date">
+					Recording Date
+				</label>
+				<input type="datetime-local" id="inventory-record-edit-date" disabled />
+			</div>
+			
+		</div>
+		
 	</div>
 		
 	<div>

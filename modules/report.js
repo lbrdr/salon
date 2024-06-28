@@ -53,15 +53,17 @@ const actions = {
 		
 		const {
 			startDate,
-			endDate
+			endDate,
+			customerType
 		} = reportParameters
 		
-		const metrics = database.getCustomerMetrics(startDate, endDate)
+		const metrics = database.getCustomerMetrics(startDate, endDate, customerType)
 		
 		const {
 			summary,
 			newlyRegisteredCustomers,
-			returningCustomers
+			returningCustomers,
+			nonReturningCustomers
 		} = metrics
 		
 		function formatCustomer(customer) {
@@ -71,22 +73,23 @@ const actions = {
 				contact: customer.contact,
 				preferredStaffID: customer.preferred_staff_id,
 				preferredStaff: customer.preferred_staff,
-				dateRegistered: customer.date_registered
+				dateRegistered: customer.date_registered,
+				lastRecord: customer.last_record
 			}
 		}
 		
 		const report = {
 			summary,
-			newlyRegisteredCustomers: newlyRegisteredCustomers.map(formatCustomer),
-			returningCustomers: returningCustomers.map(formatCustomer)
+			newlyRegisteredCustomers: newlyRegisteredCustomers?.map(formatCustomer),
+			returningCustomers: returningCustomers?.map(formatCustomer),
+			nonReturningCustomers: nonReturningCustomers?.map(formatCustomer)
 		}
 		
 		updateToken(token)
 		
 		database.createUserAction(
 			user.id,
-			'Generated Customer Report: ' +
-			JSON.stringify(reportParameters)
+			'Generated customer report'
 		)
 		
 		res.statusCode = 200
@@ -145,8 +148,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Generated Sales Report: ' +
-			JSON.stringify(reportParameters)
+			'Generated sales report'
 		)
 		
 		res.statusCode = 200
@@ -211,8 +213,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Generated Inventory Report: ' +
-			JSON.stringify(reportParameters)
+			'Generated inventory report'
 		)
 		
 		res.statusCode = 200
@@ -257,8 +258,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Generated Customer Report: ' +
-			JSON.stringify(reportParameters)
+			'Generated user report'
 		)
 		
 		res.statusCode = 200

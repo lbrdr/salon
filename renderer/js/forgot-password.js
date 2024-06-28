@@ -36,7 +36,7 @@ async function fpSubmitUsername() {
 			
 			const icon = document.createElement('label')
 			icon.htmlFor = answerID
-			icon.className = 'icon forgot-password-question-icon'
+			icon.className = 'icon security-question-icon'
 			
 			const columnDiv = document.createElement('div')
 			

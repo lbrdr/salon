@@ -67,7 +67,7 @@
   --accent-disabled: #b79292;
   --on-accent-disabled: #e7e7e7;
   
-  --accent2: #87707a;
+  --accent2: #785e6a;
   --on-accent2: #efefef;
   --accent2-hover: #a5929a;
   --on-accent2-hover: #f7f7f7;
@@ -321,4 +321,22 @@ select:disabled
 input[type="checkbox"] {
     margin: 0;
     height: 1.2em;
+}
+
+mark {
+	background-color: #54001a26;
+	text-wrap: nowrap;
+	color: #000000;
+	padding: 0.1em;
+}
+
+input[type="number"] {
+	text-align: right;
+    font-family: monospace;
+}
+
+input[type="number"]::-webkit-inner-spin-button
+{
+	-webkit-appearance: none;
+	margin: 0;
 }

@@ -35,7 +35,12 @@
 	align-items: stretch;
 	
 	flex-grow: 1;
-	padding: 1em 8em;
+}
+
+#inventory-record-creation-div,
+#inventory-record-edit-div
+{
+	padding: 0.5em 8em;
 }
 
 #inventory-record-creation-div > div,
@@ -45,14 +50,24 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: stretch;
+    flex-grow: 1;
 }
 
-#inventory-record-creation-div > div > *,
-#inventory-record-edit-div > div > *
+#inventory-record-creation-div > div
 {
-	flex-basis: 0;
-	flex-grow: 1;
-	margin: 0.5em 2em;
+	padding: 0.5em;
+}
+
+#inventory-record-edit-div > div
+{
+	padding: 0.25em;
+}
+
+#inventory-record-creation-div > div:last-child,
+#inventory-record-edit-div > div:first-child,
+#inventory-record-edit-div > div:last-child
+{
+    flex-grow: 0;
 }
 
 #inventory-record-creation-div > div > *:first-child:last-child,
@@ -60,6 +75,28 @@
 {
     flex-basis: auto;
 	flex-grow: 0;
+}
+
+.inventory-record-creation-column,
+.inventory-record-edit-column
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+	
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+.inventory-record-creation-column > *
+{
+	margin: 0.5em 1em;
+}
+
+.inventory-record-edit-column > *
+{
+	margin: 0.2em 1em;
 }
 
 .inventory-record-creation-field,

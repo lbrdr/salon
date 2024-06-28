@@ -12,8 +12,9 @@
 	color: var(--on-accent2);
 }
 
-#page-selector > .company-logo-icon {
+#page-selector > .logo-icon {
 	font-size: 2em;
+	margin-bottom: 0.2em;
 }
 
 .page-button {

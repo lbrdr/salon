@@ -14,11 +14,21 @@ const {
 function checkUserInfo(currentUser, newUser, securityQuestions, oldUser) {
 	
 	if (!newUser.username) {
-		return 'Username is required.'
+		return 'The username is required.'
+	}
+	
+	if (newUser.username.length > 16) {
+		return 'The username is too long. The username cannot be more than 16 characters long.'
+	}
+	
+	if (newUser.password) {
+		if (newUser.password.length < 8) {
+			return 'The password is too short. The password must be at least 8 characters long.'
+		}
 	}
 	
 	if (!newUser.fullName) {
-		return 'Full Name is required.'
+		return 'The full name is required.'
 	}
 	
 	if (
@@ -28,35 +38,65 @@ function checkUserInfo(currentUser, newUser, securityQuestions, oldUser) {
 		return 'Invalid user type.'
 	}
 	
-	
-	
-	if (
-		oldUser &&
-		currentUser.id !== oldUser.id &&
-		oldUser.user_type === 'admin'
-	) {
-		console.log()
+	if (oldUser) {
 		
-		if (oldUser.user_type !== newUser.userType) {
-			return (
-				'The user type of another admin cannot be changed. ' +
-				'Please allow the said admin to change their own user type.'
-			);
+		if (oldUser.user_type ==='admin') {
+			
+			if (currentUser.id !== oldUser.id) {
+				
+				if (oldUser.user_type !== newUser.userType) {
+					return (
+						'The user type of another admin cannot be changed. ' +
+						'Please allow the said admin to change their own user type.'
+					);
+				}
+				
+				if (newUser.password) {
+					return (
+						'The password of another admin cannot be changed. ' +
+						'Please allow the said admin to change their own password.'
+					);
+				}
+				
+				if (!oldUser.disabled && newUser.disabled) {
+					return (
+						'The account of another admin cannot be disabled. ' +
+						'Please allow the said admin to disable their own account.'
+					);
+				}
+		
+				if (securityQuestions.length) {
+					return (
+						'The security question of another admin cannot be changed. ' +
+						'Please allow the said admin to change their own security question.'
+					);
+				}
+				
+			}
+			
+			const users = database.getUsers()
+			
+			if (
+				newUser.userType !== 'admin' &&
+				users.filter((user) => user.user_type === 'admin').length == 1
+			) {
+				return 'The user type cannot be set because no admin user will be left in the system.'
+			}
+			
+			if (
+				!oldUser.disabled &&
+				newUser.disabled &&
+				users.filter(
+					(user) =>
+						user.user_type === 'admin' &&
+						!user.disabled
+				).length == 1
+			) {
+				return 'The user account cannot be disabled because no admin user will be able to login.'
+			}
+			
 		}
 		
-		if (newUser.password) {
-			return (
-				'The password of another admin cannot be changed. ' +
-				'Please allow the said admin to change their own password.'
-			);
-		}
-		
-		if (!oldUser.disabled && newUser.disabled) {
-			return (
-				'The account of another admin cannot be disabled. ' +
-				'Please allow the said admin to disabled their own account.'
-			);
-		}
 	}
 	
 	for (const securityQuestion of securityQuestions) {
@@ -71,17 +111,6 @@ function checkUserInfo(currentUser, newUser, securityQuestions, oldUser) {
 		
 		if (!answer) {
 			return 'The answer for the security question cannot be blank.'
-		}
-		
-		if (
-			oldUser &&
-			currentUser.id !== oldUser.id &&
-			oldUser.user_type === 'admin'
-		) {
-			return (
-				'The security questions of another admin cannot be changed. ' +
-				'Please allow the said admin to change their own security questions.'
-			);
 		}
 	}
 	

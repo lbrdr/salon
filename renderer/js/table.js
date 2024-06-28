@@ -182,7 +182,7 @@ function createTable(parent, columns, data, options) {
 				}
 				
 				for (const eachTR of allTR) {
-					eachTR.className = eachTR.className.replace(/ ?selected ?/g, '')
+					eachTR.className = eachTR.className.replace(/ ?selected/, '')
 				}
 				tr.className += ' selected'
 				

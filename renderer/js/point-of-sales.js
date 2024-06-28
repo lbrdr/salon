@@ -301,7 +301,6 @@ function posSetupServicesTable(action, services) {
 	const newTFoot = newTable.getElementsByTagName('tfoot')[0]
 	const oldTFoot = oldTable.getElementsByTagName('tfoot')[0]
 	
-	console.log(oldTFoot.children)
 	const i = oldTFoot.children.length - 3
 	
 	while (oldTFoot.children.length > i) {

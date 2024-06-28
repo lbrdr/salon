@@ -25,5 +25,5 @@ for (const dirent of dirents) {
 
 fs.appendFileSync(
 	outputPath,
-	JSON.stringify(htmlFiles, 4)
+	JSON.stringify(htmlFiles, null, 4)
 );

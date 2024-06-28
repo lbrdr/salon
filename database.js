@@ -144,7 +144,8 @@ function initialize(db) {
 			item_name TEXT NOT NULL,
 			item_manufacturer TEXT NOT NULL,
 			item_unit TEXT NOT NULL,
-			amount REAL,
+			amount REAL NOT NULL,
+			unit_cost REAL,
 			date TEXT NOT NULL,
 			FOREIGN KEY(recording_staff_id) REFERENCES user(id)
 			FOREIGN KEY(item_name, item_manufacturer, item_unit) REFERENCES inventory_item(name, manufacturer, unit)
@@ -282,7 +283,8 @@ function createSampleData(db) {
 		'Hair Dye',
 		'GLAMWORKS',
 		'box/es',
-		3
+		3,
+		500
 	)
 	
 	createInventoryRecord(
@@ -290,7 +292,8 @@ function createSampleData(db) {
 		'Hair Dye',
 		'GLAMWORKS',
 		'box/es',
-		-1
+		-1,
+		undefined
 	)
 	
 	createInventoryRecord(
@@ -298,7 +301,8 @@ function createSampleData(db) {
 		'Hair Dye',
 		'GLAMWORKS',
 		'box/es',
-		-1
+		-1,
+		undefined
 	)
 	
 	createInventoryRecord(
@@ -306,31 +310,35 @@ function createSampleData(db) {
 		'Hair Dye',
 		'GLAMWORKS',
 		'box/es',
-		-1
+		-1,
+		undefined
 	)
 	
 	createInventoryRecord(
 		1,
-		'Shampoo 500ml',
+		'Shampoo',
 		'Smooth and Manageable',
-		'bottle/s',
-		50
+		'500ml bottle/s',
+		15,
+		1000
 	)
 	
 	createInventoryRecord(
 		1,
-		'Shampoo 500ml',
+		'Shampoo',
 		'Smooth and Manageable',
-		'bottle/s',
-		-1
+		'500ml bottle/s',
+		-1,
+		undefined
 	)
 	
 	createInventoryRecord(
 		2,
-		'Shampoo 500ml',
+		'Shampoo',
 		'Smooth and Manageable',
-		'bottle/s',
-		-1
+		'500ml bottle/s',
+		-1,
+		undefined
 	)
 	
 	createInventoryRecord(
@@ -338,7 +346,8 @@ function createSampleData(db) {
 		'sabon',
 		'seypgard',
 		'box/es',
-		-1
+		-1,
+		undefined
 	)
 	
 	setInventoryRecord(
@@ -347,7 +356,8 @@ function createSampleData(db) {
 		'Soap',
 		'Safeguard',
 		'box/es',
-		1
+		1,
+		125
 	)
 	
 }
@@ -362,6 +372,7 @@ function createInventoryRecord(
 	itemManufacturer,
 	itemUnit,
 	amount,
+	unitCost,
 	date
 ) {
 	
@@ -378,8 +389,9 @@ function createInventoryRecord(
 			item_manufacturer,
 			item_unit,
 			amount,
+			unit_cost,
 			date
-		) VALUES (?, ?, ?, ?, ?, ?)
+		) VALUES (?, ?, ?, ?, ?, ?, ?)
 		`
 	).run(
 		recordingStaffID,
@@ -387,6 +399,7 @@ function createInventoryRecord(
 		itemManufacturer,
 		itemUnit,
 		amount,
+		unitCost,
 		formatDateTime(date)
 	)
 	
@@ -408,6 +421,7 @@ function setInventoryRecord(
 	itemManufacturer,
 	itemUnit,
 	amount,
+	unitCost,
 	date
 ) {
 	
@@ -435,6 +449,7 @@ function setInventoryRecord(
 			item_manufacturer=?,
 			item_unit=?,
 			amount=?,
+			unit_cost=?,
 			date=?
 		WHERE id=?
 		`
@@ -444,6 +459,7 @@ function setInventoryRecord(
 		itemManufacturer,
 		itemUnit,
 		amount,
+		unitCost,
 		formatDateTime(date),
 		inventoryRecordID
 	)
@@ -1123,11 +1139,10 @@ function getUserActions() {
 }
 
 // Get customer metrics for customer report
-function getCustomerMetrics(startDate, endDate) {
+function getCustomerMetrics(startDate, endDate, customerType) {
 	
 	const dateConditions = []
 	const dateValues = []
-	var clauseCount = 0
 
 	if (startDate) {
 		dateConditions.push('>=?')
@@ -1140,7 +1155,6 @@ function getCustomerMetrics(startDate, endDate) {
 	}
 	
 	function filter(clause, column) {
-		clauseCount++
 		if (!dateConditions.length) {
 			return ''
 		}
@@ -1148,68 +1162,145 @@ function getCustomerMetrics(startDate, endDate) {
 		return ' ' + clause + ' ' + conditions.join(' AND ')
 	}
 	
-	function filterValues() {
-		const values = [].concat(...Array(clauseCount).fill(dateValues))
-		clauseCount = 0
-		return values
-	}
+	var summary = []
+	var newlyRegisteredCustomers
+	var returningCustomers
+	var nonReturningCustomers
 	
-	const summary = [
-	
-		db.prepare(
-			`SELECT
-				'non-registered' as classification,
-				COUNT(DISTINCT sales_record.id) as records,
-				COUNT(offered_service.id) as services
-			FROM sales_record
-			INNER JOIN offered_service
-				ON sales_record.id=offered_service.sales_record_id
-			WHERE sales_record.customer_id IS NULL
-			${filter('AND', 'sales_record.date')}
-			`
-		).get(...filterValues()),
+	if (!customerType || customerType === 'newly-registered') {
 		
-		db.prepare(
+		summary.push(
+		
+			db.prepare(
+				`SELECT
+					'non-registered' as classification,
+					COUNT(DISTINCT sales_record.id) as records,
+					COUNT(offered_service.id) as services
+				FROM sales_record
+				INNER JOIN offered_service
+					ON sales_record.id=offered_service.sales_record_id
+				WHERE sales_record.customer_id IS NULL
+				${filter('AND', 'sales_record.date')}
+				`
+			).get(...dateValues),
+			
+			db.prepare(
+				`SELECT
+					'newly-registered' as classification,
+					COUNT (DISTINCT customer.id) as customers,
+					COUNT (DISTINCT sales_record.id) as records,
+					COUNT (offered_service.id) as services
+				FROM customer
+				LEFT OUTER JOIN sales_record
+					ON customer.id=sales_record.customer_id
+				LEFT OUTER JOIN offered_service
+					ON sales_record.id=offered_service.sales_record_id
+				WHERE (
+					sales_record.date IS NULL
+					${filter('OR', 'sales_record.date')}
+				)
+				${filter('AND', 'customer.date_registered')}
+				`
+			).get(...dateValues, ...dateValues)
+			
+		);
+		
+		newlyRegisteredCustomers = db.prepare(
 			`SELECT
-				'newly-registered' as classification,
-				COUNT (DISTINCT customer.id) as customers,
-				COUNT (DISTINCT sales_record.id) as records,
-				COUNT (offered_service.id) as services
+				customer.*,
+				user.id || ' - ' || user.full_name as preferred_staff,
+				COUNT(DISTINCT sales_record.id) as records,
+				COUNT(offered_service.id) as services,
+				MAX(sales_record.date) as last_record
 			FROM customer
+			LEFT OUTER JOIN user
+				ON customer.preferred_staff_id=user.id
 			LEFT OUTER JOIN sales_record
 				ON customer.id=sales_record.customer_id
 			LEFT OUTER JOIN offered_service
 				ON sales_record.id=offered_service.sales_record_id
-			${filter('WHERE', 'customer.date_registered')}
-			AND
-				(
-					sales_record.date IS NULL
-					${filter('OR', 'sales_record.date')}
-				)
+			WHERE (
+				sales_record.date IS NULL
+				${filter('OR', 'sales_record.date')}
+			)
+			${filter('AND', 'customer.date_registered')}
+			GROUP BY customer.id
 			`
-		).get(...filterValues()),
+		).all(...dateValues, ...dateValues)
 		
-		db.prepare(
+	}
+	
+	if (!customerType || customerType === 'returning/non-returning') {
+		
+		summary.push(
+			
+			db.prepare(
+				`SELECT
+					'returning' as classification,
+					COUNT(DISTINCT customer.id) as customers,
+					COUNT(DISTINCT sales_record.id) as records,
+					COUNT(offered_service.id) as services
+				FROM customer
+				INNER JOIN sales_record
+					ON customer.id=sales_record.customer_id
+				INNER JOIN offered_service
+					ON sales_record.id=offered_service.sales_record_id
+				WHERE customer.date_registered<?
+				${filter('AND', 'sales_record.date')}
+				`
+			).get(startDate, ...dateValues),
+			
+			db.prepare(
+				`SELECT
+					'non-returning' as classification,
+					COUNT (*) as customers
+				FROM customer
+				WHERE customer.date_registered<?
+				AND customer.id NOT IN
+					(
+						SELECT DISTINCT customer_id
+						FROM sales_record
+						${filter('WHERE', 'sales_record.date')}
+					)
+				`
+			).get(startDate, ...dateValues)
+			
+		)
+		
+		returningCustomers = db.prepare(
 			`SELECT
-				'returning' as classification,
-				COUNT(DISTINCT customer.id) as customers,
+				customer.*,
+				user.id || ' - ' || user.full_name as preferred_staff,
 				COUNT(DISTINCT sales_record.id) as records,
-				COUNT(offered_service.id) as services
+				COUNT(offered_service.id) as services,
+				MAX(sales_record.date) as last_record
 			FROM customer
+			LEFT OUTER JOIN user
+				ON customer.preferred_staff_id=user.id
 			INNER JOIN sales_record
 				ON customer.id=sales_record.customer_id
 			INNER JOIN offered_service
 				ON sales_record.id=offered_service.sales_record_id
 			WHERE customer.date_registered<?
 			${filter('AND', 'sales_record.date')}
+			GROUP BY customer.id
 			`
-		).get(startDate, ...filterValues()),
+		).all(startDate, ...dateValues)
 		
-		db.prepare(
+		nonReturningCustomers = db.prepare(
 			`SELECT
-				'non-returning' as classification,
-				COUNT (*) as customers
+				customer.*,
+				user.id || ' - ' || user.full_name as preferred_staff,
+				COUNT(DISTINCT sales_record.id) as records,
+				COUNT(offered_service.id) as services,
+				MAX(sales_record.date) as last_record
 			FROM customer
+			LEFT OUTER JOIN user
+				ON customer.preferred_staff_id=user.id
+			LEFT OUTER JOIN sales_record
+				ON customer.id=sales_record.customer_id
+			LEFT OUTER JOIN offered_service
+				ON sales_record.id=offered_service.sales_record_id
 			WHERE customer.date_registered<?
 			AND customer.id NOT IN
 				(
@@ -1217,54 +1308,17 @@ function getCustomerMetrics(startDate, endDate) {
 					FROM sales_record
 					${filter('WHERE', 'sales_record.date')}
 				)
-			`
-		).get(startDate, ...filterValues())
-		
-	]
-	
-	const newlyRegisteredCustomers = db.prepare(
-		`SELECT
-			customer.*,
-			user.id || ' - ' || user.full_name as preferred_staff,
-			COUNT (DISTINCT sales_record.id) as records,
-			COUNT (offered_service.id) as services
-		FROM customer
-		LEFT OUTER JOIN user
-			ON customer.preferred_staff_id=user.id
-		LEFT OUTER JOIN sales_record
-			ON customer.id=sales_record.customer_id
-		LEFT OUTER JOIN offered_service
-			ON sales_record.id=offered_service.sales_record_id
-		WHERE
-			(
+			AND (
 				sales_record.date IS NULL
-				${filter('OR', 'sales_record.date')}
+				OR sales_record.date<?
 			)
-		GROUP BY customer.id
-		${filter('HAVING', 'customer.date_registered')}
-		`
-	).all(...filterValues())
+			GROUP BY customer.id
+			`
+		).all(startDate, ...dateValues, startDate)
+		
+	}
 	
-	const returningCustomers = db.prepare(
-		`SELECT
-			customer.*,
-			user.id || ' - ' || user.full_name as preferred_staff,
-			COUNT (DISTINCT sales_record.id) as records,
-			COUNT (offered_service.id) as services
-		FROM customer
-		LEFT OUTER JOIN user
-			ON customer.preferred_staff_id=user.id
-		INNER JOIN sales_record
-			ON customer.id=sales_record.customer_id
-		INNER JOIN offered_service
-			ON sales_record.id=offered_service.sales_record_id
-		${filter('WHERE', 'sales_record.date')}
-		GROUP BY customer.id
-		HAVING customer.date_registered<?
-		`
-	).all(...filterValues(), startDate)
-	
-	return { summary, newlyRegisteredCustomers, returningCustomers }
+	return { summary, newlyRegisteredCustomers, returningCustomers, nonReturningCustomers }
 }
 
 // Get sales metrics for sales report
@@ -1349,7 +1403,8 @@ function getInventoryMetrics(startDate, endDate) {
 			item_unit as unit,
 			SUM(CASE WHEN date<? THEN amount ELSE 0 END) as start_stock,
 			SUM(CASE WHEN 1=1 ${filter('AND', 'date')} THEN amount ELSE 0 END) as stock_changes,
-			SUM(amount) as end_stock
+			SUM(amount) as end_stock,
+			SUM(unit_cost) as total_restock_cost,
 		FROM inventory_record
 		WHERE (date<=? OR ?=0)
 		GROUP BY

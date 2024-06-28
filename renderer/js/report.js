@@ -1,6 +1,4 @@
 var rFrame
-var rUserInputField
-var rExpensesInputField
 
 
 function rCreateReportFrame() {
@@ -16,8 +14,6 @@ function rCreateReportFrame() {
 	reportPreview.append(rFrame)
 	
 	const frameDocument = rFrame.contentDocument
-	frameDocument.body.innerHTML = htmlFiles['report-template.html']
-	
 	const cssLink = document.createElement("link");
 	cssLink.href = "css/report-template.css"; 
 	cssLink.rel = "stylesheet"; 
@@ -25,6 +21,7 @@ function rCreateReportFrame() {
 	frameDocument.head.appendChild(cssLink);
 	
 	return frameDocument
+	
 }
 
 function rSetText(htmlID, text) {
@@ -45,26 +42,65 @@ function rFormatDateAndTime(date) {
 }
 
 async function rSetupInputs() {
-	const today = new Date()
-	
-	const oneMonthAgo = new Date(today)
-	oneMonthAgo.setMonth(today.getMonth() - 1)
 	
 	const startDateInput = document.getElementById('report-start-date')
 	const endDateInput = document.getElementById('report-end-date')
 	
-	startDateInput.value = oneMonthAgo.toLocaleDateString('en-CA')
+	const today = new Date()
+	
+	const firstDayThisMonth = new Date(today)
+	firstDayThisMonth.setDate(1)
+	
+	startDateInput.value = firstDayThisMonth.toLocaleDateString('en-CA')
 	endDateInput.value = today.toLocaleDateString('en-CA')
+	
+	rSetupTempInputs()
+	
 }
 
 async function rSetupTempInputs() {
 	
 	const reportType = document.getElementById('report-type').value
 	
+	if (reportType === 'customer') {
+		if (!document.getElementById('report-customer-type')) {
+			const field = document.createElement('div')
+			field.className = 'report-field'
+				
+			const label = document.createElement('label')
+			label.innerText = 'Customer Type'
+			label.htmlFor = 'report-customer-type'
+			
+			const select = document.createElement('select')
+			select.id = 'report-customer-type'
+			{
+				const option = document.createElement('option')
+				option.value = 'newly-registered'
+				option.innerText = 'Newly-Registered Customers'
+				select.append(option)
+			}
+			{
+				const option = document.createElement('option')
+				option.value = 'returning/non-returning'
+				option.innerText = 'Returning/Non-returning Customers'
+				select.append(option)
+			}
+			
+			field.append(label)
+			field.append(select)
+			document.getElementById('report-fields').append(field)
+		}
+	} else {
+		const input = document.getElementById('report-customer-type')
+		if (input) {
+			input.parentElement.remove()
+		}
+	}
+	
 	if (reportType === 'sales') {
-		if (!rExpensesInputField) {
-			rExpensesInputField = document.createElement('div')
-			rExpensesInputField.className = 'report-field'
+		if (!document.getElementById('report-expenses')) {
+			const field = document.createElement('div')
+			field.className = 'report-field'
 				
 			const label = document.createElement('label')
 			label.innerText = 'Total Expenses'
@@ -78,19 +114,19 @@ async function rSetupTempInputs() {
 				input.value = Number(input.value).toFixed(2)
 			}
 			
-			rExpensesInputField.append(label)
-			rExpensesInputField.append(input)
-			document.getElementById('report-fields').append(rExpensesInputField)
+			field.append(label)
+			field.append(input)
+			document.getElementById('report-fields').append(field)
 		}
 	} else {
-		if (rExpensesInputField) {
-			rExpensesInputField.remove()
-			rExpensesInputField = undefined
+		const input = document.getElementById('report-expenses')
+		if (input) {
+			input.parentElement.remove()
 		}
 	}
 	
 	if (reportType === 'user') {		
-		if (!rUserInputField) {
+		if (!document.getElementById('report-user')) {
 			
 			const userRequest = await queryRequest(
 				'POST',
@@ -109,8 +145,8 @@ async function rSetupTempInputs() {
 			
 			const users = JSON.parse(userRequest.responseText)
 			
-			rUserInputField = document.createElement('div')
-			rUserInputField.className = 'report-field'
+			const field = document.createElement('div')
+			field.className = 'report-field'
 		
 			const label = document.createElement('label')
 			label.innerText = 'User'
@@ -135,15 +171,15 @@ async function rSetupTempInputs() {
 				select.append(option)
 			}
 			
-			rUserInputField.append(label)
-			rUserInputField.append(select)
-			document.getElementById('report-fields').append(rUserInputField)
+			field.append(label)
+			field.append(select)
+			document.getElementById('report-fields').append(field)
 			
 		}
 	} else {
-		if (rUserInputField) {
-			rUserInputField.remove()
-			rUserInputField = undefined
+		const input = document.getElementById('report-user')
+		if (input) {
+			input.parentElement.remove()
 		}
 	}
 	
@@ -152,20 +188,41 @@ async function rSetupTempInputs() {
 
 
 async function rGenerateReport() {
+	
+	rCreateReportFrame()
+	
 	const reportType = document.getElementById('report-type').value
 	
 	if (reportType === 'customer') {
-		await rGenerateCustomerReport()
+		const reportError = await rGenerateCustomerReport()
+		if (reportError) {rFrame.remove(); rFrame = undefined; return reportError;}
 	}
 	if (reportType === 'sales') {
-		await rGenerateSalesReport()
+		const reportError = await rGenerateSalesReport()
+		if (reportError) {rFrame.remove(); rFrame = undefined; return reportError;}
 	}
 	if (reportType === 'inventory') {
-		await rGenerateInventoryReport()
+		const reportError = await rGenerateInventoryReport()
+		if (reportError) {rFrame.remove(); rFrame = undefined; return reportError;}
 	}
 	if (reportType === 'user') {
-		await rGenerateUserReport()
+		const reportError = await rGenerateUserReport()
+		if (reportError) {rFrame.remove(); rFrame = undefined; return reportError;}
 	}
+	
+	rSetText('date-generated', (new Date()).toLocaleString())
+	rSetText('user-id', currentUser.id)
+	
+	const frameDocument = rFrame.contentDocument
+	
+	const header = frameDocument.getElementById('header')
+	const headerSpace = frameDocument.getElementById('header-space')
+	const footer = frameDocument.getElementById('footer')
+	const footerSpace = frameDocument.getElementById('footer-space')
+	
+	headerSpace.innerHTML = header.innerHTML
+	footerSpace.innerHTML = footer.innerHTML
+
 }
 
 
@@ -174,6 +231,7 @@ async function rGenerateCustomerReport() {
 	
 	const startDate = document.getElementById('report-start-date').value
 	const endDate = document.getElementById('report-end-date').value
+	const customerType = document.getElementById('report-customer-type').value
 	
 	const reportRequest = await queryRequest(
 		'POST',
@@ -183,7 +241,8 @@ async function rGenerateCustomerReport() {
 		},
 		JSON.stringify({
 			startDate: startDate && formatDate(startDate),
-			endDate: endDate && formatDate(endDate, setToNextDay)
+			endDate: endDate && formatDate(endDate, setToNextDay),
+			customerType
 		})
 	);
 	
@@ -199,13 +258,16 @@ async function rGenerateCustomerReport() {
 	const {
 		summary,
 		newlyRegisteredCustomers,
-		returningCustomers
+		returningCustomers,
+		nonReturningCustomers
 	} = report
 	
-	const frameDocument = rCreateReportFrame()
-	frameDocument.body.innerHTML += htmlFiles['report-template-customer.html']
+	const frameDocument = rFrame.contentDocument
+	frameDocument.body.innerHTML =
+		htmlFiles['report-template-header.html'] +
+		htmlFiles['report-template-customer.html'] +
+		htmlFiles['report-template-footer.html']
 	
-	rSetText('date-generated', (new Date()).toString())
 	rSetText('start-date',
 		startDate ?
 			rFormatInputDate(startDate) :
@@ -217,56 +279,87 @@ async function rGenerateCustomerReport() {
 			rFormatInputDate(new Date())
 	)
 	
-	for (const customer of newlyRegisteredCustomers) {
-		customer.shortDateRegistered = rFormatDate(customer.dateRegistered)
+	function appendTable(h3Text, columns, data) {
+		const body = frameDocument.getElementById('body')
+	
+		const h3 = frameDocument.createElement('h3')
+		h3.innerText = h3Text
+		
+		const tableDiv = frameDocument.createElement('div')
+		tableDiv.className = 'table-div'
+		
+		body.append(frameDocument.createElement('br'))
+		body.append(h3)
+		body.append(tableDiv)
+		
+		createTable(
+			tableDiv,
+			columns,
+			data,
+			{ minRows: 1 }
+		)
 	}
-	for (const customer of returningCustomers) {
-		customer.shortDateRegistered = rFormatDate(customer.dateRegistered)
+	
+	if (summary) {		
+		appendTable(
+			'Customer Metrics',
+			{
+				classification: 'Classification',
+				customers: 'No. of Customers',
+				records: 'No. of Visits/Records',
+				services: 'No. of Availed Services'
+			},
+			summary
+		)
 	}
 	
-	createTable(
-		frameDocument.getElementById('summary'),
-		{
-			classification: 'Classification',
-			customers: '# of Customers',
-			records: '# of Visits/Sales Records',
-			services: '# of Availed Services'
-		},
-		summary,
-		{
-			minRows: 1
-		}
-	)
+	function formatCustomers(customers) {
+		customers.forEach(
+			(customer) => {
+				customer.shortDateRegistered = rFormatDate(customer.dateRegistered)
+				customer.shortLastRecord = customer.lastRecord && rFormatDate(customer.lastRecord)
+			}
+		);
+	}
 	
-	createTable(
-		frameDocument.getElementById('newly-registered-customers'),
-		{
-			id: 'ID',
-			fullName: 'Full Name',
-			contact: 'Contact',
-			preferredStaff: 'Preferred Staff',
-			shortDateRegistered: 'Date Registered'
-		},
-		newlyRegisteredCustomers,
-		{
-			minRows: 1
-		}
-	)
+	const customerColumns = {
+		id: 'ID',
+		fullName: 'Full Name',
+		contact: 'Contact',
+		preferredStaff: 'Preferred Staff',
+		shortDateRegistered: 'Date Registered',
+		shortLastRecord: 'Date of Last Visit/Record'
+	}
 	
-	createTable(
-		frameDocument.getElementById('returning-customers'),
-		{
-			id: 'ID',
-			fullName: 'Full Name',
-			contact: 'Contact',
-			preferredStaff: 'Preferred Staff',
-			shortDateRegistered: 'Date Registered'
-		},
-		returningCustomers,
-		{
-			minRows: 1
-		}
-	)
+	if (newlyRegisteredCustomers) {
+		formatCustomers(newlyRegisteredCustomers)
+		
+		appendTable(
+			'Newly-Registered Customers',
+			customerColumns,
+			newlyRegisteredCustomers
+		)
+	}
+	
+	if (returningCustomers) {
+		formatCustomers(returningCustomers)
+		
+		appendTable(
+			'Returning Customers',
+			customerColumns,
+			returningCustomers
+		)
+	}
+	
+	if (nonReturningCustomers) {
+		formatCustomers(nonReturningCustomers)
+		
+		appendTable(
+			'Non-Returning Customers',
+			customerColumns,
+			nonReturningCustomers
+		)
+	}
 	
 	
 }
@@ -304,10 +397,12 @@ async function rGenerateSalesReport() {
 		salesRecords
 	} = report
 	
-	const frameDocument = rCreateReportFrame()
-	frameDocument.body.innerHTML += htmlFiles['report-template-sales.html']
+	const frameDocument = rFrame.contentDocument
+	frameDocument.body.innerHTML =
+		htmlFiles['report-template-header.html'] +
+		htmlFiles['report-template-sales.html'] +
+		htmlFiles['report-template-footer.html']
 	
-	rSetText('date-generated', (new Date()).toString())
 	rSetText('start-date',
 		startDate ?
 			rFormatInputDate(startDate) :
@@ -393,10 +488,12 @@ async function rGenerateInventoryReport() {
 		inventoryRecords
 	} = report
 	
-	const frameDocument = rCreateReportFrame()
-	frameDocument.body.innerHTML += htmlFiles['report-template-inventory.html']
+	const frameDocument = rFrame.contentDocument
+	frameDocument.body.innerHTML =
+		htmlFiles['report-template-header.html'] +
+		htmlFiles['report-template-inventory.html'] +
+		htmlFiles['report-template-footer.html']
 	
-	rSetText('date-generated', (new Date()).toString())
 	rSetText('start-date',
 		startDate ?
 			rFormatInputDate(startDate) :
@@ -434,8 +531,9 @@ async function rGenerateInventoryReport() {
 			id: 'ID',
 			itemName: 'Item Name',
 			itemManufacturer: 'Item Manufacturer',
-			amount: 'Amount',
+			amount: 'Quantity/Amount',
 			itemUnit: 'Unit',
+			unitCost: 'Cost Per Unit',
 			recordingStaff: 'Recording Staff',
 			shortDate: 'Date Recorded'
 		},
@@ -480,10 +578,12 @@ async function rGenerateUserReport() {
 		userLogs
 	} = report
 	
-	const frameDocument = rCreateReportFrame()
-	frameDocument.body.innerHTML += htmlFiles['report-template-user.html']
+	const frameDocument = rFrame.contentDocument
+	frameDocument.body.innerHTML =
+		htmlFiles['report-template-header.html'] +
+		htmlFiles['report-template-user.html'] +
+		htmlFiles['report-template-footer.html']
 	
-	rSetText('date-generated', (new Date()).toString())
 	rSetText('start-date',
 		startDate ?
 			rFormatInputDate(startDate) :

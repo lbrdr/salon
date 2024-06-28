@@ -79,7 +79,7 @@ function createEditTableHTML(tableObj) {
 		}
 		
 		const addIcon = document.createElement('div')
-		addIcon.className = 'icon add-row-icon'
+		addIcon.className = 'icon add-icon'
 		
 		addButton.append(addIcon)
 		addButton.append(' Add' + (name ? ' ' + name : ''))

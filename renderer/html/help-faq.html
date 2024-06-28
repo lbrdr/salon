@@ -3,6 +3,147 @@
 	<h2>Frequently Asked Questions</h2>
 </div>
 <div id="faq-div">
+	<label class="faq-question">
+		Q: How can I create a sales record?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: Sales records can be created by going to the point of sales module, and clicking the <mark>[Create Sales Record]</mark> button at the top-right corner of the screen.
+		</p>
+		<p>
+			In the sales record creation screen, you must fill up the needed details of the sales record before clicking the <mark>[Submit]</mark> button to create the sales record.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: How do I update the inventory when receiving new stock?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: When receiving a new stock of items, an inventory record must be created. 
+		</p>
+		<p>
+			An inventory record can be created by going to the inventory management module and clicking the <mark>[Create Inventory Record]</mark> button at the top-right corner of the screen.
+		</p>
+		<p>
+			In the inventory record creation, you must fill up the necessary details, and most importantly set the sign to <mark>"(+) Restock"</mark> when setting the quantity/amount.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: How do I update the inventory when an item is consumed?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: When an item is cully comsumed, an inventory record must be created to update the stock in the system.
+		</p>
+		<p>
+			An inventory record can be created by going to the inventory management module and clicking the <mark>[Create Inventory Record]</mark> button at the top-right corner of the screen.
+		</p>
+		<p>
+			When recording an item consumption, the quantity/amount must be set to <mark>"(-) Consumed"</mark> to record a decrease in stock.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: Can I edit customer information after registration?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: Yes, customer information can be edited in the customer management module after registration.
+		</p>
+		<p>
+			This is done by either:
+			<ol>
+				<li>
+					selecting the customer you want to edit from the customer table and clicking the <mark>[Edit Customer]</mark> button, or by
+				</li>
+				<li>
+					clicking the "Edit Customer" button, inputting the customer id and clicking <mark>[Check ID]</mark> before editing.
+				</li>
+			</ol>
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: How can I recover a forgotten password?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: Passwords can be reset by going through the forgot password module or by having it set by the admin.
+			<ul>
+				<li>
+					In the login screen, you can click the <mark>"Forgot password?"</mark> link to proceed to the forgot password procedure.
+				</li>
+				<li>
+					If you are a staff, you can also ask help from an admin to have your password reset through the user management module.
+				</li>
+			</ul>
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: What permissions do Admin and Staff have?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: In the system, the users with staff permissions are capable of registering customers, editing customers, creating sales records, and creating inventory records. On the other hand, users with admin permissions are able to the same things and more.
+		</p>
+		<p>
+			Users with admin permissions are able to edit sales and inventory records and services, as well as set maintenance-related settings in the system and generate reports.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: Why can't I edit a sales or inventory record?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: Editing sales and inventory records can only be done by admins.
+		</p>
+		<p>
+			In case a record needs to be edited, please inform an admin to perform the edit.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: How do I add more choices for the services in a sales record?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: The services available when creating sales records can be set by going to the point of sales module and clicking the <mark>[Edit Services]</mark> button.
+		</p>
+		<p>
+			In the service editing screen, you may edit services and add (but not remove) services to be used in sales records.
+		</p>
+	</div>
+	
+	<label class="faq-question">
+		Q: In the customer report, what are the differences between Non-Registered Customers, Registered Customers, Returning Customers, and Non-Returning Customers?
+	</label>
+	<div class="faq-answer">
+		<p>
+			A: The classifications of customers in the customer report depend on if they are registered, the time they were registered, and the time of sales records associated with them.
+			<ul>
+				<li>
+					<mark>Non-Registered Customers</mark>
+					- are customers who have not been registered but have availed a service within the time period
+				</li>
+				<li>
+					<mark>Newly-Registered Customers</mark>
+					- are customers who have been registered within the time period
+				</li>
+				<li>
+					<mark>Returning Customers</mark>
+					- are customers who have been registered before the time period and have availed a service within the time period
+				</li>
+				<li>
+					<mark>Non-Returning Customers</mark>
+					- are customers who have been registered before the time period but have not availed a service within the time period
+				</li>
+			</ul>
+		</p>
+	</div>
 </div>
 <div class="secondary-buttons">
 	<input type="button" value="Close" class="button" onclick="imCloseItemRecords()"></input>

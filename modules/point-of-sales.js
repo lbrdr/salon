@@ -332,15 +332,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Created Sales Record: ' +
-			JSON.stringify({
-				id: salesRecordID,
-				customerID,
-				servicingStaffID,
-				services,
-				payment,
-				date
-			})
+			'Created sales record ' + salesRecordID
 		)
 		
 		res.statusCode = 200
@@ -414,15 +406,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Edited Sales Record: ' +
-			JSON.stringify({
-				id: salesRecordID,
-				customerID,
-				servicingStaffID,
-				services,
-				payment,
-				date
-			})
+			'Edited sales record ' + salesRecordID
 		)
 		
 		res.statusCode = 200
@@ -469,20 +453,17 @@ const actions = {
 					unavailable
 				)
 			} else {
-				const setResult = database.createService(
+				database.createService(
 					name,
 					defaultPrice,
 					unavailable
 				)
-				
-				service.id = setResult.lastInsertRowid
 			}
 		}
 		
 		database.createUserAction(
 			user.id,
-			'Edited services: ' +
-			JSON.stringify(services)
+			'Edited services'
 		)
 		
 		res.statusCode = 200

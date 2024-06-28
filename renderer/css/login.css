@@ -1,6 +1,15 @@
 #login-banner {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
 	background-color: var(--accent2);
 	margin: 1em;
+}
+
+#login-banner > .logo-icon {
+	font-size: 20em;
 }
 
 #login-column {

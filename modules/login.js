@@ -37,7 +37,7 @@ const actions = {
 			return
 		}
 		
-		database.createUserAction(user.id, 'Logged In')
+		database.createUserAction(user.id, 'Logged in')
 		
 		res.statusCode = 200
 		res.end()
@@ -56,7 +56,7 @@ const actions = {
 		
 		tokens[token].expiry = 0
 		
-		database.createUserAction(user.id, 'Logged Out')
+		database.createUserAction(user.id, 'Logged out')
 		
 		res.statusCode = 200
 		res.end()

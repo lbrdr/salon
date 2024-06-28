@@ -281,6 +281,7 @@ async function imSetupInventoryRecordTable() {
 			itemManufacturer: 'Item Manufacturer',
 			coloredAmount: 'Amount',
 			itemUnit: 'Unit',
+			unitCost: 'Cost per Unit',
 			recordingStaff: 'Recording Staff',
 			shortDate: 'Date Recorded'
 		},
@@ -374,6 +375,21 @@ async function imSetupInventoryRecordInputs(action) {
 	staffInput.value = currentUser.id
 	staffInput.disabled = currentUser.userType !== 'admin'
 	
+	imSetupUnitCostInput(action)
+	
+}
+
+function imSetupUnitCostInput(action) {
+	const amountSign = document.getElementById(`inventory-record-${action}-amount-sign`).value
+	const unitCostInput = document.getElementById(`inventory-record-${action}-unit-cost`)
+	
+	if (amountSign === '+') {
+		unitCostInput.disabled = false
+	} else {
+		unitCostInput.disabled = true
+	}
+	
+	unitCostInput.value = ''
 }
 
 function imCheckInventoryRecordInputs(action) {
@@ -397,7 +413,7 @@ function imCheckInventoryRecordInputs(action) {
 		itemManufacturer,
 		itemUnit,
 		amount: amountSign + unsignedAmount,
-		date: formatDateTime(date)
+		date: formatDateTime(date),
 	}
 	
 	if (!itemName) {
@@ -413,7 +429,7 @@ function imCheckInventoryRecordInputs(action) {
 	}
 	
 	if (isNaN(unsignedAmount)) {
-		return [ 'Invalid amount.' ]
+		return [ 'Invalid quantity/amount.' ]
 	}
 	
 	if (unsignedAmount == 0) {
@@ -422,6 +438,34 @@ function imCheckInventoryRecordInputs(action) {
 	
 	if (unsignedAmount < 0) {
 		return [ 'The amount cannot be negative. Please use the sign selector.' ]
+	}
+	
+	if (!unsignedAmount) {
+		return [ 'The amount is required.' ]
+	}
+	
+	if (
+		amountSign === '+'
+	) {
+		const unitCost = document.getElementById(`inventory-record-${action}-unit-cost`).value
+		
+		inputValues.unitCost = unitCost
+	
+		if (isNaN(unitCost)) {
+			return [ 'Invalid cost per unit.' ]
+		}
+		
+		if (unitCost == 0) {
+			return [ 'The cost per unit cannot be zero (0).' ]
+		}
+		
+		if (unitCost < 0) {
+			return [ 'The cost per unit cannot be negative.' ]
+		}
+		
+		if (!unitCost) {
+			return [ 'The cost per unit is required.' ]
+		}
 	}
 	
 	return [ undefined, inputValues ]
@@ -720,6 +764,7 @@ function imViewItemRecords() {
 			id: 'ID',
 			coloredAmount: 'Amount',
 			itemUnit: 'Unit',
+			unitCost: 'Cost per Unit',
 			recordingStaff: 'Recording Staff',
 			shortDate: 'Date Recorded'
 		},
@@ -783,6 +828,7 @@ async function imSubmitCreation() {
 		itemManufacturer,
 		itemUnit,
 		amount,
+		unitCost,
 		date
 	} = inputValues
 	
@@ -798,6 +844,7 @@ async function imSubmitCreation() {
 			itemManufacturer,
 			itemUnit,
 			amount,
+			unitCost,
 			date
 		})
 	);
@@ -873,6 +920,7 @@ async function imCheckID() {
 	itemManufacturerInput = document.getElementById('inventory-record-edit-item-manufacturer')
 	itemUnitInput = document.getElementById('inventory-record-edit-item-unit')
 	amountSignInput = document.getElementById('inventory-record-edit-amount-sign')
+	unitCostInput = document.getElementById('inventory-record-edit-unit-cost')
 	unsignedAmountInput = document.getElementById('inventory-record-edit-amount')
 	dateInput = document.getElementById('inventory-record-edit-date')
 	
@@ -881,6 +929,8 @@ async function imCheckID() {
 	itemManufacturerInput.value = inventoryRecord.itemManufacturer
 	itemUnitInput.value = inventoryRecord.itemUnit
 	amountSignInput.value = inventoryRecord.amount < 0 ? '-' : '+'
+	unitCostInput.disabled = inventoryRecord.amount < 0
+	unitCostInput.value = inventoryRecord.amount < 0 ? '' : inventoryRecord.unitCost
 	unsignedAmountInput.value = Math.abs(inventoryRecord.amount)
 	dateInput.value = toLocalDateTime(new Date(inventoryRecord.date))
 	
@@ -902,6 +952,7 @@ async function imSubmitEdit() {
 		itemManufacturer,
 		itemUnit,
 		amount,
+		unitCost,
 		date
 	} = inputValues
 	
@@ -918,6 +969,7 @@ async function imSubmitEdit() {
 			itemManufacturer,
 			itemUnit,
 			amount,
+			unitCost,
 			date
 		})
 	);
