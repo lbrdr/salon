@@ -31,8 +31,14 @@ function hOpenUserManual(defaultSection) {
 	
 	var maxLevel = 0
 	var itemI = 0
+	
+	var firstSection
 
 	for (const section in userManualSections) {
+		if (userManualSections[section].html && !firstSection) {
+			firstSection = section
+		}
+		
 		const level = userManualSections[section].level
 		if (level > maxLevel) {
 			maxLevel = level
@@ -76,11 +82,27 @@ function hOpenUserManual(defaultSection) {
 	
 	if (defaultSection) {
 		hSetUserManualSection(defaultSection)
+	} else {
+		hSetUserManualSection(firstSection)
 	}
 }
 
 function hSetUserManualSection(section) {
-	const sectionData = userManualSections[section]
+	console.log(section)
+	
+	var sectionData = userManualSections[section]
+	if (!sectionData) {
+		const regex = new RegExp(section, 'i')
+		for (const eachSection in userManualSections) {
+			if (regex.test(eachSection)) {
+				sectionData = userManualSections[eachSection]
+				if (sectionData.html) {
+					break
+				}
+			}
+		}
+	}
+	
 	if (sectionData && sectionData.html) {
 		document.getElementById('user-manual-content').innerHTML = sectionData.html
 		

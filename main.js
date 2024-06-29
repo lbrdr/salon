@@ -2,7 +2,7 @@ const readline = require('readline')
 const path = require('path')
 const { app, BrowserWindow, Menu } = require('electron')
 
-const isDev = process.env.NODE_ENV !== 'production'
+const isDev = false
 const isMac = process.platform === 'darwin'
 
 const database = require('./database.js')
@@ -28,6 +28,8 @@ function createMainWindow() {
 			backgroundThrottling: false,
 		},
 	})
+	
+	mainWindow.setResizable(false);
 	
 	// Open devtools if in dev env
 	if (isDev) {

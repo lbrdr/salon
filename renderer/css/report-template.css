@@ -14,7 +14,7 @@ td, th {
 	padding: 0.5em;
 	border-style: solid;
 	border-width: 1px;
-	word-break: break-word;
+	word-break: normal;
 }
 
 .number-td {

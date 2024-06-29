@@ -304,14 +304,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Registered user: ' +
-			JSON.stringify({
-				id: userID,
-				username,
-				userType,
-				fullName,
-				disabled: disabled ? 1 : null
-			})
+			'Registered user ' + userID
 		)
 		
 		res.statusCode = 200
@@ -377,14 +370,7 @@ const actions = {
 		
 		database.createUserAction(
 			user.id,
-			'Edited user: ' +
-			JSON.stringify({
-				id: userID,
-				username,
-				userType,
-				fullName,
-				disabled: disabled ? 1 : null
-			})
+			'Edited user ' + userID
 		)
 		
 		res.statusCode = 200

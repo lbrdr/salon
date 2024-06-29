@@ -1,7 +1,7 @@
 .icon {
 	min-width: 1.2em;
 	min-height: 1.2em;
-	margin: 0 0.5em;
+	margin: 0 0.75em;
 	vertical-align: bottom;
 	
 	display: inline-block;
@@ -24,51 +24,89 @@
 
 
 .logo-icon {
-	background-image: url('../images/logo.png');
+	background-image: url('../images/icons/logo.png');
 }
 
 .check-icon {
-	background-image: url('../images/check.png');
+	background-image: url('../images/icons/check.png');
 }
 
 .add-icon {
-	background-image: url('../images/add.png');
+	background-image: url('../images/icons/add.png');
 }
 
 .remove-icon {
-	background-image: url('../images/remove.png');
+	background-image: url('../images/icons/remove.png');
 }
 
 .edit-icon {
-	background-image: url('../images/edit.png');
+	background-image: url('../images/icons/edit.png');
 }
 
 .edit-maintenance-icon {
-	background-image: url('../images/edit-maintenance.png');
+	background-image: url('../images/icons/edit-maintenance.png');
 }
 
 .save-icon {
-	background-image: url('../images/save.png');
+	background-image: url('../images/icons/save.png');
 }
 
 .search-icon {
-	background-image: url('../images/search.png');
+	background-image: url('../images/icons/search.png');
 }
 
 .success-icon {
-	background-image: url('../images/success.png');
+	background-image: url('../images/icons/success.png');
 }
 
 .error-icon {
-	background-image: url('../images/error.png');
+	background-image: url('../images/icons/error.png');
 }
 
 .failed-icon {
-	background-image: url('../images/error.png');
+	background-image: url('../images/icons/error.png');
 }
 
 .warning-icon {
-	background-image: url('../images/warning.png');
+	background-image: url('../images/icons/warning.png');
+}
+
+
+
+.customer-management-page-icon {
+	background-image: url('../images/page-icons/customer-management.png');
+}
+
+.point-of-sales-page-icon {
+	background-image: url('../images/page-icons/point-of-sales.png');
+}
+
+.inventory-management-page-icon {
+	background-image: url('../images/page-icons/inventory-management.png');
+}
+
+.user-management-page-icon {
+	background-image: url('../images/page-icons/user-management.png');
+}
+
+.report-page-icon {
+	background-image: url('../images/page-icons/report.png');
+}
+
+.backup-and-restore-page-icon {
+	background-image: url('../images/page-icons/backup-and-restore.png');
+}
+
+.help-page-icon {
+	background-image: url('../images/page-icons/help.png');
+}
+
+.about-page-icon {
+	background-image: url('../images/page-icons/about.png');
+}
+
+.logout-icon {
+	background-image: url('../images/page-icons/logout.png');
 }
 
 
@@ -78,113 +116,123 @@
 
 
 .forgot-password-icon {
-	background-image: url('../images/forgot-password.png');
+	background-image: url('../images/icons/forgot-password.png');
 }
 
 .username-icon {
-	background-image: url('../images/username.png');
+	background-image: url('../images/icons/username.png');
 	filter: brightness(0.2);
 }
 
 .security-question-icon {
-	background-image: url('../images/security-question.png');
+	background-image: url('../images/icons/security-question.png');
 	filter: brightness(0.2);
 }
 
 .password-icon {
-	background-image: url('../images/password.png');
+	background-image: url('../images/icons/password.png');
 	filter: brightness(0.2);
 }
 
 
 
 .customer-registration-icon {
-	background-image: url('../images/customer-registration.png');
+	background-image: url('../images/icons/customer-registration.png');
 }
 
 .customer-edit-icon {
-	background-image: url('../images/customer-edit.png');
+	background-image: url('../images/icons/customer-edit.png');
 }
 
 .customer-search-icon {
-	background-image: url('../images/customer-search.png');
+	background-image: url('../images/icons/customer-search.png');
 }
 
 .customer-services-icon {
-	background-image: url('../images/customer-services.png');
+	background-image: url('../images/icons/customer-services.png');
 }
 
 
 
 .sales-record-creation-icon {
-	background-image: url('../images/sales-record.png');
+	background-image: url('../images/icons/sales-record.png');
 }
 
 .sales-record-edit-icon {
-	background-image: url('../images/sales-record.png');
+	background-image: url('../images/icons/sales-record.png');
 }
 
 .sales-record-services-icon {
-	background-image: url('../images/sales-record.png');
+	background-image: url('../images/icons/sales-record.png');
 }
 
 
 
 .edit-services-icon {
-	background-image: url('../images/edit-services.png')
+	background-image: url('../images/icons/edit-maintenance.png')
 }
 
 .services-edit-icon {
-	background-image: url('../images/service.png')
+	background-image: url('../images/icons/service.png')
 }
 
 
 
 .inventory-record-creation-icon {
-	background-image: url('../images/inventory-record.png');
+	background-image: url('../images/icons/inventory-record.png');
 }
 
 .inventory-record-edit-icon {
-	background-image: url('../images/inventory-record.png');
+	background-image: url('../images/icons/inventory-record.png');
 }
 
 .inventory-stock-changes-icon {
-	background-image: url('../images/inventory-item.png');
+	background-image: url('../images/icons/inventory-item.png');
 }
 
 .inventory-item-records-icon {
-	background-image: url('../images/inventory-item.png');
+	background-image: url('../images/icons/inventory-item.png');
 }
 
 
 
 .user-registration-icon {
-	background-image: url('../images/user.png');
+	background-image: url('../images/icons/user.png');
 }
 
 .user-edit-icon {
-	background-image: url('../images/user.png');
+	background-image: url('../images/icons/user.png');
+}
+
+
+
+.backup-icon {
+	background-image: url('../images/icons/backup.png');
+}
+
+.restore-icon {
+	background-image: url('../images/icons/restore.png');
 }
 
 
 
 .user-manual-icon {
-	background-image: url('../images/user-manual.png');
+	background-image: url('../images/icons/user-manual.png');
 }
 
 .faq-icon {
-	background-image: url('../images/faq.png');
+	background-image: url('../images/icons/faq.png');
 }
 
 
 
 .arrow-right-icon {
-	background-image: url('../images/arrow-right.png');
+	background-image: url('../images/icons/arrow-right.png');
 	filter: brightness(0.2);
 }
 
 
 
 .generate-report-icon {
-	background-image: url('../images/generate-report.png');
+	background-image: url('../images/icons/generate-report.png');
 }

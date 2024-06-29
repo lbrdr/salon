@@ -116,7 +116,14 @@ const actions = {
 			expenses
 		} = reportParameters
 		
-		const metrics = database.getSalesMetrics(startDate, endDate, expenses)
+		if (isNaN(expenses)) {
+			res.statusCode = 204
+			res.statusMessage = 'Invalid total expenses.'
+			res.end()
+			return
+		}
+		
+		const metrics = database.getSalesMetrics(startDate, endDate, Number(expenses))
 		
 		const {
 			summary,
@@ -178,7 +185,8 @@ const actions = {
 		
 		const {
 			inventoryItems,
-			inventoryRecords
+			inventoryRecords,
+			totalRestockCost
 		} = metrics
 		
 		const report = {
@@ -204,9 +212,11 @@ const actions = {
 					itemManufacturer: record.item_manufacturer,
 					itemUnit: record.item_unit,
 					amount: record.amount,
+					unitCost: record.unit_cost,
 					date: record.date,
 				})
-			)
+			),
+			totalRestockCost
 		}
 		
 		updateToken(token)

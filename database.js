@@ -2,6 +2,58 @@ const path = require('path')
 const fs = require('fs')
 const sqlite3 = require('better-sqlite3')
 
+const createSampleData = require('./database-sample-generator.js')
+
+const database = {
+	initialize,
+	createUser,
+	setUser,
+	getUsers,
+	getUserByID,
+	getUserByUsername,
+	createSecurityQuestion,
+	setSecurityQuestion,
+	getSecurityQuestionsByUserID,
+	getEmptySecurityQuestions,
+	setUserPassword,
+	createCustomer,
+	getCustomers,
+	getCustomerByID,
+	getCustomerByFullName,
+	getSalesRecordsByCustomerID,
+	getOfferedServicesBySalesRecordID,
+	getServices,
+	getServiceByID,
+	getOfferedServiceByID,
+	getCustomersBySearch,
+	createService,
+	createSalesRecord,
+	updateSalesRecord,
+	createOfferedService,
+	getOfferedServicesByCustomerID,
+	createUserAction,
+	setCustomer,
+	getSalesRecords,
+	getUserActions,
+	getSalesRecordByID,
+	setSalesRecord,
+	voidOfferedServicesBySalesRecordID,
+	getInventoryItem,
+	getInventoryItems,
+	getInventoryRecordByID,
+	getInventoryRecords,
+	getInventoryRecordsByItem,
+	createInventoryRecord,
+	setInventoryRecord,
+	getCustomerMetrics,
+	getSalesMetrics,
+	getInventoryMetrics,
+	getUserLogs,
+	setService,
+	backupData,
+	restoreData
+}
+
 function formatDate(date, modifier) {
 	date = date ?
 		new Date(date + ' ') :
@@ -39,15 +91,17 @@ var db
 var newDb
 try {
 	fs.accessSync(dbPath, fs.constants.F_OK)
+	db = sqlite3(dbPath, options)
 } catch (err) {
 	fs.writeFileSync(dbPath, '')
+	db = sqlite3(dbPath, options)
 	newDb = true
 }
 
-db = sqlite3(dbPath, options)
 initialize(db)
 if (newDb) {
-	createSampleData(db)
+	createUser('admin', 'default123', 'admin', 'Default Admin Account')
+	createSampleData(database)
 }
 
 
@@ -151,214 +205,6 @@ function initialize(db) {
 			FOREIGN KEY(item_name, item_manufacturer, item_unit) REFERENCES inventory_item(name, manufacturer, unit)
 		)`
 	).run();
-	
-}
-
-function createSampleData(db) {
-	
-	createUser('tmvelasquez', 'velasquez123', 'admin', 'Trisha Mae Velasquez')
-	createUser('crpoblacion', 'lab123', 'staff', 'Carlo Raniel Poblacion')
-	createUser('jcdomingo', 'domingo123', 'staff', 'Jeremy Charles Domingo')
-	
-	createSecurityQuestion(
-		1,
-		'Where did you go on your favorite vacation as a child?',
-		'Pasig River'
-	)
-	createSecurityQuestion(
-		2,
-		'What is the radius of a circle that circumscribes your favorite right triangle?',
-		'5cm'
-	)
-	createSecurityQuestion(
-		3,
-		'Who is your first love?',
-		'Raihzza'
-	)
-	
-	function randomNo() {
-		return '09' + Math.floor(999999999 * Math.random()).toString().padStart(9, '0')
-	}
-	
-	createCustomer(null, 'Kristan Jay Sebastian', randomNo())
-	createCustomer(2, 'Marx Dela Cruz', randomNo())
-	createCustomer(2, 'Deinielle Anjhelo Santiago', randomNo())
-	createCustomer(1, 'Lui Andrei Reyes', randomNo())
-	createCustomer(1, 'Bianca Louise Del Mundo', randomNo())
-	createCustomer(3, 'Dingdong Dantes', randomNo())
-	createCustomer(3, 'Piolo Pascual', randomNo())
-	createCustomer(3, 'Paulo Avelino', randomNo())
-	createCustomer(3, 'Richard Gutierrez', randomNo())
-	createCustomer(3, 'Dennis Trillo', randomNo())
-	createCustomer(3, 'Jericho Rosales', randomNo())
-	createCustomer(2, 'Marian Rivera', randomNo())
-	createCustomer(2, 'Andrea Brillantes', randomNo())
-	createCustomer(2, 'Anne Curtis', randomNo())
-	createCustomer(2, 'Angel Locsin', randomNo())
-	createCustomer(2, 'Nadine Lustre', randomNo())
-	createCustomer(2, 'Katrine Bernardo', randomNo())
-	
-	createService('Haircut / Shampoo', 200)
-	createService('Blow Dry / Ironing', 500)
-	createService('Hair Oil / Hair Spa', 800)
-	createService('Hair Perming', 500)
-	createService('Hair & Make-up', 400)
-	createService('Hair Dye / Highlights / Cellophane & Make-up', 800)
-	createService('Hair Relax / Rebond / Straightening', 700)
-	createService('Facial / Diamond Peel', 800)
-	createService('Wart Removal', 1500)
-	createService('Eyebrow Shave / Threading', 1000)
-	createService('Eyelash Perm / Extension', 2000)
-	createService('Body Scrub / Body Massage', 750)
-	createService('Xiamen Foot Massage', 500)
-	createService('Hand & Foot Spa / Manicure & Pedicure', 600)
-	createService('Hand & Foot Paraffin', 2000)
-	createService('Waxing - Armpit / Legs', 500)
-	createService('Goods', 0)
-	
-	{
-		const salesRecordID = createSalesRecord(2, 12, 400).lastInsertRowid
-		createOfferedService(salesRecordID, 5, 400)
-	}
-	{
-		const salesRecordID = createSalesRecord(2, 14, 400).lastInsertRowid
-		createOfferedService(salesRecordID, 5, 400)
-	}
-	{
-		const salesRecordID = createSalesRecord(2, 16, 2000).lastInsertRowid
-		createOfferedService(salesRecordID, 12, 750)
-		createOfferedService(salesRecordID, 14, 600)
-		createOfferedService(salesRecordID, 16, 500)
-	}
-	{
-		const salesRecordID = createSalesRecord(2, 15, 400).lastInsertRowid
-		createOfferedService(salesRecordID, 5, 400)
-	}
-	{
-		const salesRecordID = createSalesRecord(1, null, 1500).lastInsertRowid
-		createOfferedService(salesRecordID, 2, 1500)
-	}
-	{
-		const salesRecordID = createSalesRecord(1, null, 1500).lastInsertRowid
-		createOfferedService(salesRecordID, 2, 1500)
-	}
-	{
-		const salesRecordID = createSalesRecord(1, null, 1500).lastInsertRowid
-		createOfferedService(salesRecordID, 2, 1500)
-	}
-	{
-		const salesRecordID = createSalesRecord(2, null, 1000).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 300)
-	}
-	{
-		const salesRecordID = createSalesRecord(2, 2, 1500).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 200)
-		createOfferedService(salesRecordID, 3, 1000)
-	}
-	{
-		const salesRecordID = createSalesRecord(3, 7, 3000).lastInsertRowid
-		createOfferedService(salesRecordID, 2, 1500)
-		createOfferedService(salesRecordID, 3, 1200)
-	}
-	{
-		const salesRecordID = createSalesRecord(3, 7, 500).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 200)
-	}
-	{
-		const salesRecordID = createSalesRecord(3, 11, 200).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 200)
-	}
-	{
-		const salesRecordID = createSalesRecord(3, 10, 1200).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 200)
-		createOfferedService(salesRecordID, 2, 1000)
-	}
-	{
-		const salesRecordID = createSalesRecord(3, 8, 200).lastInsertRowid
-		createOfferedService(salesRecordID, 1, 200)
-	}
-	
-	createInventoryRecord(
-		1,
-		'Hair Dye',
-		'GLAMWORKS',
-		'box/es',
-		3,
-		500
-	)
-	
-	createInventoryRecord(
-		3,
-		'Hair Dye',
-		'GLAMWORKS',
-		'box/es',
-		-1,
-		undefined
-	)
-	
-	createInventoryRecord(
-		2,
-		'Hair Dye',
-		'GLAMWORKS',
-		'box/es',
-		-1,
-		undefined
-	)
-	
-	createInventoryRecord(
-		1,
-		'Hair Dye',
-		'GLAMWORKS',
-		'box/es',
-		-1,
-		undefined
-	)
-	
-	createInventoryRecord(
-		1,
-		'Shampoo',
-		'Smooth and Manageable',
-		'500ml bottle/s',
-		15,
-		1000
-	)
-	
-	createInventoryRecord(
-		1,
-		'Shampoo',
-		'Smooth and Manageable',
-		'500ml bottle/s',
-		-1,
-		undefined
-	)
-	
-	createInventoryRecord(
-		2,
-		'Shampoo',
-		'Smooth and Manageable',
-		'500ml bottle/s',
-		-1,
-		undefined
-	)
-	
-	createInventoryRecord(
-		2,
-		'sabon',
-		'seypgard',
-		'box/es',
-		-1,
-		undefined
-	)
-	
-	setInventoryRecord(
-		8,
-		2,
-		'Soap',
-		'Safeguard',
-		'box/es',
-		1,
-		125
-	)
 	
 }
 
@@ -1193,13 +1039,10 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 				FROM customer
 				LEFT OUTER JOIN sales_record
 					ON customer.id=sales_record.customer_id
+					${filter('AND', 'sales_record.date')}
 				LEFT OUTER JOIN offered_service
 					ON sales_record.id=offered_service.sales_record_id
-				WHERE (
-					sales_record.date IS NULL
-					${filter('OR', 'sales_record.date')}
-				)
-				${filter('AND', 'customer.date_registered')}
+				${filter('WHERE', 'customer.date_registered')}
 				`
 			).get(...dateValues, ...dateValues)
 			
@@ -1217,13 +1060,10 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 				ON customer.preferred_staff_id=user.id
 			LEFT OUTER JOIN sales_record
 				ON customer.id=sales_record.customer_id
+				${filter('AND', 'sales_record.date')} 
 			LEFT OUTER JOIN offered_service
 				ON sales_record.id=offered_service.sales_record_id
-			WHERE (
-				sales_record.date IS NULL
-				${filter('OR', 'sales_record.date')}
-			)
-			${filter('AND', 'customer.date_registered')}
+			${filter('WHERE', 'customer.date_registered')}
 			GROUP BY customer.id
 			`
 		).all(...dateValues, ...dateValues)
@@ -1243,7 +1083,7 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 				FROM customer
 				INNER JOIN sales_record
 					ON customer.id=sales_record.customer_id
-				INNER JOIN offered_service
+				LEFT OUTER JOIN offered_service
 					ON sales_record.id=offered_service.sales_record_id
 				WHERE customer.date_registered<?
 				${filter('AND', 'sales_record.date')}
@@ -1256,11 +1096,12 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 					COUNT (*) as customers
 				FROM customer
 				WHERE customer.date_registered<?
-				AND customer.id NOT IN
+				AND NOT EXISTS
 					(
 						SELECT DISTINCT customer_id
 						FROM sales_record
-						${filter('WHERE', 'sales_record.date')}
+						WHERE customer_id=customer.id
+						${filter('AND', 'date')}
 					)
 				`
 			).get(startDate, ...dateValues)
@@ -1279,7 +1120,7 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 				ON customer.preferred_staff_id=user.id
 			INNER JOIN sales_record
 				ON customer.id=sales_record.customer_id
-			INNER JOIN offered_service
+			LEFT OUTER JOIN offered_service
 				ON sales_record.id=offered_service.sales_record_id
 			WHERE customer.date_registered<?
 			${filter('AND', 'sales_record.date')}
@@ -1299,22 +1140,20 @@ function getCustomerMetrics(startDate, endDate, customerType) {
 				ON customer.preferred_staff_id=user.id
 			LEFT OUTER JOIN sales_record
 				ON customer.id=sales_record.customer_id
+				AND sales_record.date<?
 			LEFT OUTER JOIN offered_service
 				ON sales_record.id=offered_service.sales_record_id
 			WHERE customer.date_registered<?
-			AND customer.id NOT IN
+			AND NOT EXISTS
 				(
 					SELECT DISTINCT customer_id
 					FROM sales_record
-					${filter('WHERE', 'sales_record.date')}
+					WHERE customer_id=customer.id
+					${filter('AND', 'date')}
 				)
-			AND (
-				sales_record.date IS NULL
-				OR sales_record.date<?
-			)
 			GROUP BY customer.id
 			`
-		).all(startDate, ...dateValues, startDate)
+		).all(startDate, startDate, ...dateValues)
 		
 	}
 	
@@ -1396,6 +1235,13 @@ function getInventoryMetrics(startDate, endDate) {
 		return ' ' + clause + ' ' + conditions.join(' AND ')
 	}
 	
+	const totalRestockCost = db.prepare(
+		`SELECT SUM(unit_cost*amount) as total_restock_cost
+		FROM inventory_record
+		${filter('WHERE', 'date')}
+		`
+	).get(...dateValues).total_restock_cost
+	
 	const inventoryItems = db.prepare(
 		`SELECT
 			item_name as name,
@@ -1403,10 +1249,9 @@ function getInventoryMetrics(startDate, endDate) {
 			item_unit as unit,
 			SUM(CASE WHEN date<? THEN amount ELSE 0 END) as start_stock,
 			SUM(CASE WHEN 1=1 ${filter('AND', 'date')} THEN amount ELSE 0 END) as stock_changes,
-			SUM(amount) as end_stock,
-			SUM(unit_cost) as total_restock_cost,
+			SUM(amount) as end_stock
 		FROM inventory_record
-		WHERE (date<=? OR ?=0)
+		WHERE (?=0 OR date<=?)
 		GROUP BY
 			item_name,
 			item_manufacturer,
@@ -1418,13 +1263,13 @@ function getInventoryMetrics(startDate, endDate) {
 					(
 						SELECT name, manufacturer, unit
 						FROM inventory_record
-						WHERE ${filter('', 'date')}
+						${filter('WHERE', 'date')}
 					)
 			)
 		ORDER BY
 			MAX(date) DESC
 		`
-	).all(startDate, ...dateValues, endDate, endDate || 0, ...dateValues)
+	).all(startDate, ...dateValues, endDate || 0, endDate, ...dateValues)
 	
 	const inventoryRecords = db.prepare(
 		`SELECT
@@ -1437,7 +1282,7 @@ function getInventoryMetrics(startDate, endDate) {
 		`
 	).all(...dateValues)
 	
-	return { inventoryItems, inventoryRecords }
+	return { inventoryItems, inventoryRecords, totalRestockCost }
 }
 
 // Get user logs for user report
@@ -1633,52 +1478,4 @@ function restoreData(data) {
 }
 
 
-module.exports = {
-	initialize,
-	createUser,
-	setUser,
-	getUsers,
-	getUserByID,
-	getUserByUsername,
-	createSecurityQuestion,
-	setSecurityQuestion,
-	getSecurityQuestionsByUserID,
-	getEmptySecurityQuestions,
-	setUserPassword,
-	createCustomer,
-	getCustomers,
-	getCustomerByID,
-	getCustomerByFullName,
-	getSalesRecordsByCustomerID,
-	getOfferedServicesBySalesRecordID,
-	getServices,
-	getServiceByID,
-	getOfferedServiceByID,
-	getCustomersBySearch,
-	createService,
-	createSalesRecord,
-	updateSalesRecord,
-	createOfferedService,
-	getOfferedServicesByCustomerID,
-	createUserAction,
-	setCustomer,
-	getSalesRecords,
-	getUserActions,
-	getSalesRecordByID,
-	setSalesRecord,
-	voidOfferedServicesBySalesRecordID,
-	getInventoryItem,
-	getInventoryItems,
-	getInventoryRecordByID,
-	getInventoryRecords,
-	getInventoryRecordsByItem,
-	createInventoryRecord,
-	setInventoryRecord,
-	getCustomerMetrics,
-	getSalesMetrics,
-	getInventoryMetrics,
-	getUserLogs,
-	setService,
-	backupData,
-	restoreData
-}
+module.exports = database

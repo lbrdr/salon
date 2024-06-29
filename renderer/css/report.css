@@ -8,6 +8,7 @@
 #report-top > .button5 {
 	margin: 0.5em 0.5em 0.5em 1.5em;
 	text-wrap: nowrap;
+    font-size: 1em;
 }
 
 #report-fields {

@@ -23,7 +23,9 @@
 	align-items: center;
 	justify-content: space-between;
 	
-    padding: 0.2em 1em;
+	font-size: 1.03em;
+	
+    padding: 0.5em 1em;
     border-radius: 2px;
 	
 	border-color: var(--on-background);
@@ -53,11 +55,16 @@
 }
 
 .page-button > .icon {
-	font-size: 1.5em;
+	font-size: 1.1em;
+}
+
+#page-selector.admin > .page-button {
+	font-size: 0.94em;
+    padding: 0.4em 1em;
 }
 
 #page-selector.admin > .page-button > .icon {
-	font-size: 1.2em;
+	font-size: 1.1em;
 }
 
 #system-time {

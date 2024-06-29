@@ -340,9 +340,6 @@ async function cmCustomerEdit(customer) {
 	
 	addSecondary('customer-edit')
 	
-	const dateInput = document.getElementById('customer-edit-date')
-	dateInput.value = new Date(customer.dateRegistered).toLocaleDateString('en-CA')
-	
 	const staffInput = document.getElementById('customer-edit-preferred-staff')
 	{
 		const option = document.createElement('option')
@@ -397,10 +394,12 @@ async function cmCheckID() {
 		const fullNameInput = document.getElementById('customer-edit-full-name')
 		const contactInput = document.getElementById('customer-edit-contact')
 		const staffInput = document.getElementById('customer-edit-preferred-staff')
+		const dateInput = document.getElementById('customer-edit-date')
 		
 		fullNameInput.value = customer.fullName
 		contactInput.value = customer.contact
 		staffInput.value = customer.preferredStaffID
+		dateInput.value = new Date(customer.dateRegistered).toLocaleDateString('en-CA')
 		
 		return
 	}
@@ -525,6 +524,7 @@ async function cmViewServices(customer) {
 		createTable(
 			tableDiv,
 			{
+				salesRecordID: 'Sales Record ID',
 				servicingStaff: 'Servicing Staff',
 				name: 'Service Name',
 				shortDate: 'Date Offered'

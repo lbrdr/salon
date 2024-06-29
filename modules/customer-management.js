@@ -258,6 +258,7 @@ const actions = {
 		const customerServices = database.getOfferedServicesByCustomerID(customerID).map(
 			(offeredService) => ({
 				servicingStaffID: offeredService.servicing_staff_id,
+				salesRecordID: offeredService.sales_record_id,
 				name: offeredService.name,
 				date: offeredService.date
 			})

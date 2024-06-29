@@ -17,21 +17,6 @@
 	user-select: none;
 }
 
-.button:not(:disabled):not(.disabled):hover {
-	background-color: var(--accent-hover);
-	color: var(--on-accent-hover);
-	border-color: var(--accent-hover);
-	border-style: outset;
-}
-
-.button:not(:disabled):not(.disabled):active {
-	background-color: var(--accent-active);
-	color: var(--on-accent-active);
-	border-color: var(--accent-active);
-	border-style: inset;
-	outline-style: dotted;
-}
-
 
 .button2 {
 	padding: calc(0.5em - 1px) calc(1.7em - 1px);
@@ -226,6 +211,87 @@
 	border-width: 1px;
 	border-style: inset;
 	
+	outline-style: dotted;
+}
+
+.help-shortcut-button,
+.help-shortcut-button2
+{
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	vertical-align: top;
+	
+	font-size: 1rem;
+	font-weight: bold;
+	
+    margin: 0 0.5em;
+	height: 1.5em;
+	width: 1.5em;
+	border-radius: 50%;
+	
+	background-color: var(--accent);
+	color: var(--on-accent);
+	
+	border-color: var(--accent);
+	border-width: 1px;
+	border-style: outset;
+	
+	outline-color: var(--on-background);
+	outline-width: 1px;
+	
+	cursor: pointer;
+	user-select: none;
+}
+
+.help-shortcut-button:after,
+.help-shortcut-button2:after
+{
+	content: '?'
+}
+
+.help-shortcut-button {
+	background-color: var(--accent);
+	color: var(--on-accent);
+	
+	border-color: var(--accent);
+}
+
+.help-shortcut-button:hover {
+	background-color: var(--accent-hover);
+	color: var(--on-accent-hover);
+	border-color: var(--accent-hover);
+	border-style: outset;
+}
+
+.help-shortcut-button:active {
+	background-color: var(--accent-active);
+	color: var(--on-accent-active);
+	border-color: var(--accent-active);
+	border-style: inset;
+	outline-style: dotted;
+}
+
+.help-shortcut-button2 {
+	background-color: var(--on-accent);
+	color: var(--accent);
+	
+	border-color: var(--on-accent);
+}
+
+.help-shortcut-button2:hover {
+	background-color: var(--on-accent-hover);
+	color: var(--accent-hover);
+	border-color: var(--on-accent-hover);
+	border-style: outset;
+}
+
+.help-shortcut-button2:active {
+	background-color: var(--on-accent-active);
+	color: var(--accent-active);
+	border-color: var(--on-accent-active);
+	border-style: inset;
 	outline-style: dotted;
 }
 

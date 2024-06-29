@@ -109,7 +109,7 @@ async function rSetupTempInputs() {
 			const input = document.createElement('input')
 			input.type = 'number'
 			input.id = 'report-expenses'
-			input.value = '0.00'
+			input.value = ''
 			input.onchange = () => {
 				input.value = Number(input.value).toFixed(2)
 			}
@@ -368,7 +368,7 @@ async function rGenerateSalesReport() {
 	
 	const startDate = document.getElementById('report-start-date').value
 	const endDate = document.getElementById('report-end-date').value
-	const expenses = Number(document.getElementById('report-expenses').value)
+	const expenses = document.getElementById('report-expenses').value
 	
 	const reportRequest = await queryRequest(
 		'POST',
@@ -388,6 +388,11 @@ async function rGenerateSalesReport() {
 		if (tokenError) { return tokenError; }
 		const permissionError = checkPermission(reportRequest)
 		if (permissionError) { return permissionError; }
+	}
+	
+	if (reportRequest.status === 204) {
+		createMessageDialogue('error', 'Report Generation Failed', request.statusText)
+		return
 	}
 	
 	report = JSON.parse(reportRequest.responseText)
@@ -485,7 +490,8 @@ async function rGenerateInventoryReport() {
 	
 	const {
 		inventoryItems,
-		inventoryRecords
+		inventoryRecords,
+		totalRestockCost
 	} = report
 	
 	const frameDocument = rFrame.contentDocument
@@ -507,6 +513,7 @@ async function rGenerateInventoryReport() {
 	
 	for (const record of inventoryRecords) {
 		record.shortDate = rFormatDate(record.date)
+		record.formattedUnitCost = record.unitCost?.toFixed(2)
 	}
 	
 	createTable(
@@ -533,7 +540,7 @@ async function rGenerateInventoryReport() {
 			itemManufacturer: 'Item Manufacturer',
 			amount: 'Quantity/Amount',
 			itemUnit: 'Unit',
-			unitCost: 'Cost Per Unit',
+			formattedUnitCost: 'Cost Per Unit',
 			recordingStaff: 'Recording Staff',
 			shortDate: 'Date Recorded'
 		},
@@ -542,6 +549,8 @@ async function rGenerateInventoryReport() {
 			minRows: 1
 		}
 	)
+	
+	frameDocument.getElementById('total-restock-cost').innerText = totalRestockCost.toFixed(2)
 	
 }
 

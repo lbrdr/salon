@@ -125,6 +125,8 @@ async function imGetInventoryRecordData() {
 			
 			record.coloredAmount = createColoredSpan(record.amount)
 			
+			record.formattedUnitCost = record.unitCost?.toFixed(2)
+			
 			const recordingStaff = imStaffData.find(
 				(staff) => staff.id == record.recordingStaffID
 			)
@@ -213,7 +215,7 @@ async function imSetupInventoryItemTable() {
 		},
 		inventoryItems,
 		{
-			itemsPerPage: userIsAdmin ? 6 : 8,
+			itemsPerPage: userIsAdmin ? 5 : 7,
 		}
 	)
 	
@@ -281,7 +283,7 @@ async function imSetupInventoryRecordTable() {
 			itemManufacturer: 'Item Manufacturer',
 			coloredAmount: 'Amount',
 			itemUnit: 'Unit',
-			unitCost: 'Cost per Unit',
+			formattedUnitCost: 'Cost per Unit',
 			recordingStaff: 'Recording Staff',
 			shortDate: 'Date Recorded'
 		},
@@ -930,7 +932,7 @@ async function imCheckID() {
 	itemUnitInput.value = inventoryRecord.itemUnit
 	amountSignInput.value = inventoryRecord.amount < 0 ? '-' : '+'
 	unitCostInput.disabled = inventoryRecord.amount < 0
-	unitCostInput.value = inventoryRecord.amount < 0 ? '' : inventoryRecord.unitCost
+	unitCostInput.value = inventoryRecord.amount < 0 ? '' : inventoryRecord.unitCost?.toFixed(2)
 	unsignedAmountInput.value = Math.abs(inventoryRecord.amount)
 	dateInput.value = toLocalDateTime(new Date(inventoryRecord.date))
 	
