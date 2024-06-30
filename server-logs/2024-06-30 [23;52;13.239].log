@@ -1,0 +1,363 @@
+2024-06-30 [23:52:26.788] [0] Request recieved: ::1:56390
+2024-06-30 [23:52:26.790] [0] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56390
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "52",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "login",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-30 [23:52:26.790] [0] Task started: login
+2024-06-30 [23:52:26.794] [0] Request ended
+2024-06-30 [23:52:26.796] [0] Request closed
+2024-06-30 [23:52:26.816] [0] Task done
+2024-06-30 [23:52:26.818] [0] Response closed
+2024-06-30 [23:52:26.826] [1] Request recieved: ::1:56390
+2024-06-30 [23:52:26.826] [1] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56390
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-staff-names",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "cd420921fde7a231026a4264e2ce063d4f94c22a54e1543005fae71c4ee288ac",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-30 [23:52:26.827] [1] Task started: customer-management-get-staff-names
+2024-06-30 [23:52:26.833] [1] Response closed
+2024-06-30 [23:52:26.833] [1] Request ended
+2024-06-30 [23:52:26.833] [1] Request closed
+2024-06-30 [23:52:26.834] [1] Task done
+2024-06-30 [23:52:26.904] [2] Request recieved: ::1:56390
+2024-06-30 [23:52:26.904] [2] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56390
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "cd420921fde7a231026a4264e2ce063d4f94c22a54e1543005fae71c4ee288ac",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-30 [23:52:26.904] [2] Task started: customer-management-get-customers
+2024-06-30 [23:52:26.908] [2] Response closed
+2024-06-30 [23:52:26.909] [2] Request ended
+2024-06-30 [23:52:26.909] [2] Request closed
+2024-06-30 [23:52:26.909] [2] Task done
+2024-07-01 [00:32:57.764] [3] Request recieved: ::1:56719
+2024-07-01 [00:32:57.769] [3] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56719
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "logout",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "cd420921fde7a231026a4264e2ce063d4f94c22a54e1543005fae71c4ee288ac",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:32:57.769] [3] Task started: logout
+2024-07-01 [00:32:57.789] [3] Response closed
+2024-07-01 [00:32:57.789] [3] Request ended
+2024-07-01 [00:32:57.790] [3] Request closed
+2024-07-01 [00:32:57.790] [3] Task done
+2024-07-01 [00:33:07.833] [4] Request recieved: ::1:56721
+2024-07-01 [00:33:07.834] [4] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56721
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "48",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "login",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:33:07.835] [4] Task started: login
+2024-07-01 [00:33:07.846] [4] Request ended
+2024-07-01 [00:33:07.846] [4] Request closed
+2024-07-01 [00:33:07.865] [4] Task done
+2024-07-01 [00:33:07.865] [4] Response closed
+2024-07-01 [00:33:07.873] [5] Request recieved: ::1:56721
+2024-07-01 [00:33:07.874] [5] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56721
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-staff-names",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "11bbe4f09ba74f30cf00b39a4ad3be18a2d85e6610b2ca3ad59c7cb9cc2498bb",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:33:07.874] [5] Task started: customer-management-get-staff-names
+2024-07-01 [00:33:07.878] [5] Response closed
+2024-07-01 [00:33:07.879] [5] Request ended
+2024-07-01 [00:33:07.879] [5] Request closed
+2024-07-01 [00:33:07.879] [5] Task done
+2024-07-01 [00:33:07.894] [6] Request recieved: ::1:56721
+2024-07-01 [00:33:07.894] [6] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56721
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "11bbe4f09ba74f30cf00b39a4ad3be18a2d85e6610b2ca3ad59c7cb9cc2498bb",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:33:07.894] [6] Task started: customer-management-get-customers
+2024-07-01 [00:33:07.897] [6] Response closed
+2024-07-01 [00:33:07.897] [6] Request ended
+2024-07-01 [00:33:07.898] [6] Request closed
+2024-07-01 [00:33:07.898] [6] Task done
+2024-07-01 [00:37:14.755] [7] Request recieved: ::1:56779
+2024-07-01 [00:37:14.755] [7] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56779
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "logout",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "11bbe4f09ba74f30cf00b39a4ad3be18a2d85e6610b2ca3ad59c7cb9cc2498bb",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:37:14.756] [7] Task started: logout
+2024-07-01 [00:37:14.774] [7] Response closed
+2024-07-01 [00:37:14.774] [7] Request ended
+2024-07-01 [00:37:14.775] [7] Request closed
+2024-07-01 [00:37:14.775] [7] Task done
+2024-07-01 [00:37:26.488] [8] Request recieved: ::1:56780
+2024-07-01 [00:37:26.489] [8] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56780
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "52",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "login",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:37:26.489] [8] Task started: login
+2024-07-01 [00:37:26.491] [8] Request ended
+2024-07-01 [00:37:26.491] [8] Request closed
+2024-07-01 [00:37:26.505] [8] Task done
+2024-07-01 [00:37:26.506] [8] Response closed
+2024-07-01 [00:37:26.512] [9] Request recieved: ::1:56780
+2024-07-01 [00:37:26.513] [9] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 56780
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-staff-names",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "2445c35bf08ee858d4c9c370d1457b8c11190e5c0749b1614115240c5e70de91",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-07-01 [00:37:26.513] [9] Task started: customer-management-get-staff-names
+2024-07-01 [00:37:26.516] [9] Response closed
+2024-07-01 [00:37:26.516] [9] Request ended
+2024-07-01 [00:37:26.517] [9] Request closed
+2024-07-01 [00:37:26.517] [9] Task done
+2024-07-01 [00:37:26.523] [10] Request recieved: ::1:56780
+2024-07-01 [00:37:26.524] [10] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 56780
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "0",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "customer-management-get-customers",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "2445c35bf08ee858d4c9c370d1457b8c11190e5c0749b1614115240c5e70de91",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-07-01 [00:37:26.524] [10] Task started: customer-management-get-customers
+2024-07-01 [00:37:26.527] [10] Response closed
+2024-07-01 [00:37:26.527] [10] Request ended
+2024-07-01 [00:37:26.527] [10] Request closed
+2024-07-01 [00:37:26.528] [10] Task done

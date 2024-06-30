@@ -1,0 +1,569 @@
+2024-06-21 [22:53:26.392] [0] Request recieved: ::1:64289
+2024-06-21 [22:53:26.394] [0] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64289
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "48",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "login",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [22:53:26.394] [0] Task started: login
+2024-06-21 [22:53:26.399] [0] Request ended
+2024-06-21 [22:53:26.401] [0] Request closed
+2024-06-21 [22:53:26.428] [0] Task done
+2024-06-21 [22:53:26.430] [0] Response closed
+2024-06-21 [22:53:26.446] [1] Request recieved: ::1:64289
+2024-06-21 [22:53:26.447] [1] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64289
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [22:53:26.447] [1] Task started: customer-management-get-customers
+2024-06-21 [22:53:26.454] [1] Response closed
+2024-06-21 [22:53:26.455] [1] Request ended
+2024-06-21 [22:53:26.455] [1] Request closed
+2024-06-21 [22:53:26.455] [1] Task done
+2024-06-21 [22:53:26.476] [2] Request recieved: ::1:64289
+2024-06-21 [22:53:26.477] [2] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64289
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-staff-names",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [22:53:26.477] [2] Task started: customer-management-get-staff-names
+2024-06-21 [22:53:26.481] [2] Response closed
+2024-06-21 [22:53:26.481] [2] Request ended
+2024-06-21 [22:53:26.482] [2] Request closed
+2024-06-21 [22:53:26.482] [2] Task done
+2024-06-21 [22:56:16.968] [3] Request recieved: ::1:64314
+2024-06-21 [22:56:16.970] [3] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64314
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "2",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customer-services",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [22:56:16.970] [3] Task started: customer-management-get-customer-services
+2024-06-21 [22:56:16.974] [3] Request ended
+2024-06-21 [22:56:16.974] [3] Request closed
+2024-06-21 [22:56:16.978] [3] Task done
+2024-06-21 [22:56:16.979] [3] Response closed
+2024-06-21 [22:56:20.973] [4] Request recieved: ::1:64314
+2024-06-21 [22:56:20.973] [4] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64314
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "2",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customer-services",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [22:56:20.973] [4] Task started: customer-management-get-customer-services
+2024-06-21 [22:56:20.976] [4] Request ended
+2024-06-21 [22:56:20.976] [4] Request closed
+2024-06-21 [22:56:20.979] [4] Task done
+2024-06-21 [22:56:20.980] [4] Response closed
+2024-06-21 [23:02:50.994] [5] Request recieved: ::1:64449
+2024-06-21 [23:02:50.995] [5] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64449
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "152",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers-by-search",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [23:02:50.995] [5] Task started: customer-management-get-customers-by-search
+2024-06-21 [23:02:50.998] [5] Request ended
+2024-06-21 [23:02:50.998] [5] Request closed
+2024-06-21 [23:02:51.019] [5] Task done
+2024-06-21 [23:02:51.020] [5] Response closed
+2024-06-21 [23:03:05.359] [6] Request recieved: ::1:64451
+2024-06-21 [23:03:05.360] [6] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64451
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "152",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers-by-search",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [23:03:05.360] [6] Task started: customer-management-get-customers-by-search
+2024-06-21 [23:03:05.362] [6] Request ended
+2024-06-21 [23:03:05.363] [6] Request closed
+2024-06-21 [23:03:05.392] [6] Task done
+2024-06-21 [23:03:05.392] [6] Response closed
+2024-06-21 [23:04:13.966] [7] Request recieved: ::1:64456
+2024-06-21 [23:04:13.967] [7] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64456
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "152",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "customer-management-get-customers-by-search",
+                                  "content-type": "text/plain;charset=UTF-8",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [23:04:13.967] [7] Task started: customer-management-get-customers-by-search
+2024-06-21 [23:04:13.969] [7] Request ended
+2024-06-21 [23:04:13.970] [7] Request closed
+2024-06-21 [23:04:13.985] [7] Task done
+2024-06-21 [23:04:13.986] [7] Response closed
+2024-06-21 [23:10:48.174] [8] Request recieved: ::1:64495
+2024-06-21 [23:10:48.175] [8] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64495
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "point-of-sales-get-sales-records",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [23:10:48.175] [8] Task started: point-of-sales-get-sales-records
+2024-06-21 [23:10:48.180] [8] Response closed
+2024-06-21 [23:10:48.180] [8] Request ended
+2024-06-21 [23:10:48.180] [8] Request closed
+2024-06-21 [23:10:48.181] [8] Task done
+2024-06-21 [23:10:48.189] [9] Request recieved: ::1:64495
+2024-06-21 [23:10:48.190] [9] Socket: {
+                                  "localAddress": "::1",
+                                  "localPort": 8080,
+                                  "localFamily": "IPv6",
+                                  "remoteAddress": "::1",
+                                  "remoteFamily": "IPv6",
+                                  "remotePort": 64495
+                              }
+                              Headers: {
+                                  "host": "localhost:8080",
+                                  "connection": "keep-alive",
+                                  "content-length": "0",
+                                  "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                  "action": "point-of-sales-get-customer-names",
+                                  "sec-ch-ua-mobile": "?0",
+                                  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                  "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                  "sec-ch-ua-platform": "\"Windows\"",
+                                  "accept": "*/*",
+                                  "sec-fetch-site": "cross-site",
+                                  "sec-fetch-mode": "cors",
+                                  "sec-fetch-dest": "empty",
+                                  "accept-encoding": "gzip, deflate, br",
+                                  "accept-language": "en-US"
+                              }
+                              Method: POST
+                              URL: /
+2024-06-21 [23:10:48.190] [9] Task started: point-of-sales-get-customer-names
+2024-06-21 [23:10:48.194] [9] Response closed
+2024-06-21 [23:10:48.194] [9] Request ended
+2024-06-21 [23:10:48.194] [9] Request closed
+2024-06-21 [23:10:48.195] [9] Task done
+2024-06-21 [23:10:48.203] [10] Request recieved: ::1:64495
+2024-06-21 [23:10:48.203] [10] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64495
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "0",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-staff-names",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:10:48.204] [10] Task started: point-of-sales-get-staff-names
+2024-06-21 [23:10:48.206] [10] Response closed
+2024-06-21 [23:10:48.206] [10] Request ended
+2024-06-21 [23:10:48.207] [10] Request closed
+2024-06-21 [23:10:48.207] [10] Task done
+2024-06-21 [23:10:48.213] [11] Request recieved: ::1:64495
+2024-06-21 [23:10:48.213] [11] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64495
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "0",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-services",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:10:48.214] [11] Task started: point-of-sales-get-services
+2024-06-21 [23:10:48.216] [11] Response closed
+2024-06-21 [23:10:48.217] [11] Request ended
+2024-06-21 [23:10:48.217] [11] Request closed
+2024-06-21 [23:10:48.217] [11] Task done
+2024-06-21 [23:11:16.100] [12] Request recieved: ::1:64501
+2024-06-21 [23:11:16.101] [12] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64501
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "2",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-offered-services-by-sales-record-id",
+                                   "content-type": "text/plain;charset=UTF-8",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:11:16.101] [12] Task started: point-of-sales-get-offered-services-by-sales-record-id
+2024-06-21 [23:11:16.104] [12] Request ended
+2024-06-21 [23:11:16.104] [12] Request closed
+2024-06-21 [23:11:16.106] [12] Task done
+2024-06-21 [23:11:16.107] [12] Response closed
+2024-06-21 [23:14:31.435] [13] Request recieved: ::1:64529
+2024-06-21 [23:14:31.435] [13] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64529
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "2",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-offered-services-by-sales-record-id",
+                                   "content-type": "text/plain;charset=UTF-8",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:14:31.436] [13] Task started: point-of-sales-get-offered-services-by-sales-record-id
+2024-06-21 [23:14:31.437] [13] Request ended
+2024-06-21 [23:14:31.438] [13] Request closed
+2024-06-21 [23:14:31.440] [13] Task done
+2024-06-21 [23:14:31.441] [13] Response closed
+2024-06-21 [23:17:33.040] [14] Request recieved: ::1:64563
+2024-06-21 [23:17:33.041] [14] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64563
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "1",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-offered-services-by-sales-record-id",
+                                   "content-type": "text/plain;charset=UTF-8",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:17:33.041] [14] Task started: point-of-sales-get-offered-services-by-sales-record-id
+2024-06-21 [23:17:33.044] [14] Request ended
+2024-06-21 [23:17:33.044] [14] Request closed
+2024-06-21 [23:17:33.046] [14] Task done
+2024-06-21 [23:17:33.046] [14] Response closed
+2024-06-21 [23:24:43.460] [15] Request recieved: ::1:64609
+2024-06-21 [23:24:43.460] [15] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64609
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "2",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "point-of-sales-get-offered-services-by-sales-record-id",
+                                   "content-type": "text/plain;charset=UTF-8",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:24:43.461] [15] Task started: point-of-sales-get-offered-services-by-sales-record-id
+2024-06-21 [23:24:43.463] [15] Request ended
+2024-06-21 [23:24:43.463] [15] Request closed
+2024-06-21 [23:24:43.465] [15] Task done
+2024-06-21 [23:24:43.465] [15] Response closed
+2024-06-21 [23:25:54.488] [16] Request recieved: ::1:64617
+2024-06-21 [23:25:54.489] [16] Socket: {
+                                   "localAddress": "::1",
+                                   "localPort": 8080,
+                                   "localFamily": "IPv6",
+                                   "remoteAddress": "::1",
+                                   "remoteFamily": "IPv6",
+                                   "remotePort": 64617
+                               }
+                               Headers: {
+                                   "host": "localhost:8080",
+                                   "connection": "keep-alive",
+                                   "content-length": "0",
+                                   "sec-ch-ua": "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+                                   "action": "inventory-management-get-inventory-records",
+                                   "sec-ch-ua-mobile": "?0",
+                                   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HairlinersSalon/1.0.0 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36",
+                                   "token": "54319ba809b8f1c17a988dd57d69e522e76fe3f964644a770f1de2e96bad9c12",
+                                   "sec-ch-ua-platform": "\"Windows\"",
+                                   "accept": "*/*",
+                                   "sec-fetch-site": "cross-site",
+                                   "sec-fetch-mode": "cors",
+                                   "sec-fetch-dest": "empty",
+                                   "accept-encoding": "gzip, deflate, br",
+                                   "accept-language": "en-US"
+                               }
+                               Method: POST
+                               URL: /
+2024-06-21 [23:25:54.489] [16] Unknown action
+2024-06-21 [23:25:54.490] [16] Response closed
+2024-06-21 [23:25:54.490] [16] Request ended
+2024-06-21 [23:25:54.490] [16] Request closed
