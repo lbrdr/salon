@@ -2,11 +2,12 @@ const readline = require('readline')
 const path = require('path')
 const { app, BrowserWindow, Menu } = require('electron')
 
-const isDev = process.env.NODE_ENV !== 'production'
+const isDev = false
 const isMac = process.platform === 'darwin'
 
 const database = require('./database.js')
 
+const clientOnly = false
 
 // Preprocess html files
 require('./html-preprocess.js')
@@ -14,8 +15,10 @@ require('./html-preprocess.js')
 // Preprocess user manual data
 require('./user-manual-preprocess.js')
 
-// Start server
-require('./server.js')
+if (!clientOnly) {
+	// Start server
+	require('./server.js')
+}
 
 
 

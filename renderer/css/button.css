@@ -17,6 +17,21 @@
 	user-select: none;
 }
 
+.button:not(:disabled):not(.disabled):hover {
+	background-color: var(--accent-hover);
+    color: var(--on-accent-hover);
+    border-color: var(--accent-hover);
+	border-style: outset;
+}
+
+.button:not(:disabled):not(.disabled):active {
+	background-color: var(--accent-active);
+    color: var(--on-accent-active);
+    border-color: var(--accent-active);
+	border-style: inset;
+	outline-style: dotted;
+}
+
 
 .button2 {
 	padding: calc(0.5em - 1px) calc(1.7em - 1px);
