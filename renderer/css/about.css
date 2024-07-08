@@ -1,27 +1,57 @@
 #about-div {
-    line-height: 1.5;
-    overflow-x: auto; 
+	line-height: 1.5;
+    font-size: 0.84em !important;
 }
 
-#about-div table {
-    width: 100%;
-    max-width: 600px; 
-    margin: auto; 
-    border-collapse: collapse;
+#dev-table {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-items: stretch;
 }
 
-#about-div th, #about-div td {
-    padding: 8px;
-    text-align: center; 
-    border: 1px solid #ddd; 
-    vertical-align: middle; 
+#dev-table > div {
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
 }
 
-#about-div th {
-    background-color: #f2f2f2; 
+#dev-table > div > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	
+    padding: 0.1em 0.2em;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis:	0;
+	
+    background-color: var(--background2);
+    border-bottom-style: solid;
+    border-right-style: solid;
+	border-width: 1px;
+	border-color: var(--on-background2);
 }
 
-#about-div img {
-    width: 100px; 
-    height: auto; 
+#dev-table > div:first-child > div {
+    border-top-style: solid;
+}
+
+#dev-table > div > div:first-child {
+    max-width: 8em;
+    /* align-items: flex-start; */
+	
+	font-weight: bold;
+    border-left-style: solid;
+    background-color: var(--background3);
+	color: var(--on-background3);
+	
+    border-left-style: solid;
+}
+
+#dev-table img {
+    max-height: 5em;
 }

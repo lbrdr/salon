@@ -39,6 +39,10 @@
 	background-image: url('../images/icons/remove.png');
 }
 
+.remove-row-icon {
+	background-image: url('../images/icons/remove.png');
+}
+
 .edit-icon {
 	background-image: url('../images/icons/edit.png');
 }

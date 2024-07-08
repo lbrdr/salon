@@ -47,7 +47,7 @@ function createSampleData(database) {
 
 	const users = [
 		['tmvelasquez', 'velasquez123', 'admin', 'Trisha Mae Velasquez'],
-		['crpoblacion', 'lab123', 'staff', 'Carlo Raniel Poblacion'],
+		['crpoblacion', 'poblacion123', 'staff', 'Carlo Raniel Poblacion'],
 		['jcdomingo', 'domingo123', 'staff', 'Jeremy Charles Domingo']
 	]
 
@@ -290,7 +290,7 @@ function createSampleData(database) {
 	
 	addDays(7)
 	
-	for (i = 0; i < 60; i++) {
+	for (i = 0; i < 45; i++) {
 		
 		for (j = 0; j < 20; j += ri(1, 20)) {
 			addMinutes(r(15, 360))

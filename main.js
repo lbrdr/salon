@@ -2,7 +2,7 @@ const readline = require('readline')
 const path = require('path')
 const { app, BrowserWindow, Menu } = require('electron')
 
-const isDev = false
+const isDev = process.env.NODE_ENV !== 'production'
 const isMac = process.platform === 'darwin'
 
 const database = require('./database.js')
@@ -23,13 +23,13 @@ function createMainWindow() {
 	const mainWindow = new BrowserWindow({
 		title: 'Hairliners Salon',
 		width: isDev ? 1500: 1000,
-		height: 539,
+		height: isDev ? 750: 539,
 		webPreferences: {
 			backgroundThrottling: false,
 		},
 	})
 	
-	mainWindow.setResizable(false);
+	mainWindow.setResizable(isDev);
 	
 	// Open devtools if in dev env
 	if (isDev) {

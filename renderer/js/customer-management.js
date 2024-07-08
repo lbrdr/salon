@@ -452,7 +452,7 @@ async function cmSubmitEdit() {
 	}
 	
 	if (editRequest.status === 200) {
-		createMessageDialogue('success', 'Customer Edit Successful', 'The user has been successfully edited')
+		createMessageDialogue('success', 'Customer Edit Successful', editRequest.statusText)
 		removeSecondary()
 		await cmSetupCustomerTable()
 		if (cmSearchTable) {

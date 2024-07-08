@@ -374,7 +374,7 @@ const actions = {
 		)
 		
 		res.statusCode = 200
-		res.statusMessage = 'The user ' + username + ' has been successfully edited.'
+		res.statusMessage = 'The user has been successfully edited.'
 		res.end()
 		
 	},

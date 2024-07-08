@@ -239,7 +239,7 @@ const actions = {
 		)
 		
 		res.statusCode = 200
-		res.statusMessage = 'The customer ' + customerID + ' has been successfully edited.'
+		res.statusMessage = 'The customer has been successfully edited.'
 		res.end()
 		
 	},

@@ -289,7 +289,7 @@ async function imSetupInventoryRecordTable() {
 		},
 		inventoryRecords,
 		{
-			itemsPerPage: userIsAdmin ? 5 : 7,
+			itemsPerPage: userIsAdmin ? 5 : 6,
 			select: userIsAdmin,
 		}
 	)
